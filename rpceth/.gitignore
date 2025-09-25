@@ -1,0 +1,19 @@
+/target/
+**/target/
+**/Cargo.lock
+
+# Editor and OS specific
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Python virtual environments
+.venv/
+
+# Logs and artifacts
+*.log
+coverage/
+
+# Node / package managers (if introduced later)
+node_modules/
