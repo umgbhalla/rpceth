@@ -1,0 +1,46 @@
+strategy: weighted_random
+default_timeout_ms: 5000
+max_retries: 3
+default_tolerance: Balanced
+providers:
+  - id: alchemy
+    url: https://eth-mainnet.g.alchemy.com/v2/demo
+    base_weight: 900
+    max_connections: 32
+    timeout_ms: 2000
+  - id: nodereal_eth
+    url: https://eth-mainnet.nodereal.io/v1/YOUR_NODEREAL_API_KEY
+    base_weight: 600
+    max_connections: 16
+    timeout_ms: 2500
+  - id: publicnode_eth
+    url: https://ethereum.publicnode.com
+    base_weight: 500
+    max_connections: 16
+    timeout_ms: 2500
+  - id: mevblocker_eth
+    url: https://rpc.mevblocker.io
+    base_weight: 400
+    max_connections: 16
+    timeout_ms: 3000
+methods:
+  default:
+    timeout_ms: 5000
+    weight_multiplier: 1.0
+    max_retries: 3
+  groups:
+    read:
+      tolerance: Relaxed
+      timeout_ms: 4000
+      weight_multiplier: 1.1
+      max_retries: 2
+    write:
+      tolerance: Strict
+      timeout_ms: 8000
+      weight_multiplier: 0.9
+      max_retries: 4
+  overrides:
+    - pattern: "eth_get*"
+      group: read
+    - pattern: "eth_sendRawTransaction"
+      group: write

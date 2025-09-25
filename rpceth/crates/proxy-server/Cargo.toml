@@ -1,0 +1,25 @@
+[package]
+name = "proxy-server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+axum = { workspace = true }
+bytes = "1"
+http = "1"
+proxy-core = { path = "../proxy-core" }
+reqwest = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+url = { workspace = true }
+dashmap = { workspace = true }
+
+[dev-dependencies]
+httpmock = { workspace = true }
+hyper = { workspace = true }
+http-body-util = { workspace = true }
+serde_json = { workspace = true }
+tower = { workspace = true }
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "time"] }

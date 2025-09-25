@@ -1,0 +1,2885 @@
+{
+  "provider_distribution": {
+    "total_requests": 150,
+    "successful_requests": 150,
+    "success_rate": 100.0,
+    "latency_stats": {
+      "mean": 373.44160556793213,
+      "median": 319.382905960083,
+      "stdev": 247.4551734779055,
+      "min": 188.86089324951172,
+      "max": 1131.9239139556885
+    },
+    "latency_groups": {
+      "medium": {
+        "count": 21,
+        "percentage": 14.000000000000002,
+        "avg_latency": 953.8916406177339
+      },
+      "fast": {
+        "count": 129,
+        "percentage": 86.0,
+        "avg_latency": 278.94973939703414
+      }
+    },
+    "timeline": [
+      {
+        "timestamp": 1758833283.6768582,
+        "latency_ms": 966.2415981292725,
+        "success": true,
+        "trace_id": "e10dd6f7-13e0-4532-a6e1-e507e93509da",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833283676857,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833284.694208,
+        "latency_ms": 193.34816932678223,
+        "success": true,
+        "trace_id": "0a8c0a87-fd2f-4fdc-a05e-86459ef2b32a",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833284694206,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833284.938655,
+        "latency_ms": 342.7581787109375,
+        "success": true,
+        "trace_id": "295f3625-9b80-460b-9322-85474fbcbaad",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833284938653,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833285.3326259,
+        "latency_ms": 190.83309173583984,
+        "success": true,
+        "trace_id": "720e563b-8945-4044-9973-afa332ed10ba",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833285332623,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833285.5747352,
+        "latency_ms": 189.67199325561523,
+        "success": true,
+        "trace_id": "d5377e37-d15e-4751-afbc-08e4a3dbc5c8",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833285574733,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833285.8145878,
+        "latency_ms": 206.9680690765381,
+        "success": true,
+        "trace_id": "c496c019-3031-45bc-89d0-57e88d403b92",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833285814579,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833286.0720582,
+        "latency_ms": 338.8516902923584,
+        "success": true,
+        "trace_id": "3417a34c-3017-4e83-9d48-8113e16a6633",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833286072056,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833286.462131,
+        "latency_ms": 189.17083740234375,
+        "success": true,
+        "trace_id": "94e6f5f2-9e33-43a9-b770-138df855bc04",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833286462129,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833286.702452,
+        "latency_ms": 205.8260440826416,
+        "success": true,
+        "trace_id": "155358fc-2f38-42f8-9c4d-558983e14cb9",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833286702450,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833286.959397,
+        "latency_ms": 342.74792671203613,
+        "success": true,
+        "trace_id": "f2f5af02-298d-4de8-a1a1-d7d69555150a",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833286959396,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833287.353389,
+        "latency_ms": 200.95586776733398,
+        "success": true,
+        "trace_id": "f3a105c2-b393-437f-80dc-29080e3e2518",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833287353386,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833287.605473,
+        "latency_ms": 202.55374908447266,
+        "success": true,
+        "trace_id": "d35845e0-1f64-4314-81ed-d6e44ef80c82",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833287605471,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833287.859165,
+        "latency_ms": 340.03496170043945,
+        "success": true,
+        "trace_id": "896a0afb-da83-4ffe-bd2f-8f28ae412acd",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833287859162,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833288.250441,
+        "latency_ms": 348.3917713165283,
+        "success": true,
+        "trace_id": "d5992233-c697-4510-a6d7-2a4b3d32eacb",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833288250439,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833288.650075,
+        "latency_ms": 344.649076461792,
+        "success": true,
+        "trace_id": "dfda13b7-28af-4c29-85e5-60524e38a7d1",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833288650072,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833289.045963,
+        "latency_ms": 189.92900848388672,
+        "success": true,
+        "trace_id": "4536a258-8670-40ae-95d3-b2324275c452",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833289045960,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833289.286567,
+        "latency_ms": 200.35696029663086,
+        "success": true,
+        "trace_id": "c9049278-c54e-4cbe-833c-93c944f69b37",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833289286563,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833289.538199,
+        "latency_ms": 342.5900936126709,
+        "success": true,
+        "trace_id": "a0136d2e-241a-4a3d-85ca-2dcc71139a8c",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833289538194,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833289.93211,
+        "latency_ms": 202.71587371826172,
+        "success": true,
+        "trace_id": "06ff7b52-4288-415e-8921-a4d1ebb7d083",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833289932107,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833290.186047,
+        "latency_ms": 1048.5849380493164,
+        "success": true,
+        "trace_id": "2de75655-4a33-4987-a805-0d8f939d3b40",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833290186042,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833291.28576,
+        "latency_ms": 385.71906089782715,
+        "success": true,
+        "trace_id": "fc389951-9032-4983-b54b-d2e6109a7aa7",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833291285758,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833291.722817,
+        "latency_ms": 409.5041751861572,
+        "success": true,
+        "trace_id": "3850c2f8-15ae-4c07-bcfc-0ec8899a0285",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833291722813,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833292.182582,
+        "latency_ms": 191.6041374206543,
+        "success": true,
+        "trace_id": "2576d940-a7b1-4035-b843-480bba5b0eb4",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833292182580,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833292.426396,
+        "latency_ms": 191.2710666656494,
+        "success": true,
+        "trace_id": "aaa5dcef-7604-4dc5-87c4-3d43face9687",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833292426390,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833292.6693308,
+        "latency_ms": 204.2551040649414,
+        "success": true,
+        "trace_id": "f17eb43c-7e98-41e5-9313-6c63b1865f4c",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833292669325,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833292.9247859,
+        "latency_ms": 209.18917655944824,
+        "success": true,
+        "trace_id": "2eefb9c9-b139-4592-95c7-0a74465d972f",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833292924784,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833293.1854668,
+        "latency_ms": 240.5083179473877,
+        "success": true,
+        "trace_id": "06900d5d-5eed-46fb-b9dc-fb68b86d8fde",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833293185461,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833293.4774568,
+        "latency_ms": 238.5871410369873,
+        "success": true,
+        "trace_id": "5027166d-1c83-4c2f-8ab3-bc62b64b647e",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833293477450,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833293.767309,
+        "latency_ms": 955.096960067749,
+        "success": true,
+        "trace_id": "125330e7-7105-4371-ac7e-52c6096cd52a",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833293767307,
+          "result": "0x165b467"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833294.772619,
+        "latency_ms": 1013.4279727935791,
+        "success": true,
+        "trace_id": "621427b1-1fba-423d-b404-db523fe3afdf",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833294772618,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833295.83682,
+        "latency_ms": 898.3533382415771,
+        "success": true,
+        "trace_id": "1c7de0d2-513e-4890-910a-8185413298b6",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833295836816,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833296.78641,
+        "latency_ms": 241.08576774597168,
+        "success": true,
+        "trace_id": "4b8779a3-0776-4e23-ac30-e979aaa65521",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833296786405,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833297.0783842,
+        "latency_ms": 1061.4979267120361,
+        "success": true,
+        "trace_id": "c167ead4-74f6-40c7-93d7-5a3e3eb22bba",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833297078381,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833298.1910799,
+        "latency_ms": 337.53013610839844,
+        "success": true,
+        "trace_id": "520a5f31-ed63-4621-8b09-f08108ae66a4",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833298191078,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833298.5798368,
+        "latency_ms": 347.7320671081543,
+        "success": true,
+        "trace_id": "6ffed1ce-cfce-42cf-9de3-45807bb0a05f",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833298579835,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833298.979275,
+        "latency_ms": 188.86089324951172,
+        "success": true,
+        "trace_id": "1ac85eeb-7318-4f16-8db1-6b5171b9e088",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833298979272,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833299.219341,
+        "latency_ms": 334.0260982513428,
+        "success": true,
+        "trace_id": "c4e0e09c-e2f8-4d37-9290-fb0c309f35be",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833299219338,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833299.6047082,
+        "latency_ms": 360.0308895111084,
+        "success": true,
+        "trace_id": "f6fb79e8-8fad-4bce-91e2-4434599fe9c9",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833299604706,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833300.0153542,
+        "latency_ms": 240.9358024597168,
+        "success": true,
+        "trace_id": "a7f6b308-c64a-4d67-afe4-e336a8e1b338",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833300015351,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833300.30748,
+        "latency_ms": 190.23680686950684,
+        "success": true,
+        "trace_id": "2110bc48-9113-4b85-bffc-bba36b064a4e",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833300307476,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833300.548859,
+        "latency_ms": 353.391170501709,
+        "success": true,
+        "trace_id": "b4db9474-3143-4e14-8dc7-9cfd89e787a3",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833300548857,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833300.9534411,
+        "latency_ms": 241.09673500061035,
+        "success": true,
+        "trace_id": "cb71bb58-3447-4256-bb34-0d244c133348",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833300953438,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833301.24578,
+        "latency_ms": 347.58901596069336,
+        "success": true,
+        "trace_id": "97d9f8be-a640-4e40-8826-d1958337cb3f",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833301245777,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833301.6446369,
+        "latency_ms": 192.10004806518555,
+        "success": true,
+        "trace_id": "6ba236c4-db98-4fd9-97b3-541d45cab636",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833301644633,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833301.888167,
+        "latency_ms": 288.377046585083,
+        "success": true,
+        "trace_id": "4c2abb5b-451e-45f9-9c83-e86c9b68b3de",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833301888166,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833302.22767,
+        "latency_ms": 335.0100517272949,
+        "success": true,
+        "trace_id": "3ec9b966-f41c-4559-a227-9bd7cabcf167",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833302227668,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833302.6130931,
+        "latency_ms": 285.83669662475586,
+        "success": true,
+        "trace_id": "d2bfeed7-d7dd-45f7-b919-aa6570c29378",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833302613089,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833302.950089,
+        "latency_ms": 354.07519340515137,
+        "success": true,
+        "trace_id": "a95201a1-00dc-4fe7-bfc4-5e8a03e3ea37",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833302950085,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833303.354688,
+        "latency_ms": 288.93113136291504,
+        "success": true,
+        "trace_id": "6f9a32a1-637a-42b6-81b1-b0cb4077e88f",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833303354686,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833303.6949902,
+        "latency_ms": 334.11097526550293,
+        "success": true,
+        "trace_id": "2a87f634-3bb5-4ea4-bf73-b7913d1ead62",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833303694988,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833304.080241,
+        "latency_ms": 345.02315521240234,
+        "success": true,
+        "trace_id": "98b100ed-254b-40c1-b7d0-e13d5d42ed35",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833304080239,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833304.478475,
+        "latency_ms": 195.2519416809082,
+        "success": true,
+        "trace_id": "0ae358e5-ccee-4f70-bf47-245498afd62e",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833304478472,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833304.7249742,
+        "latency_ms": 349.5917320251465,
+        "success": true,
+        "trace_id": "e3274d75-64eb-429d-aaf1-7da8a1d0eff1",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833304724972,
+          "result": "0x165b468"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833305.126164,
+        "latency_ms": 330.97124099731445,
+        "success": true,
+        "trace_id": "7fbad173-51fb-4bd0-a378-8baa0e29d9ab",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833305126160,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833305.508329,
+        "latency_ms": 333.96100997924805,
+        "success": true,
+        "trace_id": "ef6ac2ef-d590-4c68-bbd4-6814ab2a29bf",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833305508327,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833305.893517,
+        "latency_ms": 354.24208641052246,
+        "success": true,
+        "trace_id": "7f083e7c-26b7-4b65-a9c7-7869caf65acc",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833305893514,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833306.2989209,
+        "latency_ms": 285.5241298675537,
+        "success": true,
+        "trace_id": "15bf7216-03f0-4106-baa7-b35867a3de7d",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833306298917,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833306.6360781,
+        "latency_ms": 989.3808364868164,
+        "success": true,
+        "trace_id": "939f97d2-2940-4258-b8c9-5a538411e394",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833306636077,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833307.6763022,
+        "latency_ms": 333.906888961792,
+        "success": true,
+        "trace_id": "426f8922-4f77-49f0-8a7f-141eb0a44b15",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833307676300,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833308.0614898,
+        "latency_ms": 316.8940544128418,
+        "success": true,
+        "trace_id": "46870866-03a5-4bb8-bfed-e2187c42eaec",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833308061488,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833308.429605,
+        "latency_ms": 350.6779670715332,
+        "success": true,
+        "trace_id": "80286fb0-4858-49d5-9d12-9e17d0bc1524",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833308429602,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833308.831434,
+        "latency_ms": 189.38589096069336,
+        "success": true,
+        "trace_id": "5570586a-679f-42d1-af60-5b00b9ce9e5d",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833308831431,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833309.071956,
+        "latency_ms": 332.6132297515869,
+        "success": true,
+        "trace_id": "f1438fce-d96f-46af-85ef-c96390277817",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833309071955,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833309.455729,
+        "latency_ms": 336.03811264038086,
+        "success": true,
+        "trace_id": "278a97b9-6c2f-4a46-a028-094652e99af5",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833309455727,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833309.843093,
+        "latency_ms": 200.06608963012695,
+        "success": true,
+        "trace_id": "d691f7db-3942-4ffb-982b-492c5366fb4d",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833309843068,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833310.09463,
+        "latency_ms": 960.9661102294922,
+        "success": true,
+        "trace_id": "d2de72b3-8c01-4f0e-8c95-750b69c45b10",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833310094626,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833311.106737,
+        "latency_ms": 353.3811569213867,
+        "success": true,
+        "trace_id": "f8d2ecfb-c99d-4b21-8222-e1dca01968d6",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833311106735,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833311.511403,
+        "latency_ms": 346.4229106903076,
+        "success": true,
+        "trace_id": "fe35dec5-36e4-4c15-9a4b-7c4b64a35fd4",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833311511397,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833311.909044,
+        "latency_ms": 334.3160152435303,
+        "success": true,
+        "trace_id": "2516bf0b-7c05-4007-9942-fa2ec421ae70",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833311909042,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833312.2945359,
+        "latency_ms": 349.00522232055664,
+        "success": true,
+        "trace_id": "23810f41-e3b8-427a-acbd-300f802b9ffa",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833312294534,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833312.693908,
+        "latency_ms": 962.5542163848877,
+        "success": true,
+        "trace_id": "e8291849-baa3-42c0-8427-5d3ede78fe61",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833312693904,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833313.707693,
+        "latency_ms": 346.4539051055908,
+        "success": true,
+        "trace_id": "5f463f87-b0e2-4605-bdc0-133da00ec924",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833313707690,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833314.104576,
+        "latency_ms": 1131.9239139556885,
+        "success": true,
+        "trace_id": "1fe5fa5c-9dc2-4582-8464-ecdda7d6ad02",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833314104574,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833315.287723,
+        "latency_ms": 206.8631649017334,
+        "success": true,
+        "trace_id": "b87dd5e6-1820-4e0d-9e73-f0fddbc63b95",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833315287719,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833315.545745,
+        "latency_ms": 344.84195709228516,
+        "success": true,
+        "trace_id": "26934420-e30c-47ac-b3ec-e393365a2ad2",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833315545743,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833315.942218,
+        "latency_ms": 351.6421318054199,
+        "success": true,
+        "trace_id": "e1ed2035-e5fa-474f-b8dc-fbe21476c3ed",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833315942215,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833316.345131,
+        "latency_ms": 342.19813346862793,
+        "success": true,
+        "trace_id": "9285e0c7-7bb1-420e-bf54-7a116264e64c",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833316345129,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833316.738462,
+        "latency_ms": 340.99602699279785,
+        "success": true,
+        "trace_id": "de6f15ce-2ae2-4064-97d8-e90fe78327f7",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833316738459,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833317.1305642,
+        "latency_ms": 344.4328308105469,
+        "success": true,
+        "trace_id": "72be4500-7a31-42fb-bdca-0ddd59cda3e3",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833317130562,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833317.5261052,
+        "latency_ms": 343.43767166137695,
+        "success": true,
+        "trace_id": "8b993343-a4e3-4c8c-8f30-575669c3cb26",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833317526103,
+          "result": "0x165b469"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833317.9208379,
+        "latency_ms": 338.2272720336914,
+        "success": true,
+        "trace_id": "021e6153-158c-48d6-9f59-a2c8d07c2552",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833317920835,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833318.310194,
+        "latency_ms": 295.2401638031006,
+        "success": true,
+        "trace_id": "71a5b077-cef0-4621-8ab2-1712e4438daf",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833318310191,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833318.6565278,
+        "latency_ms": 300.6091117858887,
+        "success": true,
+        "trace_id": "adea8097-5e35-4e67-920f-4375efcae632",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833318656526,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833319.008318,
+        "latency_ms": 661.6170406341553,
+        "success": true,
+        "trace_id": "8c634f28-9dd2-4e5f-a9cb-54bcf3e158d8",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833319008314,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833319.720937,
+        "latency_ms": 193.1009292602539,
+        "success": true,
+        "trace_id": "f22447bd-bc5f-478c-a182-e16e56be3332",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833319720930,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833319.965246,
+        "latency_ms": 193.51816177368164,
+        "success": true,
+        "trace_id": "55ad7fa9-6585-4157-8397-58a63f365b80",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833319965243,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833320.210101,
+        "latency_ms": 977.269172668457,
+        "success": true,
+        "trace_id": "cd18020b-4686-4570-9c8d-4d81cacf120b",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833320210095,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833321.238507,
+        "latency_ms": 321.8717575073242,
+        "success": true,
+        "trace_id": "d70ec257-d6f6-46ff-880b-f4c6bf51ea42",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833321238505,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833321.611064,
+        "latency_ms": 295.5291271209717,
+        "success": true,
+        "trace_id": "03322ff3-b319-40e1-9641-0b5c5b1dce6c",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833321611061,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833321.95775,
+        "latency_ms": 297.44672775268555,
+        "success": true,
+        "trace_id": "1cd8e0b4-d8c5-42c8-8141-7efd29752382",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833321957748,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833322.30639,
+        "latency_ms": 930.5951595306396,
+        "success": true,
+        "trace_id": "92d0da39-fd80-4d0b-ac00-423dc4574c28",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833322306387,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833323.2881138,
+        "latency_ms": 352.8304100036621,
+        "success": true,
+        "trace_id": "eacc7dc2-2b31-476a-a6b2-8ed84d233c19",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833323288112,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833323.691808,
+        "latency_ms": 203.92084121704102,
+        "success": true,
+        "trace_id": "dcaf673f-dc2c-4463-804c-ab8e7c9e45ff",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833323691807,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833323.946849,
+        "latency_ms": 925.5919456481934,
+        "success": true,
+        "trace_id": "5a6fe5bd-ef26-42ed-878f-bad4bad38e11",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833323946848,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833324.922821,
+        "latency_ms": 350.4359722137451,
+        "success": true,
+        "trace_id": "6c7b2085-a70e-46ef-a565-b625d28fa8fa",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833324922819,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833325.3243918,
+        "latency_ms": 347.5363254547119,
+        "success": true,
+        "trace_id": "dfd884f3-63b6-48f1-bf5b-0ef94cf93cb2",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833325324390,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833325.723068,
+        "latency_ms": 347.00989723205566,
+        "success": true,
+        "trace_id": "df1b8436-1a3c-46ff-8209-e5636384c2d5",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833325723066,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833326.121032,
+        "latency_ms": 346.6460704803467,
+        "success": true,
+        "trace_id": "b024b888-eaf3-4db9-a515-3e3e49befa40",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833326121029,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833326.519451,
+        "latency_ms": 346.7121124267578,
+        "success": true,
+        "trace_id": "271796e3-69a7-41bd-9e84-d6ee0e2b7ca6",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833326519448,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833326.9173682,
+        "latency_ms": 243.7586784362793,
+        "success": true,
+        "trace_id": "873c4415-eac7-404a-b121-ae7a069cba23",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833326917366,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833327.2125041,
+        "latency_ms": 205.06787300109863,
+        "success": true,
+        "trace_id": "d0db9d52-afcf-46e2-8d7c-50696068a815",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833327212495,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833327.46788,
+        "latency_ms": 189.18395042419434,
+        "success": true,
+        "trace_id": "31413462-27c4-42ba-bcf6-4691929a2d81",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833327467876,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833327.7083719,
+        "latency_ms": 192.13223457336426,
+        "success": true,
+        "trace_id": "31eda5bd-c056-4c3a-a554-0d3f2f64784b",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833327708367,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833327.9518552,
+        "latency_ms": 191.2388801574707,
+        "success": true,
+        "trace_id": "3b1b0343-423c-48bc-bbaf-ef2b39e893cf",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833327951850,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833328.1943371,
+        "latency_ms": 196.36082649230957,
+        "success": true,
+        "trace_id": "d7f4ff2c-242a-4b2c-aea5-e5e5b2244cfd",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833328194334,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833328.441888,
+        "latency_ms": 257.1549415588379,
+        "success": true,
+        "trace_id": "7005c919-83bd-43f8-a874-ebe6f75b0bf9",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833328441886,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833328.749999,
+        "latency_ms": 207.63707160949707,
+        "success": true,
+        "trace_id": "5a68a552-0992-420f-8a01-6694a4bf50a4",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833328749992,
+          "result": "0x165b46a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833329.008872,
+        "latency_ms": 294.1470146179199,
+        "success": true,
+        "trace_id": "b1459995-f951-458e-bd2f-3c7debda6473",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833329008870,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833329.354197,
+        "latency_ms": 975.3799438476562,
+        "success": true,
+        "trace_id": "b6d59329-7ab9-44a0-93c9-948da2177c2e",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833329354194,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833330.3807812,
+        "latency_ms": 189.6367073059082,
+        "success": true,
+        "trace_id": "31dd470d-0405-4a98-a740-aaca495bf5fa",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833330380778,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833330.621609,
+        "latency_ms": 248.50988388061523,
+        "success": true,
+        "trace_id": "71b2124f-f95a-4d83-a1fc-eca09e8d30ee",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833330621605,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833330.921257,
+        "latency_ms": 294.2478656768799,
+        "success": true,
+        "trace_id": "52fd46b9-8440-4ba2-8554-879747327315",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833330921255,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833331.266525,
+        "latency_ms": 204.2698860168457,
+        "success": true,
+        "trace_id": "dbb92b54-2455-4e7a-ab97-9c796246b577",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833331266523,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833331.522343,
+        "latency_ms": 292.3319339752197,
+        "success": true,
+        "trace_id": "7b951121-97ea-42f3-a4ee-8052f7af3460",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833331522342,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833331.865867,
+        "latency_ms": 232.712984085083,
+        "success": true,
+        "trace_id": "0e82f0ac-23d4-4243-9c02-002176fa5e46",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833331865865,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833332.149714,
+        "latency_ms": 190.57917594909668,
+        "success": true,
+        "trace_id": "201fb71b-def7-4123-973b-6dca74370d38",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833332149711,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833332.391423,
+        "latency_ms": 292.4211025238037,
+        "success": true,
+        "trace_id": "b8690796-708e-46f2-bd87-a56026f742f7",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833332391422,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833332.734947,
+        "latency_ms": 991.6958808898926,
+        "success": true,
+        "trace_id": "90fab152-3a9b-403e-a37f-a00b99c556f5",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833332734945,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833333.777919,
+        "latency_ms": 967.3888683319092,
+        "success": true,
+        "trace_id": "b3f09852-0678-40b8-87c3-c3a5a647a3be",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833333777914,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833334.796434,
+        "latency_ms": 385.6942653656006,
+        "success": true,
+        "trace_id": "29b0db48-ba45-4c9b-956d-05f8f4fb8362",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833334796431,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833335.232478,
+        "latency_ms": 386.5232467651367,
+        "success": true,
+        "trace_id": "344267fd-633c-4422-8112-fcecee7f43cc",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833335232474,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833335.6705449,
+        "latency_ms": 201.00927352905273,
+        "success": true,
+        "trace_id": "3691cca2-66b6-48c3-9447-3056b403c380",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833335670537,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833335.922681,
+        "latency_ms": 191.10774993896484,
+        "success": true,
+        "trace_id": "141ba626-56f4-4e6f-8d7f-f3a18a4a04cf",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833335922679,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833336.16509,
+        "latency_ms": 384.80377197265625,
+        "success": true,
+        "trace_id": "3cb178e2-30a3-4c93-9929-d0adfbab1fb7",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833336165084,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833336.6010098,
+        "latency_ms": 202.67224311828613,
+        "success": true,
+        "trace_id": "fb89e909-c084-4a2d-8c7b-7896611e5c72",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833336601008,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833336.854988,
+        "latency_ms": 365.095853805542,
+        "success": true,
+        "trace_id": "1fba5db9-98fd-4498-bf7e-e406f23a26a2",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833336854984,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833337.27115,
+        "latency_ms": 995.9838390350342,
+        "success": true,
+        "trace_id": "9bb72baf-d676-4492-9523-9058ce57576c",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833337271147,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833338.318274,
+        "latency_ms": 350.9349822998047,
+        "success": true,
+        "trace_id": "88a30704-866b-4313-98a2-4fb5eac87802",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833338318272,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833338.720489,
+        "latency_ms": 189.85795974731445,
+        "success": true,
+        "trace_id": "5ce05f33-72cf-4f11-8384-d1af448be222",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833338720487,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833338.9612741,
+        "latency_ms": 190.59467315673828,
+        "success": true,
+        "trace_id": "82f9d5c6-1c1b-4932-b72d-5c874f63568b",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833338961271,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833339.202995,
+        "latency_ms": 592.4410820007324,
+        "success": true,
+        "trace_id": "71ec8215-5273-4787-8540-197a5367a3a1",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833339202993,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833339.84588,
+        "latency_ms": 190.06800651550293,
+        "success": true,
+        "trace_id": "739779c1-8359-4304-983b-68a093c65bef",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833339845878,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833340.0869162,
+        "latency_ms": 984.1327667236328,
+        "success": true,
+        "trace_id": "a39fdd92-38b6-4a45-a4ad-39a163979871",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833340086914,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833341.122269,
+        "latency_ms": 351.4230251312256,
+        "success": true,
+        "trace_id": "c67e7c91-2d77-4497-8f00-bfb371aad4cd",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833341122265,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833341.524031,
+        "latency_ms": 241.18614196777344,
+        "success": true,
+        "trace_id": "64d284b3-e421-44e8-b1c5-7d4cda9f8e47",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833341524027,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833341.816424,
+        "latency_ms": 251.22714042663574,
+        "success": true,
+        "trace_id": "eaa8efa3-a4d5-4b64-bcc5-927d3921f5ce",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833341816422,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833342.11863,
+        "latency_ms": 190.6411647796631,
+        "success": true,
+        "trace_id": "28a46ca8-2ecd-4228-a76c-1ed703eeb3ba",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833342118628,
+          "result": "0x165b46b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833342.360496,
+        "latency_ms": 1041.6009426116943,
+        "success": true,
+        "trace_id": "8a9cc785-a780-457f-9812-05c43f42fa54",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833342360493,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833343.452667,
+        "latency_ms": 269.58703994750977,
+        "success": true,
+        "trace_id": "d0052f03-c730-4bc5-91c3-4396196699d4",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833343452665,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833343.7734232,
+        "latency_ms": 297.2397804260254,
+        "success": true,
+        "trace_id": "9b58a9f7-a1c5-4538-992e-cd59183b63db",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833343773421,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833344.1218119,
+        "latency_ms": 363.356351852417,
+        "success": true,
+        "trace_id": "0baab18f-ba6c-4fa1-b60e-79fbfccb0e13",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833344121807,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833344.535937,
+        "latency_ms": 297.0550060272217,
+        "success": true,
+        "trace_id": "47d68155-14ed-48da-b4d0-0c8ac2e8ebfb",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833344535935,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833344.883779,
+        "latency_ms": 190.21010398864746,
+        "success": true,
+        "trace_id": "9b08ed3f-9c34-4473-a86d-59d220f26d1d",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833344883777,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833345.12518,
+        "latency_ms": 298.9218235015869,
+        "success": true,
+        "trace_id": "17fec827-215e-4a8c-a1b0-15116f714dce",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833345125177,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833345.475329,
+        "latency_ms": 200.01220703125,
+        "success": true,
+        "trace_id": "477fff55-0540-419a-9ddf-1729d54f28f6",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833345475327,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833345.726503,
+        "latency_ms": 299.7779846191406,
+        "success": true,
+        "trace_id": "41b27172-1178-4071-84a7-84697ae81a31",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833345726500,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833346.077518,
+        "latency_ms": 352.27084159851074,
+        "success": true,
+        "trace_id": "fea8fdc4-1d09-4e5e-b938-b545de9fe795",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833346077514,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833346.481313,
+        "latency_ms": 242.05279350280762,
+        "success": true,
+        "trace_id": "540d1a7d-4ba1-4f38-b4d1-dd5d3a436856",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833346481308,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833346.774632,
+        "latency_ms": 298.0070114135742,
+        "success": true,
+        "trace_id": "3e5d1f9a-60ca-49e6-8e52-d0b67dcd6166",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833346774629,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833347.1238668,
+        "latency_ms": 189.0733242034912,
+        "success": true,
+        "trace_id": "2c31cc4e-6bd7-4782-ac2c-a1b28cfd8bc1",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833347123866,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      }
+    ]
+  },
+  "health_probe_timing": {
+    "duration_seconds": 61.27699303627014,
+    "total_requests": 69,
+    "successful_requests": 69,
+    "overall_success_rate": 100.0,
+    "latency_trend": {
+      "raw_latencies": [
+        260.8792781829834,
+        190.4139518737793,
+        190.89794158935547,
+        339.94388580322266,
+        357.57899284362793,
+        206.33983612060547,
+        246.28019332885742,
+        349.2929935455322,
+        336.1220359802246,
+        334.87701416015625,
+        976.2091636657715,
+        355.91912269592285,
+        360.7642650604248,
+        333.9681625366211,
+        190.0017261505127,
+        947.8309154510498,
+        203.6731243133545,
+        197.4508762359619,
+        388.72385025024414,
+        201.66873931884766,
+        386.293888092041,
+        189.53227996826172,
+        995.6810474395752,
+        451.2810707092285,
+        296.1878776550293,
+        193.87316703796387,
+        195.9071159362793,
+        189.55516815185547,
+        952.6598453521729,
+        340.58189392089844,
+        223.8469123840332,
+        337.36109733581543,
+        296.31996154785156,
+        190.96088409423828,
+        296.98920249938965,
+        295.7959175109863,
+        302.8600215911865,
+        1111.0920906066895,
+        277.4679660797119,
+        329.0688991546631,
+        251.26099586486816,
+        329.9977779388428,
+        327.7599811553955,
+        334.41686630249023,
+        205.3201198577881,
+        984.4660758972168,
+        385.0371837615967,
+        334.46407318115234,
+        373.15988540649414,
+        367.62213706970215,
+        386.242151260376,
+        961.0939025878906,
+        386.7199420928955,
+        386.4471912384033,
+        393.24331283569336,
+        187.21413612365723,
+        305.3750991821289,
+        336.72380447387695,
+        296.7638969421387,
+        962.4159336090088,
+        356.83703422546387,
+        195.19305229187012,
+        351.14479064941406,
+        248.25620651245117,
+        188.92407417297363,
+        352.6184558868408,
+        356.6868305206299,
+        355.73387145996094,
+        975.8620262145996
+      ],
+      "moving_average": [
+        281.2626123428345,
+        352.7956008911133,
+        369.34611797332764,
+        386.33275032043457,
+        385.7351779937744,
+        368.9774513244629,
+        443.1265592575073,
+        438.86585235595703,
+        423.681640625,
+        428.94182205200195,
+        415.6209945678711,
+        356.62946701049805,
+        339.99078273773193,
+        403.482460975647,
+        415.2137517929077,
+        425.8323669433594,
+        350.4365921020508,
+        349.65999126434326,
+        348.8704204559326,
+        405.2640199661255,
+        419.15533542633057,
+        402.9106378555298,
+        417.69351959228516,
+        347.7574110031128,
+        321.72539234161377,
+        321.8055248260498,
+        331.99779987335205,
+        342.6930904388428,
+        434.8467826843262,
+        367.3275947570801,
+        366.17629528045654,
+        368.91770362854004,
+        368.1813716888428,
+        371.32537364959717,
+        385.67097187042236,
+        376.5040636062622,
+        445.37107944488525,
+        453.58879566192627,
+        375.92599391937256,
+        385.4951858520508,
+        389.3505096435547,
+        402.84862518310547,
+        465.95823764801025,
+        471.85423374176025,
+        477.05726623535156,
+        495.8495855331421,
+        416.12439155578613,
+        408.15818309783936,
+        408.3841562271118,
+        400.74455738067627,
+        460.22393703460693,
+        457.2834253311157,
+        380.6933403015137,
+        377.1358251571655,
+        363.3167266845703,
+        342.88480281829834,
+        359.4252347946167,
+        364.5564079284668,
+        366.4574146270752
+      ],
+      "moving_success_rate": [
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "timeline": [
+      {
+        "timestamp": 1758833347.3643289,
+        "latency_ms": 260.8792781829834,
+        "success": true,
+        "trace_id": "70980b48-0a65-4f96-a497-8491a610ab72",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833347364328,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833348.125978,
+        "latency_ms": 190.4139518737793,
+        "success": true,
+        "trace_id": "c8bb1ba8-a9d7-4488-bb09-06967925f1b6",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833348125974,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833348.81761,
+        "latency_ms": 190.89794158935547,
+        "success": true,
+        "trace_id": "d1017f65-3d29-496c-9481-70b14bcfd5c3",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833348817608,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833349.509683,
+        "latency_ms": 339.94388580322266,
+        "success": true,
+        "trace_id": "29e3d8c1-7193-4674-89fd-081f88758b7e",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833349509681,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833350.35105,
+        "latency_ms": 357.57899284362793,
+        "success": true,
+        "trace_id": "36732dba-e23e-4d75-a97c-2ddd52a19feb",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833350351046,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833351.209773,
+        "latency_ms": 206.33983612060547,
+        "success": true,
+        "trace_id": "41f13ee8-d02f-4551-886f-e553b0c3e003",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833351209771,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833351.916776,
+        "latency_ms": 246.28019332885742,
+        "success": true,
+        "trace_id": "adc9898a-f6e5-4bd6-861c-6147ee90baad",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833351916772,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833352.663569,
+        "latency_ms": 349.2929935455322,
+        "success": true,
+        "trace_id": "82a868d9-5b2e-40a0-ac3e-4b9decfcd0f9",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833352663565,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833353.513916,
+        "latency_ms": 336.1220359802246,
+        "success": true,
+        "trace_id": "de2e2d0e-1859-4927-9962-7fb5eab4ee17",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833353513914,
+          "result": "0x165b46c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833354.3512099,
+        "latency_ms": 334.87701416015625,
+        "success": true,
+        "trace_id": "73a9c9a1-269e-4d8c-816f-7ab04a623c5f",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833354351208,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833355.1872928,
+        "latency_ms": 976.2091636657715,
+        "success": true,
+        "trace_id": "686ec45c-d005-4b85-8bff-1371c5bb65b3",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833355187291,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833356.664799,
+        "latency_ms": 355.91912269592285,
+        "success": true,
+        "trace_id": "10f85e80-adba-4637-8d48-bc6605b5d0b2",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833356664795,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833357.5219378,
+        "latency_ms": 360.7642650604248,
+        "success": true,
+        "trace_id": "49c1755c-0f15-4ca8-9140-c4cdd4566847",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833357521934,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833358.3839319,
+        "latency_ms": 333.9681625366211,
+        "success": true,
+        "trace_id": "fe6381f5-15d9-4342-b929-174752bef709",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833358383931,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833359.2192042,
+        "latency_ms": 190.0017261505127,
+        "success": true,
+        "trace_id": "5e029fc1-9ca5-4e7a-a34f-c3b8eeaa7ba1",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833359219198,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833359.9096131,
+        "latency_ms": 947.8309154510498,
+        "success": true,
+        "trace_id": "7f8515b7-1b73-4ff3-87eb-104946c802e8",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833359909610,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833361.35871,
+        "latency_ms": 203.6731243133545,
+        "success": true,
+        "trace_id": "4e4b708a-e0cb-4389-8473-3aa81049e453",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833361358706,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833362.06254,
+        "latency_ms": 197.4508762359619,
+        "success": true,
+        "trace_id": "c9f663b6-6f5c-4365-a1a7-cb11051712fe",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833362062538,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833362.76111,
+        "latency_ms": 388.72385025024414,
+        "success": true,
+        "trace_id": "793cf674-eb60-4361-b27d-cc2c53c6b592",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833362761109,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833363.650957,
+        "latency_ms": 201.66873931884766,
+        "success": true,
+        "trace_id": "7f9da4e2-5c3b-49c3-ae2f-175d88920dac",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833363650955,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833364.3537412,
+        "latency_ms": 386.293888092041,
+        "success": true,
+        "trace_id": "d8b72d10-05f9-461d-8622-881ff5ce7578",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833364353740,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833365.2411468,
+        "latency_ms": 189.53227996826172,
+        "success": true,
+        "trace_id": "84dc65cb-c3fa-4dba-894b-112014de4b37",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833365241146,
+          "result": "0x165b46d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833365.931927,
+        "latency_ms": 995.6810474395752,
+        "success": true,
+        "trace_id": "d148d186-d0c8-439e-ba8f-6dccd29ab0d2",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833365931923,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833367.428923,
+        "latency_ms": 451.2810707092285,
+        "success": true,
+        "trace_id": "15f8098e-bc5d-45da-834d-fec31ee04f32",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833367428919,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833368.3817642,
+        "latency_ms": 296.1878776550293,
+        "success": true,
+        "trace_id": "2e7c0d6f-0e8c-46b1-9486-e5271de63dbf",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833368381760,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833369.1791239,
+        "latency_ms": 193.87316703796387,
+        "success": true,
+        "trace_id": "d9c68ea3-785a-4d82-a180-258c6fbd3eea",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833369179122,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833369.873259,
+        "latency_ms": 195.9071159362793,
+        "success": true,
+        "trace_id": "33410928-55dc-48ba-8956-ab748e9ab4f9",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833369873257,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833370.570343,
+        "latency_ms": 189.55516815185547,
+        "success": true,
+        "trace_id": "2099ac33-d181-4434-8740-9c2c3200b899",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833370570341,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833371.261121,
+        "latency_ms": 952.6598453521729,
+        "success": true,
+        "trace_id": "f5455539-d070-430f-8ca1-22f89b562152",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833371261117,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833372.714965,
+        "latency_ms": 340.58189392089844,
+        "success": true,
+        "trace_id": "dc158ecb-9300-4f14-af2b-1b03ca25acdd",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833372714963,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833373.556716,
+        "latency_ms": 223.8469123840332,
+        "success": true,
+        "trace_id": "94ff6c4d-a4cd-47da-bd09-ec08173cd399",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833373556712,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833374.281884,
+        "latency_ms": 337.36109733581543,
+        "success": true,
+        "trace_id": "ccbff3d5-a16b-4b51-86e2-bd0c915496e5",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833374281882,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833375.120528,
+        "latency_ms": 296.31996154785156,
+        "success": true,
+        "trace_id": "ab7c41c1-6dbd-4555-9934-f79b8192de6d",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833375120525,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833375.918113,
+        "latency_ms": 190.96088409423828,
+        "success": true,
+        "trace_id": "cc1584fe-c4fb-4979-9e98-ce78ba085c97",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833375918110,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833376.6103098,
+        "latency_ms": 296.98920249938965,
+        "success": true,
+        "trace_id": "8a169968-6826-4724-b809-0a7b19c889ea",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833376610307,
+          "result": "0x165b46e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833377.4084532,
+        "latency_ms": 295.7959175109863,
+        "success": true,
+        "trace_id": "c39bf859-f896-42a4-94d0-ab36fdb5a00b",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833377408452,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833378.205475,
+        "latency_ms": 302.8600215911865,
+        "success": true,
+        "trace_id": "dedea034-036e-4f5a-b79d-cda1839c9bc9",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833378205473,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833379.009527,
+        "latency_ms": 1111.0920906066895,
+        "success": true,
+        "trace_id": "41d77b74-9176-402d-bf00-c5122ceb6615",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833379009526,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833380.621738,
+        "latency_ms": 277.4679660797119,
+        "success": true,
+        "trace_id": "5094fbad-c459-4d2f-9f17-f4938d43c01d",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833380621734,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833381.400754,
+        "latency_ms": 329.0688991546631,
+        "success": true,
+        "trace_id": "f931df29-acd7-4430-b4b5-cecea1f6e747",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833381400752,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833382.231091,
+        "latency_ms": 251.26099586486816,
+        "success": true,
+        "trace_id": "7947c66f-24db-4683-b70b-7a5b69dd0cdf",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833382231086,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833382.9832242,
+        "latency_ms": 329.9977779388428,
+        "success": true,
+        "trace_id": "a79f5258-8ba0-44a6-9451-40ea1662e5b6",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833382983221,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833383.81438,
+        "latency_ms": 327.7599811553955,
+        "success": true,
+        "trace_id": "63454823-d7ea-4ea6-b06f-fc2149327897",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833383814378,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833384.6433,
+        "latency_ms": 334.41686630249023,
+        "success": true,
+        "trace_id": "ac913463-e3f5-456a-b823-e4da4c32a091",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833384643298,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833385.478891,
+        "latency_ms": 205.3201198577881,
+        "success": true,
+        "trace_id": "83cd9f36-8a7b-4270-a191-c519241bcb02",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833385478889,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833386.184713,
+        "latency_ms": 984.4660758972168,
+        "success": true,
+        "trace_id": "fbeb0018-549d-4c4c-abf6-27fa993ce4a5",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833386184711,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833387.6701288,
+        "latency_ms": 385.0371837615967,
+        "success": true,
+        "trace_id": "773e6cc7-76b0-4e42-8fb7-30b376c1cc5c",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833387670126,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833388.556333,
+        "latency_ms": 334.46407318115234,
+        "success": true,
+        "trace_id": "afc9a113-c6af-4153-a98c-b9b7404c9457",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833388556330,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833389.391947,
+        "latency_ms": 373.15988540649414,
+        "success": true,
+        "trace_id": "d0d875d8-de69-4aef-8807-634b4449afbe",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833389391946,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833390.2662919,
+        "latency_ms": 367.62213706970215,
+        "success": true,
+        "trace_id": "23b002aa-1cbc-4930-b3c6-043dbd4a66e1",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833390266289,
+          "result": "0x165b46f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833391.134364,
+        "latency_ms": 386.242151260376,
+        "success": true,
+        "trace_id": "0ca7f932-c7b3-4141-ae65-e888d86c1fe5",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833391134363,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833392.021729,
+        "latency_ms": 961.0939025878906,
+        "success": true,
+        "trace_id": "10a48b8d-a3c0-4e5b-bdbc-f07aeb67a9f3",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833392021727,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833393.484082,
+        "latency_ms": 386.7199420928955,
+        "success": true,
+        "trace_id": "515c234a-6387-4b2d-a5a0-57f98003a83b",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833393484079,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833394.3720179,
+        "latency_ms": 386.4471912384033,
+        "success": true,
+        "trace_id": "a74d25a8-744e-4a3c-b56f-33fb934ac1a7",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833394372015,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833395.2596228,
+        "latency_ms": 393.24331283569336,
+        "success": true,
+        "trace_id": "aabb1026-8e5f-4a0b-a057-dfb27364651f",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833395259621,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833396.154023,
+        "latency_ms": 187.21413612365723,
+        "success": true,
+        "trace_id": "e1070e12-9686-4977-9299-949f58b9a79c",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833396154022,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833396.8424199,
+        "latency_ms": 305.3750991821289,
+        "success": true,
+        "trace_id": "aa39caad-b5a5-4e66-b4bc-20be82bb44b0",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833396842418,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833397.64911,
+        "latency_ms": 336.72380447387695,
+        "success": true,
+        "trace_id": "80a4547d-99e3-4da9-b6bb-8db33960a50b",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833397649108,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833398.487117,
+        "latency_ms": 296.7638969421387,
+        "success": true,
+        "trace_id": "e1765ca1-2e7b-46ef-abed-cce4bb11a0e7",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833398487114,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833399.285129,
+        "latency_ms": 962.4159336090088,
+        "success": true,
+        "trace_id": "8c0053c2-9975-4e3f-952e-a5600d9d6b3c",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833399285127,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833400.748842,
+        "latency_ms": 356.83703422546387,
+        "success": true,
+        "trace_id": "065fb34b-a315-429d-a2f0-6d60a1a10086",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833400748835,
+          "result": "0x165b470"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833401.607049,
+        "latency_ms": 195.19305229187012,
+        "success": true,
+        "trace_id": "989d2c29-f46c-48fb-a848-ec488e6f869e",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833401607043,
+          "result": "0x165b471"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833402.3033972,
+        "latency_ms": 351.14479064941406,
+        "success": true,
+        "trace_id": "403664ac-5d46-4357-acc7-82bd78db7c51",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833402303388,
+          "result": "0x165b471"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833403.1555939,
+        "latency_ms": 248.25620651245117,
+        "success": true,
+        "trace_id": "df85232a-a2a5-4082-9093-e94eda0528ea",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833403155593,
+          "result": "0x165b471"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833403.904984,
+        "latency_ms": 188.92407417297363,
+        "success": true,
+        "trace_id": "f7947d31-599f-4175-ba5b-8b24a892c7e2",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833403904982,
+          "result": "0x165b471"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833404.5950878,
+        "latency_ms": 352.6184558868408,
+        "success": true,
+        "trace_id": "f5324d69-9d44-49a8-b880-e69f181e8a17",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833404595086,
+          "result": "0x165b471"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833405.4488761,
+        "latency_ms": 356.6868305206299,
+        "success": true,
+        "trace_id": "0e6c22c9-a062-4d89-8cf1-d814283dbac7",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833405448874,
+          "result": "0x165b471"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833406.306782,
+        "latency_ms": 355.73387145996094,
+        "success": true,
+        "trace_id": "8e6714ad-4986-4b2b-bf58-5ec2a94a9a39",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833406306779,
+          "result": "0x165b471"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758833407.163687,
+        "latency_ms": 975.8620262145996,
+        "success": true,
+        "trace_id": "2a3367b7-ffb0-49d5-b4ce-bc1dcb38b8b3",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758833407163685,
+          "result": "0x165b471"
+        },
+        "status_code": 200
+      }
+    ]
+  },
+  "concurrent_impact": {
+    "baseline": {
+      "phase": "baseline",
+      "total_requests": 20,
+      "successful_requests": 20,
+      "success_rate": 100.0,
+      "avg_latency": 368.0287003517151,
+      "max_latency": 986.3097667694092
+    },
+    "concurrent_load": {
+      "phase": "concurrent_load",
+      "total_requests": 50,
+      "successful_requests": 50,
+      "success_rate": 100.0,
+      "avg_latency": 731.3957786560059,
+      "max_latency": 1119.4701194763184
+    },
+    "recovery": {
+      "phase": "recovery",
+      "total_requests": 20,
+      "successful_requests": 20,
+      "success_rate": 100.0,
+      "avg_latency": 411.35047674179077,
+      "max_latency": 922.0499992370605
+    }
+  }
+}

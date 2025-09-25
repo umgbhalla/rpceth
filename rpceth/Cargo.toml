@@ -1,0 +1,41 @@
+[workspace]
+members = ["crates/proxy-core", "crates/proxy-server"]
+resolver = "3"
+
+[workspace.package]
+edition = "2024"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+authors = ["rpceth maintainers"]
+
+[workspace.dependencies]
+axum = { version = "0.7", features = ["macros", "json"] }
+dashmap = "5"
+async-trait = "0.1"
+hyper = { version = "1", features = ["client", "http1", "http2"] }
+reqwest = { version = "0.12", default-features = false, features = [
+  "json",
+  "stream",
+  "rustls-tls",
+] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = [
+  "macros",
+  "rt-multi-thread",
+  "time",
+  "sync",
+] }
+tower = { version = "0.5", features = ["util", "timeout", "load", "buffer"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+uuid = { version = "1", features = ["v4"] }
+http-body-util = "0.1"
+httpmock = "0.7"
+tracing-test = "0.2"
+rand = "0.8"
+serde_yaml = "0.9"
+thiserror = "1.0"
+url = "2.5"
+globset = "0.4"
+tower-retry = "0.3"

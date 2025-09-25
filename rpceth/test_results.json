@@ -1,0 +1,714 @@
+{
+  "basic_functionality": {
+    "eth_blockNumber": {
+      "success": true,
+      "latency_ms": 837.6801013946533,
+      "trace_id": "961fb430-9049-4706-a7a9-57c01de85dfd",
+      "block_number": "0x165b4a9"
+    },
+    "eth_chainId": {
+      "success": true,
+      "latency_ms": 771.9287872314453,
+      "trace_id": "09945c6e-2253-4d27-abfa-f39ae28a7211",
+      "chain_id": "0x1"
+    },
+    "custom_trace_id": {
+      "sent": "test-37008f80-61fe-4d62-8e84-10aa1a10ee79",
+      "received": "test-37008f80-61fe-4d62-8e84-10aa1a10ee79",
+      "preserved": true
+    },
+    "auto_trace_id": {
+      "generated": true,
+      "trace_id": "c3878385-a320-4d5a-9c29-6aefa5d634cf"
+    }
+  },
+  "load_balancing": {
+    "total_requests": 100,
+    "successful_requests": 100,
+    "failed_requests": 0,
+    "success_rate": 100.0,
+    "avg_latency_ms": 915.2490663528442,
+    "min_latency_ms": 290.32301902770996,
+    "max_latency_ms": 1398.2782363891602,
+    "p95_latency_ms": 1299.3710279464722,
+    "unique_trace_ids": 100,
+    "trace_id_sample": [
+      "dba4302e-9b5b-4e78-8825-aec23b8051a3",
+      "d1a8c5c8-fcc4-477e-8503-d4d6b2f5a975",
+      "f8e37826-05b8-4274-9b4a-e4161ed5eb68",
+      "b81ebd10-9286-4fce-b234-3e2c0bb5f81f",
+      "6820f999-ea54-412b-8720-b2cc48177b35"
+    ]
+  },
+  "error_handling": {
+    "invalid_method": {
+      "has_error": true,
+      "error_code": -32601,
+      "trace_id": "080263c9-ca7c-45b2-90eb-cd581450c153"
+    },
+    "malformed_json": {
+      "status_code": "exception",
+      "error": "400, message='Attempt to decode JSON with unexpected mimetype: text/plain; charset=utf-8', url='http://localhost:3000'"
+    }
+  },
+  "concurrent_load": {
+    "concurrent_users": 30,
+    "requests_per_user": 5,
+    "total_requests": 150,
+    "successful_requests": 150,
+    "failed_requests": 0,
+    "total_time_seconds": 2.2579009532928467,
+    "requests_per_second": 66.43338352873498,
+    "success_rate": 100.0,
+    "avg_latency_ms": 298.6574665705363,
+    "p95_latency_ms": 488.5666251182556,
+    "p99_latency_ms": 979.6141052246094
+  },
+  "health_monitoring": {
+    "rounds": [
+      {
+        "round": 1,
+        "requests": [
+          {
+            "success": true,
+            "latency_ms": 300.980806350708,
+            "trace_id": "d0074bf4-4b29-4404-9be5-4572dc58f974",
+            "timestamp": 1758834082.2013671
+          },
+          {
+            "success": true,
+            "latency_ms": 180.61494827270508,
+            "trace_id": "c9f75e4f-ac14-4f45-b086-a25c2ff33bb1",
+            "timestamp": 1758834082.4832351
+          },
+          {
+            "success": true,
+            "latency_ms": 238.80481719970703,
+            "trace_id": "8ea40760-dafb-4bf7-9965-31a994a0a487",
+            "timestamp": 1758834082.823191
+          },
+          {
+            "success": true,
+            "latency_ms": 182.4929714202881,
+            "trace_id": "85d7e473-55f3-4363-a7b5-4746da353a0b",
+            "timestamp": 1758834083.10688
+          },
+          {
+            "success": true,
+            "latency_ms": 204.7271728515625,
+            "trace_id": "30e954d0-4e2b-4e42-8ee5-c182bb9f1bee",
+            "timestamp": 1758834083.412802
+          },
+          {
+            "success": true,
+            "latency_ms": 229.9058437347412,
+            "trace_id": "d0ea3775-32c1-412d-bba4-6089ac74c1c2",
+            "timestamp": 1758834083.7438421
+          },
+          {
+            "success": true,
+            "latency_ms": 236.21392250061035,
+            "trace_id": "a085cafc-43e1-46c2-8cc8-2c3f22224c69",
+            "timestamp": 1758834084.081162
+          },
+          {
+            "success": true,
+            "latency_ms": 681.2100410461426,
+            "trace_id": "14f75507-aed5-4b17-a50c-bbc6d393ffd1",
+            "timestamp": 1758834084.863329
+          },
+          {
+            "success": true,
+            "latency_ms": 199.7530460357666,
+            "trace_id": "fa2a19bb-1bbc-4c27-be71-b9328eb6adae",
+            "timestamp": 1758834085.1633348
+          },
+          {
+            "success": true,
+            "latency_ms": 1016.0598754882812,
+            "trace_id": "229f9080-dad4-4945-ac65-9ebcee6f97cc",
+            "timestamp": 1758834086.2805781
+          },
+          {
+            "success": true,
+            "latency_ms": 341.5510654449463,
+            "trace_id": "531fe4f3-fa5d-4355-ad81-9853d9b09597",
+            "timestamp": 1758834086.722998
+          },
+          {
+            "success": true,
+            "latency_ms": 275.4356861114502,
+            "trace_id": "fb60026d-5d15-4791-abbc-d0f649761296",
+            "timestamp": 1758834087.099651
+          },
+          {
+            "success": true,
+            "latency_ms": 738.0580902099609,
+            "trace_id": "7e4f39f4-1c65-49ed-af2c-4307084c18ab",
+            "timestamp": 1758834087.938956
+          },
+          {
+            "success": true,
+            "latency_ms": 209.89012718200684,
+            "trace_id": "72363829-c361-4259-8bd9-b264fed09715",
+            "timestamp": 1758834088.249654
+          },
+          {
+            "success": true,
+            "latency_ms": 380.36489486694336,
+            "trace_id": "ec2f2372-661c-4a89-bc4b-b698d9438993",
+            "timestamp": 1758834088.731242
+          },
+          {
+            "success": true,
+            "latency_ms": 190.27304649353027,
+            "trace_id": "a1581c81-08eb-45df-bcaf-a648fc154963",
+            "timestamp": 1758834089.022084
+          },
+          {
+            "success": true,
+            "latency_ms": 202.5289535522461,
+            "trace_id": "9bdc4d17-d2cc-4ea0-aaa9-b365efbb6ff1",
+            "timestamp": 1758834089.325788
+          },
+          {
+            "success": true,
+            "latency_ms": 978.2328605651855,
+            "trace_id": "15ccc7cc-7a22-41d7-987e-fae6965cfa08",
+            "timestamp": 1758834090.404935
+          },
+          {
+            "success": true,
+            "latency_ms": 188.91096115112305,
+            "trace_id": "ce009f27-4530-42c0-b303-1461790ce53e",
+            "timestamp": 1758834090.695086
+          },
+          {
+            "success": true,
+            "latency_ms": 296.6158390045166,
+            "trace_id": "317ab32a-b4e0-4e06-96cb-bde41ca0606e",
+            "timestamp": 1758834091.0938618
+          }
+        ],
+        "success_rate": 100.0,
+        "avg_latency": 363.6312484741211
+      },
+      {
+        "round": 2,
+        "requests": [
+          {
+            "success": true,
+            "latency_ms": 239.74609375,
+            "trace_id": "73f444e1-22e4-4d2a-aef7-911607dd6340",
+            "timestamp": 1758834092.4359019
+          },
+          {
+            "success": true,
+            "latency_ms": 270.59412002563477,
+            "trace_id": "f9db4467-c586-4e30-96a5-09096ec8cd73",
+            "timestamp": 1758834092.807799
+          },
+          {
+            "success": true,
+            "latency_ms": 989.8369312286377,
+            "trace_id": "60270744-c0d6-4864-9edb-6b5403123504",
+            "timestamp": 1758834093.8988988
+          },
+          {
+            "success": true,
+            "latency_ms": 247.24197387695312,
+            "trace_id": "5b52d3b1-b44e-4c5b-9a90-e2385cca0b88",
+            "timestamp": 1758834094.247318
+          },
+          {
+            "success": true,
+            "latency_ms": 343.86706352233887,
+            "trace_id": "4a97826d-d208-4fad-9247-044f188c5e90",
+            "timestamp": 1758834094.692389
+          },
+          {
+            "success": true,
+            "latency_ms": 364.5319938659668,
+            "trace_id": "d8cbd7d7-2f40-4ce6-87f4-79eb33c4b396",
+            "timestamp": 1758834095.157423
+          },
+          {
+            "success": true,
+            "latency_ms": 377.5160312652588,
+            "trace_id": "dafeaecf-8ac4-442b-b688-31cd1bc95a03",
+            "timestamp": 1758834095.636109
+          },
+          {
+            "success": true,
+            "latency_ms": 338.49596977233887,
+            "trace_id": "0b3876ec-82ed-46ec-b53a-d4ef163e9e04",
+            "timestamp": 1758834096.075789
+          },
+          {
+            "success": true,
+            "latency_ms": 235.1229190826416,
+            "trace_id": "67294b9b-fb76-4969-be99-6b464f2bb1a5",
+            "timestamp": 1758834096.412111
+          },
+          {
+            "success": true,
+            "latency_ms": 252.7308464050293,
+            "trace_id": "86e0a0c6-0d7a-45bb-8875-eb68183d1091",
+            "timestamp": 1758834096.7661288
+          },
+          {
+            "success": true,
+            "latency_ms": 198.577880859375,
+            "trace_id": "d787d61b-4d65-45f0-a825-baf39cd95c36",
+            "timestamp": 1758834097.06706
+          },
+          {
+            "success": true,
+            "latency_ms": 197.55220413208008,
+            "trace_id": "729c6f99-685d-4378-9926-6e41e525c8b8",
+            "timestamp": 1758834097.365422
+          },
+          {
+            "success": true,
+            "latency_ms": 337.18085289001465,
+            "trace_id": "8f6e5002-09e9-4554-9bc2-426f2c011565",
+            "timestamp": 1758834097.803846
+          },
+          {
+            "success": true,
+            "latency_ms": 205.5492401123047,
+            "trace_id": "31ca28df-f1c4-4522-9836-bc4bf28382ac",
+            "timestamp": 1758834098.110521
+          },
+          {
+            "success": true,
+            "latency_ms": 760.2109909057617,
+            "trace_id": "f790c657-b5dc-4d28-881d-90a5f1ef9da4",
+            "timestamp": 1758834098.971848
+          },
+          {
+            "success": true,
+            "latency_ms": 211.35520935058594,
+            "trace_id": "5c7f3f19-5180-4e6a-b626-04b79111010a",
+            "timestamp": 1758834099.2837691
+          },
+          {
+            "success": true,
+            "latency_ms": 201.0807991027832,
+            "trace_id": "68c278c2-5979-44b9-b15a-42b30e82e452",
+            "timestamp": 1758834099.5859818
+          },
+          {
+            "success": true,
+            "latency_ms": 208.7271213531494,
+            "trace_id": "8788bc11-1b65-47b7-8fca-305ab7240e5c",
+            "timestamp": 1758834099.8958678
+          },
+          {
+            "success": true,
+            "latency_ms": 763.2598876953125,
+            "trace_id": "61b48840-053b-4853-978b-670707704976",
+            "timestamp": 1758834100.7600808
+          },
+          {
+            "success": true,
+            "latency_ms": 266.282320022583,
+            "trace_id": "fdb1b1e7-be4c-47de-bf03-e2073beed4ae",
+            "timestamp": 1758834101.1274939
+          }
+        ],
+        "success_rate": 100.0,
+        "avg_latency": 350.4730224609375
+      },
+      {
+        "round": 3,
+        "requests": [
+          {
+            "success": true,
+            "latency_ms": 444.75603103637695,
+            "trace_id": "b620a1ad-3278-48e9-b5d1-65c7cc110a8d",
+            "timestamp": 1758834102.6745741
+          },
+          {
+            "success": true,
+            "latency_ms": 309.3881607055664,
+            "trace_id": "2b9d1836-01cf-4907-8101-4c7a334069ef",
+            "timestamp": 1758834103.0851321
+          },
+          {
+            "success": true,
+            "latency_ms": 803.9250373840332,
+            "trace_id": "164d528f-b60a-4261-ac9d-e54f064fdcaa",
+            "timestamp": 1758834103.9902341
+          },
+          {
+            "success": true,
+            "latency_ms": 204.38694953918457,
+            "trace_id": "748dddbf-4cd8-4960-b32d-de38926e51ad",
+            "timestamp": 1758834104.2958841
+          },
+          {
+            "success": true,
+            "latency_ms": 260.101318359375,
+            "trace_id": "b03c4382-7477-4d4d-853d-530b4a0ba913",
+            "timestamp": 1758834104.657259
+          },
+          {
+            "success": true,
+            "latency_ms": 268.28503608703613,
+            "trace_id": "f5465207-c13b-4d77-aa57-e03d87b65550",
+            "timestamp": 1758834105.026689
+          },
+          {
+            "success": true,
+            "latency_ms": 184.01718139648438,
+            "trace_id": "6e3cc24a-059f-46e3-9f62-29b2dba0dc88",
+            "timestamp": 1758834105.311927
+          },
+          {
+            "success": true,
+            "latency_ms": 747.8621006011963,
+            "trace_id": "9048179f-c4b5-46b1-9eb1-6a4fc5a8dbd3",
+            "timestamp": 1758834106.161004
+          },
+          {
+            "success": true,
+            "latency_ms": 799.950122833252,
+            "trace_id": "ac2decca-b08c-4232-a680-84e4aa19fa2c",
+            "timestamp": 1758834107.062088
+          },
+          {
+            "success": true,
+            "latency_ms": 265.8581733703613,
+            "trace_id": "e9b225ae-5322-4841-b91a-5c0a3fa4bf18",
+            "timestamp": 1758834107.4291148
+          },
+          {
+            "success": true,
+            "latency_ms": 229.48503494262695,
+            "trace_id": "7c20f7e0-cd7b-4dd8-930b-9ad86c133729",
+            "timestamp": 1758834107.7618198
+          },
+          {
+            "success": true,
+            "latency_ms": 187.24417686462402,
+            "trace_id": "73501e94-96be-4dd9-8c6a-e7c1bc300b41",
+            "timestamp": 1758834108.049272
+          },
+          {
+            "success": true,
+            "latency_ms": 292.47307777404785,
+            "trace_id": "c6b6daf3-5948-46f2-af16-035e66b445c8",
+            "timestamp": 1758834108.442875
+          },
+          {
+            "success": true,
+            "latency_ms": 201.98392868041992,
+            "trace_id": "3ea967ef-2b89-4a9e-98f8-7a4a3a32ee24",
+            "timestamp": 1758834108.7459788
+          },
+          {
+            "success": true,
+            "latency_ms": 261.1210346221924,
+            "trace_id": "bdbf1dff-36d3-41ba-a4a9-4fe344486928",
+            "timestamp": 1758834109.1082702
+          },
+          {
+            "success": true,
+            "latency_ms": 264.0249729156494,
+            "trace_id": "3a497a04-13d2-4afe-a43f-0615f6bad072",
+            "timestamp": 1758834109.473462
+          },
+          {
+            "success": true,
+            "latency_ms": 258.9530944824219,
+            "trace_id": "2ae75685-0310-4f49-b43a-6cdec0276c36",
+            "timestamp": 1758834109.833576
+          },
+          {
+            "success": true,
+            "latency_ms": 180.53412437438965,
+            "trace_id": "27e272a9-b8ce-4999-81ea-15d500d56c20",
+            "timestamp": 1758834110.115259
+          },
+          {
+            "success": true,
+            "latency_ms": 299.4112968444824,
+            "trace_id": "94843767-ecde-40af-b6aa-29e7a5f0bb9e",
+            "timestamp": 1758834110.5159009
+          },
+          {
+            "success": true,
+            "latency_ms": 347.3670482635498,
+            "trace_id": "68786c40-64d1-4052-b2e5-0e567bea2195",
+            "timestamp": 1758834110.964541
+          }
+        ],
+        "success_rate": 100.0,
+        "avg_latency": 340.5563950538635
+      },
+      {
+        "round": 4,
+        "requests": [
+          {
+            "success": true,
+            "latency_ms": 345.59082984924316,
+            "trace_id": "ab28d085-b71a-4094-bf79-8dccaa8edfa4",
+            "timestamp": 1758834112.4126542
+          },
+          {
+            "success": true,
+            "latency_ms": 239.80021476745605,
+            "trace_id": "4c05deb0-68b8-4c66-9b36-7d902019e16a",
+            "timestamp": 1758834112.7536058
+          },
+          {
+            "success": true,
+            "latency_ms": 308.51006507873535,
+            "trace_id": "d7fe7dba-491e-4004-b2f2-82acaf124465",
+            "timestamp": 1758834113.163293
+          },
+          {
+            "success": true,
+            "latency_ms": 184.42916870117188,
+            "trace_id": "081e62ea-977d-4696-8405-e54fcf32b193",
+            "timestamp": 1758834113.448888
+          },
+          {
+            "success": true,
+            "latency_ms": 205.7790756225586,
+            "trace_id": "039d9ed3-408e-4002-b7c2-130a650befa8",
+            "timestamp": 1758834113.755827
+          },
+          {
+            "success": true,
+            "latency_ms": 343.66321563720703,
+            "trace_id": "6341bd5b-e218-40b2-826e-9dc2ed287cd6",
+            "timestamp": 1758834114.2006552
+          },
+          {
+            "success": true,
+            "latency_ms": 200.98590850830078,
+            "trace_id": "89b174cf-d150-44dd-bd99-20e2d3eff2ac",
+            "timestamp": 1758834114.5027509
+          },
+          {
+            "success": true,
+            "latency_ms": 239.8991584777832,
+            "trace_id": "0c07673e-929d-47b1-8b59-76cd6232dbb8",
+            "timestamp": 1758834114.843843
+          },
+          {
+            "success": true,
+            "latency_ms": 203.9358615875244,
+            "trace_id": "0d1f3815-d6a1-4c54-b789-48f5ffca73da",
+            "timestamp": 1758834115.148999
+          },
+          {
+            "success": true,
+            "latency_ms": 346.9429016113281,
+            "trace_id": "ded06d68-2356-45d0-831b-9f4529909174",
+            "timestamp": 1758834115.597177
+          },
+          {
+            "success": true,
+            "latency_ms": 187.67881393432617,
+            "trace_id": "4852ceec-c6c3-40f0-8a6f-5a13e8b553e6",
+            "timestamp": 1758834115.886136
+          },
+          {
+            "success": true,
+            "latency_ms": 361.6981506347656,
+            "trace_id": "44dd68fb-a6c2-4c3b-bf4c-8f0baa407530",
+            "timestamp": 1758834116.349059
+          },
+          {
+            "success": true,
+            "latency_ms": 180.5741786956787,
+            "trace_id": "b6a1c3ab-c64c-4352-b88f-13c069296a60",
+            "timestamp": 1758834116.630964
+          },
+          {
+            "success": true,
+            "latency_ms": 933.5200786590576,
+            "trace_id": "68c7c7c5-0e21-45a0-8917-f7e151d23dce",
+            "timestamp": 1758834117.665689
+          },
+          {
+            "success": true,
+            "latency_ms": 336.05098724365234,
+            "trace_id": "3ee5cbbc-5325-4b6e-8ec2-25382a20cbfd",
+            "timestamp": 1758834118.1029382
+          },
+          {
+            "success": true,
+            "latency_ms": 341.9618606567383,
+            "trace_id": "e308b1b3-9ee4-4a3d-8014-24bdf0b0ed26",
+            "timestamp": 1758834118.5460951
+          },
+          {
+            "success": true,
+            "latency_ms": 203.40394973754883,
+            "trace_id": "f5066173-c4b1-40ec-8791-044d92195236",
+            "timestamp": 1758834118.850867
+          },
+          {
+            "success": true,
+            "latency_ms": 201.54404640197754,
+            "trace_id": "60f1e4e0-e5f1-4ef1-862b-605610d42693",
+            "timestamp": 1758834119.1532412
+          },
+          {
+            "success": true,
+            "latency_ms": 331.56681060791016,
+            "trace_id": "f8572e7e-2325-487b-b840-795049667c2c",
+            "timestamp": 1758834119.585958
+          },
+          {
+            "success": true,
+            "latency_ms": 333.09006690979004,
+            "trace_id": "2681374c-21be-4a42-a136-9f6b3b9034a5",
+            "timestamp": 1758834120.0202508
+          }
+        ],
+        "success_rate": 100.0,
+        "avg_latency": 301.5312671661377
+      },
+      {
+        "round": 5,
+        "requests": [
+          {
+            "success": true,
+            "latency_ms": 200.78396797180176,
+            "trace_id": "567edc74-31cc-4bb1-8850-6b0d60c7cd94",
+            "timestamp": 1758834121.3235042
+          },
+          {
+            "success": true,
+            "latency_ms": 244.07696723937988,
+            "trace_id": "2b61f390-b595-41b2-ab14-fbb9cdb033e4",
+            "timestamp": 1758834121.668753
+          },
+          {
+            "success": true,
+            "latency_ms": 210.9999656677246,
+            "trace_id": "e89b44d7-cca1-411e-8343-4f1cd0cd2553",
+            "timestamp": 1758834121.980594
+          },
+          {
+            "success": true,
+            "latency_ms": 733.5748672485352,
+            "trace_id": "6fb04925-732a-4034-ae12-b2391e6060c8",
+            "timestamp": 1758834122.815357
+          },
+          {
+            "success": true,
+            "latency_ms": 217.18597412109375,
+            "trace_id": "b7bce0d0-128d-4938-8861-fa6afda20183",
+            "timestamp": 1758834123.133824
+          },
+          {
+            "success": true,
+            "latency_ms": 181.5500259399414,
+            "trace_id": "dd569816-9d5a-4e1f-8e8f-84ca5da576b0",
+            "timestamp": 1758834123.416648
+          },
+          {
+            "success": true,
+            "latency_ms": 278.45287322998047,
+            "trace_id": "b453ef57-f8ab-4a9e-b7b2-9fd97fa88054",
+            "timestamp": 1758834123.796382
+          },
+          {
+            "success": true,
+            "latency_ms": 185.1949691772461,
+            "trace_id": "f2453766-7104-4c68-a0d8-6fb6f123509b",
+            "timestamp": 1758834124.082334
+          },
+          {
+            "success": true,
+            "latency_ms": 181.90503120422363,
+            "trace_id": "5a7a5508-55fb-40e6-9184-e46e468d5649",
+            "timestamp": 1758834124.3654132
+          },
+          {
+            "success": true,
+            "latency_ms": 283.9210033416748,
+            "trace_id": "245408c9-817b-41f5-8cda-91388ab5f068",
+            "timestamp": 1758834124.7505338
+          },
+          {
+            "success": true,
+            "latency_ms": 981.9419384002686,
+            "trace_id": "83fc3a21-2ea8-4cc4-bf95-1cd736082558",
+            "timestamp": 1758834125.833306
+          },
+          {
+            "success": true,
+            "latency_ms": 182.83486366271973,
+            "trace_id": "f20edb19-978f-4b01-b8fa-affca58952e7",
+            "timestamp": 1758834126.117352
+          },
+          {
+            "success": true,
+            "latency_ms": 260.7240676879883,
+            "trace_id": "3100a6e6-64bf-4233-8f2c-7a54c329e881",
+            "timestamp": 1758834126.4792361
+          },
+          {
+            "success": true,
+            "latency_ms": 341.74394607543945,
+            "trace_id": "fe33bb03-93c2-42dd-a0d1-cc42d1ae8979",
+            "timestamp": 1758834126.9222028
+          },
+          {
+            "success": true,
+            "latency_ms": 205.54804801940918,
+            "trace_id": "17c58214-d061-4884-8980-aa03f1fb4e26",
+            "timestamp": 1758834127.2286
+          },
+          {
+            "success": true,
+            "latency_ms": 272.28856086730957,
+            "trace_id": "b75e37ee-cfee-480a-901f-a61f9164ceb1",
+            "timestamp": 1758834127.601758
+          },
+          {
+            "success": true,
+            "latency_ms": 197.64280319213867,
+            "trace_id": "ffedf929-f609-4253-8aaf-80ca23c356ab",
+            "timestamp": 1758834127.90056
+          },
+          {
+            "success": true,
+            "latency_ms": 253.3860206604004,
+            "trace_id": "5dadcb3a-f75c-47c8-bccd-f80a29ed55fb",
+            "timestamp": 1758834128.255102
+          },
+          {
+            "success": true,
+            "latency_ms": 993.9899444580078,
+            "trace_id": "55e956bd-d9a4-411f-b18a-5ff26a61cfca",
+            "timestamp": 1758834129.3503182
+          },
+          {
+            "success": true,
+            "latency_ms": 216.41802787780762,
+            "trace_id": "f609d608-133d-487b-bc48-b22e5aa4b463",
+            "timestamp": 1758834129.667707
+          }
+        ],
+        "success_rate": 100.0,
+        "avg_latency": 331.20819330215454
+      }
+    ],
+    "overall_success_rate": 100.0,
+    "latency_trend": [
+      363.6312484741211,
+      350.4730224609375,
+      340.5563950538635,
+      301.5312671661377,
+      331.20819330215454
+    ]
+  }
+}
