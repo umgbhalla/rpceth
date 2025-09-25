@@ -145,6 +145,8 @@ async fn proxy_handler(
             None => break,
         };
 
+        tried.insert(provider.id.clone());
+
         state.circuit_breaker.on_request_start(&provider.id);
 
         info!(
@@ -169,11 +171,7 @@ async fn proxy_handler(
                     %error_message,
                     "provider attempt failed"
                 );
-                last_error = Some(format!(
-                    "provider {} attempt {} failed: {}",
-                    provider.id.0, attempt, error_message
-                ));
-                tried.insert(provider.id.clone());
+                last_error = Some(error_message.clone());
 
                 state.circuit_breaker.on_failure(&provider.id);
 

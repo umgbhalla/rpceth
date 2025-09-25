@@ -146,7 +146,7 @@ impl LoadBalancer {
         }
 
         match self.inner.strategy {
-            BalancerStrategy::RoundRobin => self.next_round_robin_from(eligible).await,
+            BalancerStrategy::RoundRobin => self.next_round_robin_filtered(&eligible).await,
             BalancerStrategy::WeightedRandom => {
                 self.weighted_random_from(eligible, &health_scores, policy)
                     .await
@@ -158,20 +158,30 @@ impl LoadBalancer {
         self.select(&HashSet::new(), None).await
     }
 
-    async fn next_round_robin_from(&self, eligible: Vec<ProviderHandle>) -> Option<ProviderHandle> {
-        let total = eligible.len();
+    async fn next_round_robin_filtered(
+        &self,
+        eligible: &[ProviderHandle],
+    ) -> Option<ProviderHandle> {
+        let total = self.inner.pool.len();
         if total == 0 {
             return None;
         }
 
-        let index = {
-            let mut cursor = self.inner.round_robin_cursor.lock().await;
+        let eligible_ids: HashSet<ProviderId> = eligible.iter().map(|p| p.id.clone()).collect();
+        let mut cursor = self.inner.round_robin_cursor.lock().await;
+
+        for _ in 0..total {
             let index = *cursor % total;
             *cursor = (*cursor + 1) % total;
-            index
-        };
 
-        eligible.get(index).cloned()
+            if let Some(candidate) = self.inner.pool.get(index) {
+                if eligible_ids.contains(&candidate.id) {
+                    return Some(candidate.clone());
+                }
+            }
+        }
+
+        None
     }
 
     async fn weighted_random_from(

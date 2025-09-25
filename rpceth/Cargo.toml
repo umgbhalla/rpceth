@@ -28,7 +28,18 @@ tokio = { version = "1", features = [
 ] }
 tower = { version = "0.5", features = ["util", "timeout", "load", "buffer"] }
 tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+tracing-subscriber = { version = "0.3", features = [
+  "env-filter",
+  "fmt",
+  "json",
+] }
+metrics = "0.21"
+metrics-util = "0.15"
+metrics-exporter-prometheus = "0.12"
+tracing-opentelemetry = "0.23"
+opentelemetry = { version = "0.22", default-features = false, features = [
+  "trace",
+] }
 uuid = { version = "1", features = ["v4"] }
 http-body-util = "0.1"
 httpmock = "0.7"
