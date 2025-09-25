@@ -17,12 +17,20 @@ methods:
     timeout_ms: 5000
     weight_multiplier: 1.0
     max_retries: 3
+    backoff:
+      min_ms: 100
+      max_ms: 800
+      jitter: 0.2
   groups:
     read:
       tolerance: Relaxed
       timeout_ms: 4000
       weight_multiplier: 1.2
       max_retries: 2
+      backoff:
+        min_ms: 50
+        max_ms: 400
+        jitter: 0.1
     write:
       tolerance: Strict
       timeout_ms: 7000
@@ -34,6 +42,10 @@ methods:
     - pattern: "eth_sendRawTransaction"
       group: write
       weight_multiplier: 1.5
+      backoff:
+        min_ms: 150
+        max_ms: 1000
+        jitter: 0.3
       provider_weights:
         alchemy: 900
         infura: 300
@@ -82,6 +94,10 @@ fn method_registry_resolves_overrides() {
     assert_eq!(default_policy.timeout, Duration::from_millis(5000));
     assert_eq!(default_policy.max_retries, 3);
     assert!((default_policy.weight_multiplier - 1.0).abs() < f64::EPSILON);
+    let backoff = default_policy.backoff.as_ref().expect("default backoff");
+    assert_eq!(backoff.min.as_millis(), 100);
+    assert_eq!(backoff.max.as_millis(), 800);
+    assert!((backoff.jitter - 0.2).abs() < f64::EPSILON);
 }
 
 #[tokio::test]
@@ -121,4 +137,23 @@ async fn load_balancer_respects_method_provider_overrides() {
         alchemy_count > infura_count,
         "override should favor alchemy"
     );
+}
+
+#[test]
+fn override_picks_custom_backoff() {
+    let config = ProxyConfigLoader::load_from_str(sample_config_yaml()).expect("parse config");
+    let registry = MethodRegistry::new(&config).expect("build registry");
+
+    let policy = registry.resolve(Some("eth_sendRawTransaction"));
+    let backoff = policy.backoff.expect("override backoff");
+
+    assert_eq!(backoff.min.as_millis(), 150);
+    assert_eq!(backoff.max.as_millis(), 1000);
+    assert!((backoff.jitter - 0.3).abs() < f64::EPSILON);
+
+    let read_policy = registry.resolve(Some("eth_getBalance"));
+    let read_backoff = read_policy.backoff.expect("read group backoff");
+    assert_eq!(read_backoff.min.as_millis(), 50);
+    assert_eq!(read_backoff.max.as_millis(), 400);
+    assert!((read_backoff.jitter - 0.1).abs() < f64::EPSILON);
 }

@@ -10,12 +10,16 @@ use proxy_core::ToleranceLevel;
 #[cfg(not(test))]
 use proxy_core::health::JsonRpcHealthProbe;
 use proxy_core::{
-    CircuitBreaker, HealthService, LoadBalancer, MethodRegistry, ProviderConfig, ProviderHandle,
-    ProxyConfig,
+    CircuitBreaker, HealthService, LoadBalancer, MethodPolicy, MethodRegistry, ProviderConfig,
+    ProviderHandle, ProviderId, ProxyConfig, ResolvedBackoff,
 };
 use serde_json::{Value, json};
 use tokio::time::timeout;
-use tracing::{error, info, instrument};
+use tower::retry::backoff::{
+    Backoff as TowerBackoff, ExponentialBackoff, ExponentialBackoffMaker, MakeBackoff,
+};
+use tower::util::rng::HasherRng;
+use tracing::{error, info, instrument, warn};
 use uuid::Uuid;
 
 #[derive(Clone)]
@@ -130,16 +134,18 @@ async fn proxy_handler(
     let method_policy = state.method_registry.resolve(method_name);
     let max_attempts = method_policy.max_retries.max(1);
     let timeout_override = method_policy.timeout;
+    let mut backoff: Option<ExponentialBackoff> = method_policy
+        .backoff
+        .as_ref()
+        .and_then(|cfg| make_backoff(cfg));
 
     for attempt in 0..max_attempts {
-        let provider = match state
-            .load_balancer
-            .select(&tried, Some(&method_policy))
-            .await
-        {
+        let provider = match select_provider(&state, &tried, &method_policy).await {
             Some(provider) => provider,
             None => break,
         };
+
+        state.circuit_breaker.on_request_start(&provider.id);
 
         info!(
             provider = %provider.id.0,
@@ -152,23 +158,69 @@ async fn proxy_handler(
 
         match forward_to_provider(&state, &provider, &body, &trace_id, timeout).await {
             Ok(success) => {
+                state.circuit_breaker.on_success(&provider.id);
                 return ProxyOutcome::Success(build_success_response(success, trace_id));
             }
             Err(error_message) => {
                 error!(
                     provider = %provider.id.0,
                     %trace_id,
+                    attempt,
                     %error_message,
                     "provider attempt failed"
                 );
-                last_error = Some(error_message);
+                last_error = Some(format!(
+                    "provider {} attempt {} failed: {}",
+                    provider.id.0, attempt, error_message
+                ));
                 tried.insert(provider.id.clone());
+
+                state.circuit_breaker.on_failure(&provider.id);
+
+                if attempt + 1 < max_attempts {
+                    if let Some(backoff) = backoff.as_mut() {
+                        let sleep = backoff.next_backoff();
+                        warn!(
+                            %trace_id,
+                            attempt = attempt + 1,
+                            provider = %provider.id.0,
+                            "retrying request after backoff"
+                        );
+                        sleep.await;
+                    }
+                }
                 continue;
             }
         }
     }
 
     ProxyOutcome::Failure(build_error_response(&body, trace_id, last_error))
+}
+
+async fn select_provider(
+    state: &ProxyState,
+    tried: &HashSet<ProviderId>,
+    policy: &MethodPolicy,
+) -> Option<ProviderHandle> {
+    let mut excluded = tried.clone();
+
+    loop {
+        let provider = state.load_balancer.select(&excluded, Some(policy)).await?;
+
+        if state.circuit_breaker.is_available(&provider.id) {
+            return Some(provider);
+        }
+
+        excluded.insert(provider.id);
+    }
+}
+
+fn make_backoff(policy: &ResolvedBackoff) -> Option<ExponentialBackoff> {
+    let mut maker =
+        ExponentialBackoffMaker::new(policy.min, policy.max, policy.jitter, HasherRng::default())
+            .ok()?;
+
+    Some(maker.make_backoff())
 }
 
 async fn forward_to_provider(

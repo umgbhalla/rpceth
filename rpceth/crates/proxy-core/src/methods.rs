@@ -61,7 +61,7 @@ pub struct MethodRegistry {
 
 #[derive(Debug)]
 struct OverrideEntry {
-    pattern: String,
+    _pattern: String,
     policy: MethodPolicy,
 }
 
@@ -92,7 +92,7 @@ impl OverrideSet {
         let entries = overrides
             .iter()
             .map(|resolved| OverrideEntry {
-                pattern: resolved.pattern.clone(),
+                _pattern: resolved.pattern.clone(),
                 policy: resolved.policy.clone(),
             })
             .collect();
