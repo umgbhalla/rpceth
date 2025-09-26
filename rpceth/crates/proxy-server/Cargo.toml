@@ -17,6 +17,7 @@ tracing-subscriber = { workspace = true }
 tracing-opentelemetry = { workspace = true }
 opentelemetry = { workspace = true }
 opentelemetry-otlp = { workspace = true }
+opentelemetry_sdk = { workspace = true }
 bytes = { workspace = true }
 uuid = { workspace = true }
 url = { workspace = true }

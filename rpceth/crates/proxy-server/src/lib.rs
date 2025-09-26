@@ -5,15 +5,17 @@ use std::{
 };
 
 use axum::{
+    Json, Router,
     extract::State,
     http::{HeaderMap, StatusCode},
     response::{IntoResponse, Response},
     routing::post,
-    Json, Router,
+};
+use metrics::{histogram, increment_counter};
+use tower::retry::backoff::{
+    Backoff as TowerBackoff, ExponentialBackoff, ExponentialBackoffMaker, MakeBackoff,
 };
 use tracing::{error, info, instrument, warn};
-use tower::retry::backoff::{Backoff as TowerBackoff, ExponentialBackoff, ExponentialBackoffMaker, MakeBackoff};
-use metrics::{counter, histogram, Key, Label};
 
 #[derive(Clone)]
 pub struct ProxyState {
@@ -133,16 +135,14 @@ async fn proxy_handler(
 
     let mut tried = HashSet::new();
     let mut last_error: Option<String> = None;
-    let mut backoff = method_policy
-        .backoff
-        .as_ref()
-        .and_then(|cfg| make_backoff(cfg));
+    let mut backoff = method_policy.backoff.as_ref().map(make_backoff);
 
-    let method_label = leak_label(method_name);
-    let mut labels = Vec::with_capacity(2);
-    labels.push(Label::new("method", method_name.to_owned()));
-    labels.push(Label::new("status", "started"));
-    counter!(Key::from_parts("rpc_requests_total", labels)).increment(1);
+    let method_label = method_name.to_owned();
+    increment_counter!(
+        "rpc_requests_total",
+        "method" => method_label,
+        "status" => "started"
+    );
 
     for attempt in 0..max_attempts {
         let provider = match select_provider(&state, &tried, &method_policy).await {
@@ -187,12 +187,9 @@ async fn proxy_handler(
                 });
 
                 if attempt + 1 < max_attempts {
-                    if let Some(backoff) = backoff.as_mut() {
-                        let sleep = backoff.next_backoff();
-                        span.in_scope(|| {
-                            warn!("retrying request after backoff");
-                        });
-                        sleep.await;
+                    if let Some(delay) = backoff.as_mut().map(TowerBackoff::next_backoff) {
+                        span.in_scope(|| warn!("retrying request after backoff"));
+                        delay.await;
                     }
                 }
             }
@@ -222,18 +219,15 @@ async fn select_provider(
     }
 }
 
-fn make_backoff(
-    policy: &proxy_core::ResolvedBackoff,
-) -> Option<tower::retry::backoff::ExponentialBackoff> {
-    let mut maker = tower::retry::backoff::ExponentialBackoffMaker::new(
+fn make_backoff(policy: &proxy_core::ResolvedBackoff) -> ExponentialBackoff {
+    ExponentialBackoffMaker::new(
         policy.min,
         policy.max,
         policy.jitter,
         tower::util::rng::HasherRng::default(),
     )
-    .ok()?;
-
-    Some(maker.make_backoff())
+    .expect("invalid backoff configuration")
+    .make_backoff()
 }
 
 async fn forward_to_provider(
@@ -329,32 +323,37 @@ fn build_error_response(
 }
 
 fn record_success_metrics(method: &str, provider: &proxy_core::ProviderId, elapsed: Duration) {
-    let mut hist_labels = Vec::with_capacity(2);
-    hist_labels.push(Label::new("method", method.to_owned()));
-    hist_labels.push(Label::new("provider", provider.0.clone()));
-    histogram!(Key::from_parts("rpc_request_duration_seconds", hist_labels), elapsed.as_secs_f64());
-
-    let mut success_labels = Vec::with_capacity(3);
-    success_labels.push(Label::new("method", method.to_owned()));
-    success_labels.push(Label::new("provider", provider.0.clone()));
-    success_labels.push(Label::new("status", "success"));
-    counter!(Key::from_parts("rpc_requests_total", success_labels)).increment(1);
+    let method_label = method.to_owned();
+    let provider_label = provider.0.clone();
+    histogram!(
+        "rpc_request_duration_seconds",
+        elapsed.as_secs_f64(),
+        "method" => method_label.clone(),
+        "provider" => provider_label.clone()
+    );
+    increment_counter!(
+        "rpc_requests_total",
+        "method" => method_label,
+        "provider" => provider_label,
+        "status" => "success"
+    );
 }
 
 fn record_failure_metrics(method: &str, provider: Option<&str>, error: &str) {
-    let provider_value = provider.unwrap_or("<none>").to_owned();
-
-    let mut failure_labels = Vec::with_capacity(3);
-    failure_labels.push(Label::new("method", method.to_owned()));
-    failure_labels.push(Label::new("provider", provider_value.clone()))
-;    failure_labels.push(Label::new("status", "failure"));
-    counter!(Key::from_parts("rpc_requests_total", failure_labels)).increment(1);
-
-    let mut error_labels = Vec::with_capacity(3);
-    error_labels.push(Label::new("method", method.to_owned()));
-    error_labels.push(Label::new("provider", provider_value));
-    error_labels.push(Label::new("code", classify_error(error)));
-    counter!(Key::from_parts("rpc_errors_total", error_labels)).increment(1);
+    let method_label = method.to_owned();
+    let provider_label = provider.unwrap_or("<none>").to_owned();
+    increment_counter!(
+        "rpc_requests_total",
+        "method" => method_label.clone(),
+        "provider" => provider_label.clone(),
+        "status" => "failure"
+    );
+    increment_counter!(
+        "rpc_errors_total",
+        "method" => method_label,
+        "provider" => provider_label,
+        "code" => classify_error(error)
+    );
 }
 
 fn classify_error(message: &str) -> &'static str {
@@ -367,8 +366,4 @@ fn classify_error(message: &str) -> &'static str {
     } else {
         "other"
     }
-}
-
-fn leak_label(value: &str) -> &'static str {
-    Box::leak(value.to_owned().into_boxed_str())
 }
