@@ -17,4 +17,4 @@ coverage/
 
 # Node / package managers (if introduced later)
 node_modules/
-*json
+*.json
