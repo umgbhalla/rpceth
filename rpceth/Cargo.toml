@@ -36,10 +36,14 @@ tracing-subscriber = { version = "0.3", features = [
 metrics = "0.21"
 metrics-util = "0.15"
 metrics-exporter-prometheus = "0.12"
-tracing-opentelemetry = "0.23"
-opentelemetry = { version = "0.22", default-features = false, features = [
+tracing-opentelemetry = "0.27"
+opentelemetry = { version = "0.31", default-features = false, features = [
   "trace",
 ] }
+opentelemetry-otlp = { version = "0.31", default-features = false, features = [
+  "grpc-tonic",
+] }
+bytes = "1.7"
 uuid = { version = "1", features = ["v4"] }
 http-body-util = "0.1"
 httpmock = "0.7"

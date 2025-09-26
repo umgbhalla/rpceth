@@ -1,52 +1,45 @@
-use std::{collections::HashSet, sync::Arc, time::Duration};
+use std::{
+    collections::HashSet,
+    sync::Arc,
+    time::{Duration, Instant},
+};
 
-use axum::extract::State;
-use axum::response::IntoResponse;
-use axum::response::Response;
-use axum::{Json, Router, routing::post};
-use http::{HeaderMap, StatusCode};
-#[cfg(not(test))]
-use proxy_core::ToleranceLevel;
-#[cfg(not(test))]
-use proxy_core::health::JsonRpcHealthProbe;
-use proxy_core::{
-    CircuitBreaker, HealthService, LoadBalancer, MethodPolicy, MethodRegistry, ProviderConfig,
-    ProviderHandle, ProviderId, ProxyConfig, ResolvedBackoff,
+use axum::{
+    extract::State,
+    http::{HeaderMap, StatusCode},
+    response::{IntoResponse, Response},
+    routing::post,
+    Json, Router,
 };
-use serde_json::{Value, json};
-use tokio::time::timeout;
-use tower::retry::backoff::{
-    Backoff as TowerBackoff, ExponentialBackoff, ExponentialBackoffMaker, MakeBackoff,
-};
-use tower::util::rng::HasherRng;
 use tracing::{error, info, instrument, warn};
-use uuid::Uuid;
+use tower::retry::backoff::{Backoff as TowerBackoff, ExponentialBackoff, ExponentialBackoffMaker, MakeBackoff};
+use metrics::{counter, histogram, Key, Label};
 
 #[derive(Clone)]
 pub struct ProxyState {
-    pub config: ProxyConfig,
-    pub load_balancer: LoadBalancer,
-    pub health_service: Option<Arc<HealthService>>,
-    pub circuit_breaker: Arc<CircuitBreaker>,
-    pub method_registry: MethodRegistry,
+    pub config: proxy_core::ProxyConfig,
+    pub load_balancer: proxy_core::LoadBalancer,
+    pub health_service: Option<Arc<proxy_core::HealthService>>,
+    pub circuit_breaker: Arc<proxy_core::CircuitBreaker>,
+    pub method_registry: proxy_core::MethodRegistry,
     pub client: reqwest::Client,
 }
 
 impl ProxyState {
-    pub fn new(config: ProxyConfig) -> Self {
+    pub fn new(config: proxy_core::ProxyConfig) -> Self {
         let client = reqwest::Client::builder()
             .pool_max_idle_per_host(8)
             .build()
             .expect("failed to build reqwest client");
 
-        let provider_handles: Vec<ProviderHandle> = config
+        let provider_handles: Vec<proxy_core::ProviderHandle> = config
             .providers
             .iter()
             .cloned()
-            .map(ProviderConfig::into_handle)
+            .map(proxy_core::ProviderConfig::into_handle)
             .collect();
 
-        let health_service: Option<Arc<HealthService>> = {
+        let health_service: Option<Arc<proxy_core::HealthService>> = {
             #[cfg(test)]
             {
                 None
@@ -54,10 +47,12 @@ impl ProxyState {
 
             #[cfg(not(test))]
             {
-                let probe = Arc::new(JsonRpcHealthProbe::new(Duration::from_secs(3)));
-                let service = Arc::new(HealthService::new(
+                let probe = Arc::new(proxy_core::health::JsonRpcHealthProbe::new(
+                    Duration::from_secs(3),
+                ));
+                let service = Arc::new(proxy_core::HealthService::new(
                     provider_handles.clone(),
-                    ToleranceLevel::Balanced,
+                    proxy_core::ToleranceLevel::Balanced,
                     Duration::from_secs(15),
                     probe,
                 ));
@@ -71,19 +66,19 @@ impl ProxyState {
             }
         };
 
-        let circuit_breaker = Arc::new(CircuitBreaker::new(
+        let circuit_breaker = Arc::new(proxy_core::CircuitBreaker::new(
             &provider_handles,
             &config.circuit_breaker,
         ));
 
-        let load_balancer = LoadBalancer::new(
+        let load_balancer = proxy_core::LoadBalancer::new(
             config.strategy,
             provider_handles.clone(),
             health_service.clone(),
         );
 
         let method_registry =
-            MethodRegistry::new(&config).expect("failed to build method registry");
+            proxy_core::MethodRegistry::new(&config).expect("failed to build method registry");
 
         Self {
             config,
@@ -110,7 +105,7 @@ impl IntoResponse for ProxyOutcome {
     }
 }
 
-pub fn build_router(config: ProxyConfig) -> Router {
+pub fn build_router(config: proxy_core::ProxyConfig) -> Router {
     let state = ProxyState::new(config);
     Router::new()
         .route("/", post(proxy_handler))
@@ -121,85 +116,99 @@ pub fn build_router(config: ProxyConfig) -> Router {
 async fn proxy_handler(
     State(state): State<ProxyState>,
     headers: HeaderMap,
-    Json(body): Json<Value>,
+    Json(body): Json<serde_json::Value>,
 ) -> ProxyOutcome {
+    let start = Instant::now();
     let trace_id = headers
         .get("x-xray-id")
         .and_then(|value| value.to_str().ok().map(|s| s.to_owned()))
-        .unwrap_or_else(|| Uuid::new_v4().to_string());
+        .unwrap_or_else(|| uuid::Uuid::new_v4().to_string());
+
+    let method_name = body
+        .get("method")
+        .and_then(serde_json::Value::as_str)
+        .unwrap_or("<unknown>");
+    let method_policy = state.method_registry.resolve(Some(method_name));
+    let max_attempts = method_policy.max_retries.max(1);
 
     let mut tried = HashSet::new();
     let mut last_error: Option<String> = None;
-    let method_name = body.get("method").and_then(Value::as_str);
-    let method_policy = state.method_registry.resolve(method_name);
-    let max_attempts = method_policy.max_retries.max(1);
-    let timeout_override = method_policy.timeout;
-    let mut backoff: Option<ExponentialBackoff> = method_policy
+    let mut backoff = method_policy
         .backoff
         .as_ref()
         .and_then(|cfg| make_backoff(cfg));
+
+    let method_label = leak_label(method_name);
+    let mut labels = Vec::with_capacity(2);
+    labels.push(Label::new("method", method_name.to_owned()));
+    labels.push(Label::new("status", "started"));
+    counter!(Key::from_parts("rpc_requests_total", labels)).increment(1);
 
     for attempt in 0..max_attempts {
         let provider = match select_provider(&state, &tried, &method_policy).await {
             Some(provider) => provider,
             None => break,
         };
-
         tried.insert(provider.id.clone());
 
         state.circuit_breaker.on_request_start(&provider.id);
 
-        info!(
+        let span = tracing::info_span!(
+            "proxy.attempt",
+            method = method_name,
             provider = %provider.id.0,
-            %trace_id,
             attempt,
-            "proxy forwarding request"
+            trace_id = %trace_id
         );
+        span.in_scope(|| {
+            info!("proxy forwarding request");
+        });
 
+        let timeout_override = method_policy.timeout;
         let timeout = provider.timeout.max(timeout_override);
 
         match forward_to_provider(&state, &provider, &body, &trace_id, timeout).await {
             Ok(success) => {
                 state.circuit_breaker.on_success(&provider.id);
+                record_success_metrics(method_name, &provider.id, start.elapsed());
                 return ProxyOutcome::Success(build_success_response(success, trace_id));
             }
             Err(error_message) => {
-                error!(
-                    provider = %provider.id.0,
-                    %trace_id,
-                    attempt,
-                    %error_message,
-                    "provider attempt failed"
-                );
+                record_failure_metrics(method_name, Some(provider.id.0.as_str()), &error_message);
                 last_error = Some(error_message.clone());
 
                 state.circuit_breaker.on_failure(&provider.id);
 
+                span.in_scope(|| {
+                    error!(
+                        error = %error_message,
+                        "provider attempt failed"
+                    );
+                });
+
                 if attempt + 1 < max_attempts {
                     if let Some(backoff) = backoff.as_mut() {
                         let sleep = backoff.next_backoff();
-                        warn!(
-                            %trace_id,
-                            attempt = attempt + 1,
-                            provider = %provider.id.0,
-                            "retrying request after backoff"
-                        );
+                        span.in_scope(|| {
+                            warn!("retrying request after backoff");
+                        });
                         sleep.await;
                     }
                 }
-                continue;
             }
         }
     }
+
+    record_failure_metrics(method_name, None, "all providers failed");
 
     ProxyOutcome::Failure(build_error_response(&body, trace_id, last_error))
 }
 
 async fn select_provider(
     state: &ProxyState,
-    tried: &HashSet<ProviderId>,
-    policy: &MethodPolicy,
-) -> Option<ProviderHandle> {
+    tried: &HashSet<proxy_core::ProviderId>,
+    policy: &proxy_core::MethodPolicy,
+) -> Option<proxy_core::ProviderHandle> {
     let mut excluded = tried.clone();
 
     loop {
@@ -213,18 +222,24 @@ async fn select_provider(
     }
 }
 
-fn make_backoff(policy: &ResolvedBackoff) -> Option<ExponentialBackoff> {
-    let mut maker =
-        ExponentialBackoffMaker::new(policy.min, policy.max, policy.jitter, HasherRng::default())
-            .ok()?;
+fn make_backoff(
+    policy: &proxy_core::ResolvedBackoff,
+) -> Option<tower::retry::backoff::ExponentialBackoff> {
+    let mut maker = tower::retry::backoff::ExponentialBackoffMaker::new(
+        policy.min,
+        policy.max,
+        policy.jitter,
+        tower::util::rng::HasherRng::default(),
+    )
+    .ok()?;
 
     Some(maker.make_backoff())
 }
 
 async fn forward_to_provider(
     state: &ProxyState,
-    provider: &ProviderHandle,
-    request: &Value,
+    provider: &proxy_core::ProviderHandle,
+    request: &serde_json::Value,
     trace_id: &str,
     timeout_duration: Duration,
 ) -> Result<ProviderResponse, String> {
@@ -243,7 +258,7 @@ async fn forward_to_provider(
             .await
     };
 
-    let response = timeout(timeout_duration, fut)
+    let response = tokio::time::timeout(timeout_duration, fut)
         .await
         .map_err(|_| "provider request timed out".to_string())?
         .map_err(|err| err.to_string())?;
@@ -285,15 +300,18 @@ fn build_success_response(provider_response: ProviderResponse, trace_id: String)
 }
 
 fn build_error_response(
-    original_request: &Value,
+    original_request: &serde_json::Value,
     trace_id: String,
     last_error: Option<String>,
 ) -> Response {
-    let id = original_request.get("id").cloned().unwrap_or(Value::Null);
+    let id = original_request
+        .get("id")
+        .cloned()
+        .unwrap_or(serde_json::Value::Null);
 
     let error_message = last_error.unwrap_or_else(|| "all providers failed".to_string());
 
-    let payload = json!({
+    let payload = serde_json::json!({
         "jsonrpc": "2.0",
         "id": id,
         "error": {
@@ -308,4 +326,49 @@ fn build_error_response(
         .header("x-xray-id", trace_id)
         .body(axum::body::Body::from(payload.to_string()))
         .unwrap()
+}
+
+fn record_success_metrics(method: &str, provider: &proxy_core::ProviderId, elapsed: Duration) {
+    let mut hist_labels = Vec::with_capacity(2);
+    hist_labels.push(Label::new("method", method.to_owned()));
+    hist_labels.push(Label::new("provider", provider.0.clone()));
+    histogram!(Key::from_parts("rpc_request_duration_seconds", hist_labels), elapsed.as_secs_f64());
+
+    let mut success_labels = Vec::with_capacity(3);
+    success_labels.push(Label::new("method", method.to_owned()));
+    success_labels.push(Label::new("provider", provider.0.clone()));
+    success_labels.push(Label::new("status", "success"));
+    counter!(Key::from_parts("rpc_requests_total", success_labels)).increment(1);
+}
+
+fn record_failure_metrics(method: &str, provider: Option<&str>, error: &str) {
+    let provider_value = provider.unwrap_or("<none>").to_owned();
+
+    let mut failure_labels = Vec::with_capacity(3);
+    failure_labels.push(Label::new("method", method.to_owned()));
+    failure_labels.push(Label::new("provider", provider_value.clone()))
+;    failure_labels.push(Label::new("status", "failure"));
+    counter!(Key::from_parts("rpc_requests_total", failure_labels)).increment(1);
+
+    let mut error_labels = Vec::with_capacity(3);
+    error_labels.push(Label::new("method", method.to_owned()));
+    error_labels.push(Label::new("provider", provider_value));
+    error_labels.push(Label::new("code", classify_error(error)));
+    counter!(Key::from_parts("rpc_errors_total", error_labels)).increment(1);
+}
+
+fn classify_error(message: &str) -> &'static str {
+    if message.contains("timed out") {
+        "timeout"
+    } else if message.contains("status 4") {
+        "client"
+    } else if message.contains("status 5") {
+        "server"
+    } else {
+        "other"
+    }
+}
+
+fn leak_label(value: &str) -> &'static str {
+    Box::leak(value.to_owned().into_boxed_str())
 }
