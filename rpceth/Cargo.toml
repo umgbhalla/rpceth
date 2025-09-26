@@ -37,15 +37,17 @@ tracing-subscriber = { version = "0.3", features = [
 metrics = "0.21"
 metrics-util = "0.15"
 metrics-exporter-prometheus = "0.12"
-tracing-opentelemetry = "0.27"
-opentelemetry = { version = "0.31", default-features = false, features = [
+tracing-opentelemetry = "0.31"
+opentelemetry = { version = "0.30", default-features = false, features = [
   "trace",
 ] }
-opentelemetry-otlp = { version = "0.31", default-features = false, features = [
+opentelemetry-otlp = { version = "0.30", default-features = false, features = [
   "grpc-tonic",
-] }
-opentelemetry_sdk = { version = "0.31", default-features = false, features = [
   "trace",
+] }
+opentelemetry_sdk = { version = "0.30", default-features = false, features = [
+  "trace",
+  "rt-tokio",
 ] }
 bytes = "1.7"
 uuid = { version = "1", features = ["v4"] }
@@ -58,3 +60,4 @@ thiserror = "1.0"
 url = "2.5"
 globset = "0.4"
 tower-retry = "0.3"
+chrono = { version = "0.4", features = ["serde"] }

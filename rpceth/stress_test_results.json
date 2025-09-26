@@ -1,0 +1,85 @@
+{
+  "stress_test_summary": {
+    "total_tests": 4,
+    "successful_tests": 4,
+    "total_requests": 89,
+    "successful_requests": 83,
+    "total_duration": 46.36102104187012,
+    "timestamp": 1758848323.249009
+  },
+  "test_results": [
+    {
+      "test": "concurrent_load",
+      "total_requests": 30,
+      "successful": 30,
+      "failed": 0,
+      "total_duration": 1.063321828842163,
+      "avg_duration": 0.47454840342203775,
+      "throughput": 28.213471393384822,
+      "trace_ids": [
+        "load-test-0-1758848276",
+        "load-test-1-1758848276",
+        "load-test-2-1758848276",
+        "load-test-3-1758848276",
+        "load-test-4-1758848276",
+        "load-test-5-1758848276",
+        "load-test-6-1758848276",
+        "load-test-7-1758848276",
+        "load-test-8-1758848276",
+        "load-test-9-1758848276"
+      ]
+    },
+    {
+      "test": "complex_eth_calls",
+      "total_requests": 3,
+      "successful": 3,
+      "failed": 0,
+      "total_duration": 2.39536714553833,
+      "trace_ids": [
+        "complex-call-0-1758848279",
+        "complex-call-1-1758848280",
+        "complex-call-2-1758848281"
+      ]
+    },
+    {
+      "test": "error_scenarios",
+      "total_requests": 6,
+      "responses_received": 6,
+      "total_duration": 4.504127025604248,
+      "trace_ids": [
+        "error-test-0-1758848284",
+        "error-test-1-1758848285",
+        "error-test-2-1758848285",
+        "error-test-3-1758848286",
+        "error-test-4-1758848287",
+        "error-test-5-1758848288"
+      ]
+    },
+    {
+      "test": "burst_patterns",
+      "total_requests": 50,
+      "successful": 50,
+      "failed": 0,
+      "total_duration": 30.392969846725464,
+      "burst_duration": 0.9783339500427246,
+      "sustained_duration": 27.41463589668274,
+      "trace_ids": [
+        "burst-quick-0-1758848290",
+        "burst-quick-1-1758848290",
+        "burst-quick-2-1758848290",
+        "burst-quick-3-1758848290",
+        "burst-quick-4-1758848290",
+        "burst-quick-5-1758848290",
+        "burst-quick-6-1758848290",
+        "burst-quick-7-1758848290",
+        "burst-quick-8-1758848290",
+        "burst-quick-9-1758848290",
+        "burst-quick-10-1758848290",
+        "burst-quick-11-1758848290",
+        "burst-quick-12-1758848290",
+        "burst-quick-13-1758848290",
+        "burst-quick-14-1758848290"
+      ]
+    }
+  ]
+}

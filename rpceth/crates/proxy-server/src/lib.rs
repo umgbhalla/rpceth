@@ -4,6 +4,8 @@ use std::{
     time::{Duration, Instant},
 };
 
+pub mod admin;
+
 use axum::{
     Json, Router,
     extract::State,
@@ -111,20 +113,38 @@ pub fn build_router(config: proxy_core::ProxyConfig) -> Router {
     let state = ProxyState::new(config);
     Router::new()
         .route("/", post(proxy_handler))
+        .merge(admin::admin_routes())
         .with_state(state)
 }
 
-#[instrument(skip(body, state, headers))]
+#[instrument(
+    skip(body, state, _headers),
+    fields(
+        method = body.get("method").and_then(|v| v.as_str()).unwrap_or("<unknown>"),
+        request_id = body.get("id").and_then(|v| v.as_i64()).unwrap_or(0),
+        jsonrpc_version = body.get("jsonrpc").and_then(|v| v.as_str()).unwrap_or("unknown"),
+        otel_trace_id = tracing::field::Empty
+    )
+)]
 async fn proxy_handler(
     State(state): State<ProxyState>,
-    headers: HeaderMap,
+    _headers: HeaderMap,
     Json(body): Json<serde_json::Value>,
 ) -> ProxyOutcome {
-    let start = Instant::now();
-    let trace_id = headers
-        .get("x-xray-id")
-        .and_then(|value| value.to_str().ok().map(|s| s.to_owned()))
-        .unwrap_or_else(|| uuid::Uuid::new_v4().to_string());
+    let request_start = Instant::now();
+
+    // Get the OpenTelemetry trace ID from the current span context
+    let trace_id = {
+        use opentelemetry::trace::TraceContextExt;
+        use tracing_opentelemetry::OpenTelemetrySpanExt;
+        let context = tracing::Span::current().context();
+        let span = context.span();
+        let span_context = span.span_context();
+        format!("{:032x}", span_context.trace_id())
+    };
+
+    // Record the OpenTelemetry trace_id in the current span
+    tracing::Span::current().record("otel_trace_id", &trace_id);
 
     let method_name = body
         .get("method")
@@ -145,10 +165,12 @@ async fn proxy_handler(
     );
 
     for attempt in 0..max_attempts {
+        let lb_selection_start = Instant::now();
         let provider = match select_provider(&state, &tried, &method_policy).await {
             Some(provider) => provider,
             None => break,
         };
+        let lb_selection_duration = lb_selection_start.elapsed();
         tried.insert(provider.id.clone());
 
         state.circuit_breaker.on_request_start(&provider.id);
@@ -157,23 +179,53 @@ async fn proxy_handler(
             "proxy.attempt",
             method = method_name,
             provider = %provider.id.0,
+            provider_url = %provider.url,
             attempt,
-            trace_id = %trace_id
+            otel_trace_id = %trace_id,
+            timeout_ms = provider.timeout.as_millis(),
+            max_retries = max_attempts,
+            request_id = body.get("id").and_then(|v| v.as_i64()).unwrap_or(0),
+            lb_selection_duration_us = lb_selection_duration.as_micros(),
+            provider_weight = provider.base_weight,
+            total_providers = state.config.providers.len(),
+            tried_providers = tried.len()
         );
         span.in_scope(|| {
-            info!("proxy forwarding request");
+            info!(
+                provider_url = %provider.url,
+                timeout_ms = provider.timeout.as_millis(),
+                "proxy forwarding request"
+            );
         });
 
         let timeout_override = method_policy.timeout;
         let timeout = provider.timeout.max(timeout_override);
 
+        let provider_request_start = Instant::now();
         match forward_to_provider(&state, &provider, &body, &trace_id, timeout).await {
             Ok(success) => {
+                let provider_request_duration = provider_request_start.elapsed();
+                let total_request_duration = request_start.elapsed();
+
                 state.circuit_breaker.on_success(&provider.id);
-                record_success_metrics(method_name, &provider.id, start.elapsed());
+
+                // Record detailed timing in span
+                span.in_scope(|| {
+                    info!(
+                        provider_request_duration_ms = provider_request_duration.as_millis(),
+                        total_request_duration_ms = total_request_duration.as_millis(),
+                        lb_overhead_us = lb_selection_duration.as_micros(),
+                        "request completed successfully"
+                    );
+                });
+
+                record_success_metrics(method_name, &provider.id, total_request_duration);
                 return ProxyOutcome::Success(build_success_response(success, trace_id));
             }
             Err(error_message) => {
+                let provider_request_duration = provider_request_start.elapsed();
+                let total_request_duration = request_start.elapsed();
+
                 record_failure_metrics(method_name, Some(provider.id.0.as_str()), &error_message);
                 last_error = Some(error_message.clone());
 
@@ -182,6 +234,9 @@ async fn proxy_handler(
                 span.in_scope(|| {
                     error!(
                         error = %error_message,
+                        provider_request_duration_ms = provider_request_duration.as_millis(),
+                        total_request_duration_ms = total_request_duration.as_millis(),
+                        lb_overhead_us = lb_selection_duration.as_micros(),
                         "provider attempt failed"
                     );
                 });
@@ -282,7 +337,7 @@ fn build_success_response(provider_response: ProviderResponse, trace_id: String)
     let mut response = Response::builder()
         .status(provider_response.status)
         .header("content-type", "application/json")
-        .header("x-xray-id", trace_id);
+        .header("x-trace-id", trace_id); // Use x-trace-id for OpenTelemetry trace ID
 
     if let Some(value) = provider_response.headers.get("content-type") {
         response = response.header("content-type", value);
@@ -317,7 +372,7 @@ fn build_error_response(
     Response::builder()
         .status(StatusCode::BAD_GATEWAY)
         .header("content-type", "application/json")
-        .header("x-xray-id", trace_id)
+        .header("x-trace-id", trace_id) // Use x-trace-id for OpenTelemetry trace ID
         .body(axum::body::Body::from(payload.to_string()))
         .unwrap()
 }
