@@ -26,8 +26,9 @@ Json = Dict[str, Any]
 
 
 class MethodRoutingTester:
-    def __init__(self, base_url: str) -> None:
+    def __init__(self, base_url: str, api_key: str = "change-me") -> None:
         self.base_url = base_url.rstrip("/")
+        self.api_key = api_key
         self._session: Optional[aiohttp.ClientSession] = None
 
     async def __aenter__(self) -> "MethodRoutingTester":
@@ -61,7 +62,7 @@ class MethodRoutingTester:
 
         assert self._session is not None, "session not initialised"
         start = time.perf_counter()
-        async with self._session.post(self.base_url, json=payload, headers=headers) as resp:
+        async with self._session.post(f"{self.base_url}/?apikey={self.api_key}", json=payload, headers=headers) as resp:
             latency = time.perf_counter() - start
             data = await resp.json(content_type=None)
             returned_trace = resp.headers.get("x-xray-id", "")

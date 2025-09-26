@@ -13,8 +13,9 @@ from collections import defaultdict
 # Removed matplotlib dependency for simpler execution
 
 class HealthAnalyzer:
-    def __init__(self, base_url: str = "http://localhost:3000"):
+    def __init__(self, base_url: str = "http://localhost:3000", api_key: str = "change-me"):
         self.base_url = base_url
+        self.api_key = api_key
         self.session = None
         
     async def __aenter__(self):
@@ -37,7 +38,7 @@ class HealthAnalyzer:
         start_time = time.time()
         
         try:
-            async with self.session.post(self.base_url, 
+            async with self.session.post(f"{self.base_url}/?apikey={self.api_key}", 
                                        json=payload,
                                        timeout=aiohttp.ClientTimeout(total=10)) as response:
                 latency = time.time() - start_time

@@ -13,9 +13,10 @@ import os
 from typing import Dict, List, Any
 
 class AdminObservabilityTester:
-    def __init__(self, proxy_url: str = "http://localhost:3000", jaeger_url: str = "http://localhost:16686"):
+    def __init__(self, proxy_url: str = "http://localhost:3000", jaeger_url: str = "http://localhost:16686", api_key: str = "change-me"):
         self.proxy_url = proxy_url
         self.jaeger_url = jaeger_url
+        self.api_key = api_key
         self.session = None
         
     async def __aenter__(self):
@@ -132,7 +133,7 @@ class AdminObservabilityTester:
             }
             
             start_time = time.time()
-            async with self.session.post(self.proxy_url, json=payload) as response:
+            async with self.session.post(f"{self.proxy_url}/?apikey={self.api_key}", json=payload) as response:
                 result = await response.json()
                 duration = time.time() - start_time
                 trace_id = response.headers.get("x-trace-id")
@@ -225,7 +226,7 @@ class AdminObservabilityTester:
                 "id": i + 1
             }
             
-            async with self.session.post(self.proxy_url, json=payload) as response:
+            async with self.session.post(f"{self.proxy_url}/?apikey={self.api_key}", json=payload) as response:
                 trace_id = response.headers.get("x-trace-id")
                 if trace_id:
                     overhead_data.append(trace_id)

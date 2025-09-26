@@ -2,7 +2,7 @@ use axum::{
     Router,
     extract::State,
     http::StatusCode,
-    response::{IntoResponse, Json},
+    response::{IntoResponse, Json, Response},
     routing::get,
 };
 use serde_json::json;
@@ -167,4 +167,16 @@ async fn config_handler(State(state): State<ProxyState>) -> impl IntoResponse {
     });
 
     (StatusCode::OK, Json(response))
+}
+
+/// Prometheus metrics endpoint
+#[instrument(skip(_state))]
+pub async fn metrics_handler(State(_state): State<ProxyState>) -> Response {
+    let output = "# Metrics endpoint placeholder\n# TODO: Implement actual metrics collection\n";
+    
+    Response::builder()
+        .status(StatusCode::OK)
+        .header("content-type", "text/plain; version=0.0.4")
+        .body(output.into())
+        .unwrap()
 }

@@ -14,8 +14,9 @@ from typing import Dict, List, Optional, Tuple
 from collections import defaultdict, Counter
 
 class ProxyTester:
-    def __init__(self, base_url: str = "http://localhost:3000"):
+    def __init__(self, base_url: str = "http://localhost:3000", api_key: str = "change-me"):
         self.base_url = base_url
+        self.api_key = api_key
         self.session = None
         
     async def __aenter__(self):
@@ -27,7 +28,7 @@ class ProxyTester:
             await self.session.close()
     
     async def make_rpc_call(self, method: str, params: List = None, custom_id: int = None, 
-                           custom_headers: Dict = None) -> Tuple[Dict, float, str]:
+                           custom_headers: Dict = None, provider_id: str = None) -> Tuple[Dict, float, str]:
         """Make an RPC call and return response, latency, and trace ID"""
         if params is None:
             params = []
@@ -42,15 +43,24 @@ class ProxyTester:
         headers = {"Content-Type": "application/json"}
         if custom_headers:
             headers.update(custom_headers)
-            
+        
+        # Build URL with required apikey and optional provider_id
+        url_params = f"?apikey={self.api_key}"
+        if provider_id:
+            url_params += f"&provider_id={provider_id}"
+        request_url = f"{self.base_url}/{url_params}"
+        
         start_time = time.time()
         
-        async with self.session.post(self.base_url, 
+        async with self.session.post(request_url, 
                                    json=payload, 
                                    headers=headers) as response:
             latency = time.time() - start_time
-            response_data = await response.json()
-            trace_id = response.headers.get('x-xray-id', 'NO_TRACE_ID')
+            try:
+                response_data = await response.json()
+            except:
+                response_data = {"error": {"code": -32700, "message": f"HTTP {response.status}"}}
+            trace_id = response.headers.get('x-trace-id', 'NO_TRACE_ID')
             
             return response_data, latency, trace_id
     
@@ -161,7 +171,8 @@ class ProxyTester:
         
         # Test malformed request (this will test the server's JSON parsing)
         try:
-            async with self.session.post(self.base_url, 
+            request_url = f"{self.base_url}/?apikey={self.api_key}"
+            async with self.session.post(request_url, 
                                        data="invalid json", 
                                        headers={"Content-Type": "application/json"}) as resp:
                 response_data = await resp.json()

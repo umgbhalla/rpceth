@@ -12,8 +12,9 @@ import random
 from typing import Dict, List, Any
 
 class StressAndEdgeCaseTester:
-    def __init__(self, proxy_url: str = "http://localhost:3000"):
+    def __init__(self, proxy_url: str = "http://localhost:3000", api_key: str = "change-me"):
         self.proxy_url = proxy_url
+        self.api_key = api_key
         self.session = None
         
     async def __aenter__(self):
@@ -43,7 +44,7 @@ class StressAndEdgeCaseTester:
         
         start_time = time.time()
         try:
-            async with self.session.post(self.proxy_url, json=payload, headers=headers) as response:
+            async with self.session.post(f"{self.proxy_url}/?apikey={self.api_key}", json=payload, headers=headers) as response:
                 result = await response.json()
                 duration = time.time() - start_time
                 

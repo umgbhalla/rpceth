@@ -1,6 +1,5 @@
 use std::{
     collections::{HashMap, HashSet},
-    convert::Infallible,
     sync::Arc,
     time::{Duration, Instant},
 };
@@ -10,11 +9,11 @@ pub mod admin;
 use axum::body::Body;
 use axum::{
     Json, Router,
-    extract::{Extension, Path, State},
-    http::{HeaderMap, Request, StatusCode, Uri},
+    extract::{Extension, State},
+    http::{HeaderMap, Request, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
-    routing::post,
+    routing::{get, post},
 };
 use metrics::{histogram, increment_counter};
 use tower::retry::backoff::{
@@ -22,7 +21,6 @@ use tower::retry::backoff::{
 };
 use tracing::{error, info, instrument, warn};
 
-use serde::Deserialize;
 use serde_json::json;
 use url::form_urlencoded;
 
@@ -139,7 +137,7 @@ impl IntoResponse for ProxyOutcome {
 pub fn build_router(config: proxy_core::ProxyConfig) -> Router {
     let state = ProxyState::new(config);
     Router::new()
-        .route("/metrics", get(crate::main::metrics_handler))
+        .route("/metrics", get(admin::metrics_handler))
         .route("/:chain_id", post(proxy_handler))
         .route("/", post(proxy_handler))
         .layer(middleware::from_fn_with_state(
@@ -150,10 +148,10 @@ pub fn build_router(config: proxy_core::ProxyConfig) -> Router {
         .with_state(state)
 }
 
-async fn authenticate_request<B>(
+async fn authenticate_request(
     State(state): State<ProxyState>,
-    mut req: Request<B>,
-    next: Next<B>,
+    mut req: Request<Body>,
+    next: Next,
 ) -> Result<Response, Response> {
     if req.uri().path() == "/metrics" {
         return Ok(next.run(req).await);

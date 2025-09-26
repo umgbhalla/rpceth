@@ -12,9 +12,10 @@ import uuid
 from typing import Dict, List, Any
 
 class TraceIDFixVerificationTester:
-    def __init__(self, proxy_url: str = "http://localhost:3000", jaeger_url: str = "http://localhost:16686"):
+    def __init__(self, proxy_url: str = "http://localhost:3000", jaeger_url: str = "http://localhost:16686", api_key: str = "change-me"):
         self.proxy_url = proxy_url
         self.jaeger_url = jaeger_url
+        self.api_key = api_key
         self.session = None
         
     async def __aenter__(self):
@@ -39,7 +40,7 @@ class TraceIDFixVerificationTester:
             headers["x-xray-id"] = trace_id
         
         start_time = time.time()
-        async with self.session.post(self.proxy_url, json=payload, headers=headers) as response:
+        async with self.session.post(f"{self.proxy_url}/?apikey={self.api_key}", json=payload, headers=headers) as response:
             result = await response.json()
             duration = time.time() - start_time
             

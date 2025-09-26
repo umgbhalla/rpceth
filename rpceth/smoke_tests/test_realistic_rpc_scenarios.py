@@ -27,8 +27,9 @@ class TestScenario:
     complexity: str  # "simple", "medium", "complex"
 
 class RealEthereumRPCTester:
-    def __init__(self, proxy_url: str = "http://localhost:3000"):
+    def __init__(self, proxy_url: str = "http://localhost:3000", api_key: str = "change-me"):
         self.proxy_url = proxy_url
+        self.api_key = api_key
         self.session = None
         self.test_results = []
         
@@ -58,7 +59,7 @@ class RealEthereumRPCTester:
         }
         
         start_time = time.time()
-        async with self.session.post(self.proxy_url, json=payload, headers=headers) as response:
+        async with self.session.post(f"{self.proxy_url}/?apikey={self.api_key}", json=payload, headers=headers) as response:
             result = await response.json()
             duration = time.time() - start_time
             
