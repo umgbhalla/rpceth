@@ -12,6 +12,8 @@ strategy: weighted_random
 default_timeout_ms: 5000
 max_retries: 3
 default_tolerance: Balanced
+auth:
+  api_key: test-key
 methods:
   default:
     timeout_ms: 5000

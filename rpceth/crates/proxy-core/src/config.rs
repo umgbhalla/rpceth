@@ -66,6 +66,12 @@ pub struct MethodConfig {
     pub overrides: Vec<MethodOverrideConfig>,
 }
 
+#[derive(Debug, Clone, Deserialize)]
+pub struct AuthConfig {
+    pub api_key: String,
+}
+
+
 #[derive(Debug, Clone, Deserialize, Default)]
 #[serde(default)]
 pub struct CircuitBreakerConfig {
@@ -88,6 +94,7 @@ pub struct ProxyConfig {
     pub methods: MethodConfig,
     #[serde(default)]
     pub circuit_breaker: CircuitBreakerConfig,
+    pub auth: AuthConfig,
     pub providers: Vec<ProviderConfig>,
 }
 
@@ -139,6 +146,7 @@ impl ProxyConfig {
         default_timeout_ms: u64,
         max_retries: u8,
         providers: Vec<ProviderConfig>,
+        auth: AuthConfig,
     ) -> Result<Self, ConfigError> {
         let config = Self {
             strategy,
@@ -147,6 +155,7 @@ impl ProxyConfig {
             default_tolerance: default_tolerance_level(),
             methods: MethodConfig::default(),
             circuit_breaker: CircuitBreakerConfig::default(),
+            auth,
             providers,
         };
         validate(&config)?;
@@ -172,6 +181,12 @@ fn validate(config: &ProxyConfig) -> Result<(), ConfigError> {
     if config.max_retries == 0 {
         return Err(ConfigError::Validation(
             "max_retries must be greater than zero".into(),
+        ));
+    }
+
+    if config.auth.api_key.trim().is_empty() {
+        return Err(ConfigError::Validation(
+            "auth.api_key must be provided and not be empty".into(),
         ));
     }
 

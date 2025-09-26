@@ -1,15 +1,18 @@
 use std::{
-    collections::HashSet,
+    collections::{HashMap, HashSet},
+    convert::Infallible,
     sync::Arc,
     time::{Duration, Instant},
 };
 
 pub mod admin;
 
+use axum::body::Body;
 use axum::{
     Json, Router,
-    extract::State,
-    http::{HeaderMap, StatusCode},
+    extract::{Extension, Path, State},
+    http::{HeaderMap, Request, StatusCode, Uri},
+    middleware::{self, Next},
     response::{IntoResponse, Response},
     routing::post,
 };
@@ -19,6 +22,18 @@ use tower::retry::backoff::{
 };
 use tracing::{error, info, instrument, warn};
 
+use serde::Deserialize;
+use serde_json::json;
+use url::form_urlencoded;
+
+const API_KEY_PARAM: &str = "apikey";
+const PROVIDER_PARAM: &str = "provider_id";
+
+#[derive(Debug, Clone, Default)]
+struct RequestContext {
+    provider_override: Option<proxy_core::ProviderId>,
+}
+
 #[derive(Clone)]
 pub struct ProxyState {
     pub config: proxy_core::ProxyConfig,
@@ -27,6 +42,7 @@ pub struct ProxyState {
     pub circuit_breaker: Arc<proxy_core::CircuitBreaker>,
     pub method_registry: proxy_core::MethodRegistry,
     pub client: reqwest::Client,
+    pub providers_by_id: HashMap<proxy_core::ProviderId, proxy_core::ProviderHandle>,
 }
 
 impl ProxyState {
@@ -42,6 +58,12 @@ impl ProxyState {
             .cloned()
             .map(proxy_core::ProviderConfig::into_handle)
             .collect();
+
+        let providers_by_id: HashMap<proxy_core::ProviderId, proxy_core::ProviderHandle> =
+            provider_handles
+                .iter()
+                .map(|handle| (handle.id.clone(), handle.clone()))
+                .collect();
 
         let health_service: Option<Arc<proxy_core::HealthService>> = {
             #[cfg(test)]
@@ -91,7 +113,12 @@ impl ProxyState {
             circuit_breaker,
             method_registry,
             client,
+            providers_by_id,
         }
+    }
+
+    pub fn api_key(&self) -> &str {
+        self.config.auth.api_key.as_str()
     }
 }
 
@@ -112,9 +139,63 @@ impl IntoResponse for ProxyOutcome {
 pub fn build_router(config: proxy_core::ProxyConfig) -> Router {
     let state = ProxyState::new(config);
     Router::new()
+        .route("/metrics", get(crate::main::metrics_handler))
+        .route("/:chain_id", post(proxy_handler))
         .route("/", post(proxy_handler))
+        .layer(middleware::from_fn_with_state(
+            state.clone(),
+            authenticate_request,
+        ))
         .merge(admin::admin_routes())
         .with_state(state)
+}
+
+async fn authenticate_request<B>(
+    State(state): State<ProxyState>,
+    mut req: Request<B>,
+    next: Next<B>,
+) -> Result<Response, Response> {
+    if req.uri().path() == "/metrics" {
+        return Ok(next.run(req).await);
+    }
+
+    let mut provided_key: Option<String> = None;
+    let mut provider_override: Option<proxy_core::ProviderId> = None;
+
+    if let Some(query) = req.uri().query() {
+        for (key, value) in form_urlencoded::parse(query.as_bytes()) {
+            if key == API_KEY_PARAM {
+                provided_key = Some(value.into_owned());
+            } else if key == PROVIDER_PARAM {
+                provider_override = Some(proxy_core::ProviderId(value.into_owned()));
+            }
+        }
+    }
+
+    match provided_key {
+        Some(ref key) if key == state.api_key() => {
+            req.extensions_mut()
+                .insert(RequestContext { provider_override });
+            Ok(next.run(req).await)
+        }
+        _ => Err(unauthorized_response()),
+    }
+}
+
+fn unauthorized_response() -> Response {
+    Response::builder()
+        .status(StatusCode::UNAUTHORIZED)
+        .header("content-type", "application/json")
+        .body(Body::from(
+            json!({
+                "error": {
+                    "code": -32000,
+                    "message": "unauthorized"
+                }
+            })
+            .to_string(),
+        ))
+        .unwrap()
 }
 
 #[instrument(
@@ -128,6 +209,7 @@ pub fn build_router(config: proxy_core::ProxyConfig) -> Router {
 )]
 async fn proxy_handler(
     State(state): State<ProxyState>,
+    Extension(ctx): Extension<RequestContext>,
     _headers: HeaderMap,
     Json(body): Json<serde_json::Value>,
 ) -> ProxyOutcome {
@@ -166,7 +248,7 @@ async fn proxy_handler(
 
     for attempt in 0..max_attempts {
         let lb_selection_start = Instant::now();
-        let provider = match select_provider(&state, &tried, &method_policy).await {
+        let provider = match select_provider(&state, &ctx, &tried, &method_policy).await {
             Some(provider) => provider,
             None => break,
         };
@@ -258,10 +340,24 @@ async fn proxy_handler(
 
 async fn select_provider(
     state: &ProxyState,
+    ctx: &RequestContext,
     tried: &HashSet<proxy_core::ProviderId>,
     policy: &proxy_core::MethodPolicy,
 ) -> Option<proxy_core::ProviderHandle> {
+    if let Some(ref override_id) = ctx.provider_override {
+        if !tried.contains(override_id) {
+            if let Some(handle) = state.providers_by_id.get(override_id) {
+                if state.circuit_breaker.is_available(override_id) {
+                    return Some(handle.clone());
+                }
+            }
+        }
+    }
+
     let mut excluded = tried.clone();
+    if let Some(ref override_id) = ctx.provider_override {
+        excluded.insert(override_id.clone());
+    }
 
     loop {
         let provider = state.load_balancer.select(&excluded, Some(policy)).await?;
