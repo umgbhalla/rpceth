@@ -173,7 +173,7 @@ async fn config_handler(State(state): State<ProxyState>) -> impl IntoResponse {
 #[instrument(skip(_state))]
 pub async fn metrics_handler(State(_state): State<ProxyState>) -> Response {
     let output = "# Metrics endpoint placeholder\n# TODO: Implement actual metrics collection\n";
-    
+
     Response::builder()
         .status(StatusCode::OK)
         .header("content-type", "text/plain; version=0.0.4")

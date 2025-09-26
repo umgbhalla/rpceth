@@ -13,7 +13,7 @@ use axum::{
     http::{HeaderMap, Request, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
-    routing::{get, post},
+    routing::post,
 };
 use metrics::{histogram, increment_counter};
 use tower::retry::backoff::{
@@ -137,7 +137,6 @@ impl IntoResponse for ProxyOutcome {
 pub fn build_router(config: proxy_core::ProxyConfig) -> Router {
     let state = ProxyState::new(config);
     Router::new()
-        .route("/metrics", get(admin::metrics_handler))
         .route("/:chain_id", post(proxy_handler))
         .route("/", post(proxy_handler))
         .layer(middleware::from_fn_with_state(

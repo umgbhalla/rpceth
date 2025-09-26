@@ -1,0 +1,3005 @@
+{
+  "provider_distribution": {
+    "total_requests": 150,
+    "successful_requests": 150,
+    "success_rate": 100.0,
+    "latency_stats": {
+      "mean": 324.4431225458781,
+      "median": 239.42101001739502,
+      "stdev": 227.32770085666968,
+      "min": 177.39510536193848,
+      "max": 1233.8778972625732
+    },
+    "latency_groups": {
+      "medium": {
+        "count": 16,
+        "percentage": 10.666666666666668,
+        "avg_latency": 929.5332431793213
+      },
+      "fast": {
+        "count": 134,
+        "percentage": 89.33333333333333,
+        "avg_latency": 252.1935559030789
+      }
+    },
+    "timeline": [
+      {
+        "timestamp": 1758854664.134391,
+        "latency_ms": 807.438850402832,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854664134390,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854664.9930959,
+        "latency_ms": 402.88519859313965,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854664993092,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854665.4470751,
+        "latency_ms": 354.5117378234863,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854665447068,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854665.852885,
+        "latency_ms": 224.66516494750977,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854665852881,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854666.128979,
+        "latency_ms": 273.7689018249512,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854666128975,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854666.45412,
+        "latency_ms": 187.94012069702148,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854666454117,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854666.693372,
+        "latency_ms": 210.24489402770996,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854666693367,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854666.954989,
+        "latency_ms": 178.955078125,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854666954985,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854667.1850922,
+        "latency_ms": 561.7280006408691,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854667185091,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854667.798096,
+        "latency_ms": 269.805908203125,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854667798092,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854668.11923,
+        "latency_ms": 390.1660442352295,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854668119226,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854668.560846,
+        "latency_ms": 190.71006774902344,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854668560840,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854668.802779,
+        "latency_ms": 276.2470245361328,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854668802775,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854669.130347,
+        "latency_ms": 241.46294593811035,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854669130343,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854669.423168,
+        "latency_ms": 237.82825469970703,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854669423163,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854669.712302,
+        "latency_ms": 238.6770248413086,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854669712298,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854670.0016582,
+        "latency_ms": 290.70281982421875,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854670001654,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854670.343667,
+        "latency_ms": 197.68595695495605,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854670343663,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854670.592698,
+        "latency_ms": 346.2979793548584,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854670592693,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854670.990038,
+        "latency_ms": 247.24721908569336,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854670990033,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854671.2886431,
+        "latency_ms": 190.40799140930176,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854671288638,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854671.529571,
+        "latency_ms": 182.31773376464844,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854671529535,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854671.763232,
+        "latency_ms": 194.6098804473877,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854671763225,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854672.009291,
+        "latency_ms": 179.12721633911133,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854672009286,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854672.239778,
+        "latency_ms": 202.82506942749023,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854672239774,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854672.4937432,
+        "latency_ms": 185.44387817382812,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854672493741,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854672.730538,
+        "latency_ms": 182.32297897338867,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854672730533,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854672.9642692,
+        "latency_ms": 1233.8778972625732,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854672964261,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854674.249495,
+        "latency_ms": 358.6728572845459,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854674249487,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854674.659543,
+        "latency_ms": 465.7437801361084,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854674659540,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854675.176172,
+        "latency_ms": 354.6409606933594,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854675176167,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854675.5834398,
+        "latency_ms": 181.67495727539062,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854675583435,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854675.816619,
+        "latency_ms": 181.7300319671631,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854675816612,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854676.049702,
+        "latency_ms": 956.3848972320557,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854676049694,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854677.0574908,
+        "latency_ms": 998.4571933746338,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854677057487,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854678.107328,
+        "latency_ms": 346.74906730651855,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854678107324,
+          "result": "0x165bb48"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854678.505263,
+        "latency_ms": 199.31507110595703,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854678505259,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854678.755954,
+        "latency_ms": 261.43813133239746,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854678755949,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854679.068349,
+        "latency_ms": 200.38819313049316,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854679068345,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854679.3202078,
+        "latency_ms": 181.44607543945312,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854679320201,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854679.553073,
+        "latency_ms": 180.81092834472656,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854679553070,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854679.785362,
+        "latency_ms": 249.76205825805664,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854679785354,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854680.086468,
+        "latency_ms": 969.6810245513916,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854680086464,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854681.107567,
+        "latency_ms": 179.58402633666992,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854681107560,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854681.338356,
+        "latency_ms": 1011.5809440612793,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854681338349,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854682.401471,
+        "latency_ms": 177.39510536193848,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854682401464,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854682.629987,
+        "latency_ms": 199.50103759765625,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854682629986,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854682.880372,
+        "latency_ms": 207.0319652557373,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854682880365,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854683.1389189,
+        "latency_ms": 204.909086227417,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854683138912,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854683.3953412,
+        "latency_ms": 345.71290016174316,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854683395333,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854683.792574,
+        "latency_ms": 181.92505836486816,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854683792567,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854684.025915,
+        "latency_ms": 361.74607276916504,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854684025908,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854684.439151,
+        "latency_ms": 204.99587059020996,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854684439143,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854684.695627,
+        "latency_ms": 365.2360439300537,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854684695619,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854685.1123672,
+        "latency_ms": 319.5657730102539,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854685112358,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854685.4834418,
+        "latency_ms": 348.052978515625,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854685483435,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854685.8827178,
+        "latency_ms": 360.87512969970703,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854685882714,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854686.294807,
+        "latency_ms": 180.26304244995117,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854686294799,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854686.5262458,
+        "latency_ms": 197.82328605651855,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854686526241,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854686.7754948,
+        "latency_ms": 180.82618713378906,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854686775488,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854687.0070589,
+        "latency_ms": 180.20009994506836,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854687007051,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854687.2387042,
+        "latency_ms": 985.407829284668,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854687238697,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854688.275615,
+        "latency_ms": 199.91803169250488,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854688275606,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854688.527056,
+        "latency_ms": 354.6180725097656,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854688527047,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854688.933098,
+        "latency_ms": 182.69109725952148,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854688933090,
+          "result": "0x165bb49"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854689.167254,
+        "latency_ms": 186.1870288848877,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854689167247,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854689.404865,
+        "latency_ms": 358.7930202484131,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854689404858,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854689.814883,
+        "latency_ms": 190.5648708343506,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854689814880,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854690.056917,
+        "latency_ms": 180.82618713378906,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854690056910,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854690.289226,
+        "latency_ms": 178.14278602600098,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854690289219,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854690.518371,
+        "latency_ms": 350.17871856689453,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854690518364,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854690.919174,
+        "latency_ms": 179.37302589416504,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854690919165,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854691.149941,
+        "latency_ms": 239.15815353393555,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854691149935,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854691.440327,
+        "latency_ms": 413.0971431732178,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854691440321,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854691.9047391,
+        "latency_ms": 404.0348529815674,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854691904735,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854692.359701,
+        "latency_ms": 354.809045791626,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854692359695,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854692.765861,
+        "latency_ms": 179.78501319885254,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854692765859,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854692.996619,
+        "latency_ms": 353.9268970489502,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854692996617,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854693.4019918,
+        "latency_ms": 202.728271484375,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854693401987,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854693.6561768,
+        "latency_ms": 363.34824562072754,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854693656172,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854694.071028,
+        "latency_ms": 977.4329662322998,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854694071021,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854695.099964,
+        "latency_ms": 180.6950569152832,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854695099957,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854695.332285,
+        "latency_ms": 369.33016777038574,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854695332277,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854695.753033,
+        "latency_ms": 222.24807739257812,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854695753026,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854696.0267992,
+        "latency_ms": 243.2246208190918,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854696026792,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854696.3215182,
+        "latency_ms": 349.625825881958,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854696321509,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854696.72209,
+        "latency_ms": 194.11611557006836,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854696722086,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854696.9677079,
+        "latency_ms": 343.4321880340576,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854696967701,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854697.362627,
+        "latency_ms": 239.6838665008545,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854697362620,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854697.653528,
+        "latency_ms": 200.3788948059082,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854697653522,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854697.9052448,
+        "latency_ms": 197.44634628295898,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854697905243,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854698.1540182,
+        "latency_ms": 241.14179611206055,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854698154012,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854698.446652,
+        "latency_ms": 180.94897270202637,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854698446645,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854698.678632,
+        "latency_ms": 313.59291076660156,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854698678624,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854699.042877,
+        "latency_ms": 179.72397804260254,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854699042870,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854699.274094,
+        "latency_ms": 218.0948257446289,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854699274088,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854699.543672,
+        "latency_ms": 971.8747138977051,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854699543665,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854700.566543,
+        "latency_ms": 180.30285835266113,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854700566535,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854700.798285,
+        "latency_ms": 187.71004676818848,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854700798277,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854701.037489,
+        "latency_ms": 184.01098251342773,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854701037482,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854701.27299,
+        "latency_ms": 244.43411827087402,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854701272982,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854701.569689,
+        "latency_ms": 245.8047866821289,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854701569685,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854701.866234,
+        "latency_ms": 342.4079418182373,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854701866231,
+          "result": "0x165bb4a"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854702.260145,
+        "latency_ms": 179.83722686767578,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854702260136,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854702.491542,
+        "latency_ms": 180.2668571472168,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854702491504,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854702.723318,
+        "latency_ms": 255.7680606842041,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854702723310,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854703.0304189,
+        "latency_ms": 354.63929176330566,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854703030417,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854703.4362009,
+        "latency_ms": 341.86720848083496,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854703436200,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854703.829545,
+        "latency_ms": 351.9878387451172,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854703829538,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854704.2330189,
+        "latency_ms": 182.7540397644043,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854704233011,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854704.467276,
+        "latency_ms": 201.582670211792,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854704467267,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854704.720339,
+        "latency_ms": 350.89802742004395,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854704720332,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854705.122744,
+        "latency_ms": 336.2550735473633,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854705122737,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854705.510357,
+        "latency_ms": 240.922212600708,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854705510352,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854705.8028271,
+        "latency_ms": 969.6958065032959,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854705802819,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854706.824011,
+        "latency_ms": 180.41706085205078,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854706824004,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854707.055922,
+        "latency_ms": 202.70514488220215,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854707055915,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854707.3094342,
+        "latency_ms": 180.49979209899902,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854707309430,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854707.5408099,
+        "latency_ms": 383.6841583251953,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854707540805,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854707.9758499,
+        "latency_ms": 238.37709426879883,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854707975845,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854708.265418,
+        "latency_ms": 200.93894004821777,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854708265416,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854708.5178392,
+        "latency_ms": 352.2317409515381,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854708517832,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854708.921543,
+        "latency_ms": 346.97914123535156,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854708921536,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854709.3199842,
+        "latency_ms": 349.5519161224365,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854709319980,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854709.720982,
+        "latency_ms": 251.19376182556152,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854709720974,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854710.0230331,
+        "latency_ms": 187.2568130493164,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854710023024,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854710.261803,
+        "latency_ms": 614.4189834594727,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854710261795,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854710.927639,
+        "latency_ms": 955.8758735656738,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854710927631,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854711.9350688,
+        "latency_ms": 352.56314277648926,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854711935062,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854712.3387258,
+        "latency_ms": 189.51034545898438,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854712338719,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854712.5797162,
+        "latency_ms": 349.8396873474121,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854712579710,
+          "result": "0x165bb4b"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854712.980942,
+        "latency_ms": 278.41901779174805,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854712980937,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854713.310624,
+        "latency_ms": 178.8640022277832,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854713310622,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854713.540807,
+        "latency_ms": 349.26700592041016,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854713540802,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854713.940921,
+        "latency_ms": 199.0678310394287,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854713940913,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854714.191482,
+        "latency_ms": 237.69688606262207,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854714191474,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854714.4805381,
+        "latency_ms": 180.30285835266113,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854714480531,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854714.711297,
+        "latency_ms": 180.65786361694336,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854714711290,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854714.943449,
+        "latency_ms": 181.1678409576416,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854714943441,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854715.1760929,
+        "latency_ms": 187.37220764160156,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854715176086,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854715.415068,
+        "latency_ms": 236.94610595703125,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854715415060,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854715.703487,
+        "latency_ms": 180.71603775024414,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854715703481,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854715.93568,
+        "latency_ms": 247.33901023864746,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854715935675,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854716.2344809,
+        "latency_ms": 971.5371131896973,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854716234477,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854717.257567,
+        "latency_ms": 936.0649585723877,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854717257559,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854718.24496,
+        "latency_ms": 190.26494026184082,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854718244949,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854718.486345,
+        "latency_ms": 178.73716354370117,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854718486343,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854718.716309,
+        "latency_ms": 343.46890449523926,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854718716306,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854719.111192,
+        "latency_ms": 951.0748386383057,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854719111187,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854720.1136901,
+        "latency_ms": 335.71386337280273,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854720113684,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      }
+    ]
+  },
+  "health_probe_timing": {
+    "duration_seconds": 60.082907915115356,
+    "total_requests": 77,
+    "successful_requests": 77,
+    "overall_success_rate": 100.0,
+    "latency_trend": {
+      "raw_latencies": [
+        236.9370460510254,
+        342.50402450561523,
+        181.2441349029541,
+        206.10404014587402,
+        181.74076080322266,
+        185.90807914733887,
+        179.7020435333252,
+        362.2910976409912,
+        239.96496200561523,
+        949.3651390075684,
+        180.17196655273438,
+        179.34894561767578,
+        222.1090793609619,
+        218.5673713684082,
+        240.4170036315918,
+        442.68274307250977,
+        181.0171604156494,
+        181.2281608581543,
+        977.7088165283203,
+        183.44974517822266,
+        201.67994499206543,
+        349.6701717376709,
+        183.0580234527588,
+        180.2077293395996,
+        357.9378128051758,
+        535.0689888000488,
+        195.93119621276855,
+        201.21526718139648,
+        261.75880432128906,
+        203.29809188842773,
+        180.74393272399902,
+        198.7919807434082,
+        189.14389610290527,
+        240.9360408782959,
+        178.9560317993164,
+        242.60616302490234,
+        219.0530300140381,
+        243.59512329101562,
+        253.5879611968994,
+        375.2720355987549,
+        181.96415901184082,
+        181.34379386901855,
+        196.7759132385254,
+        179.42285537719727,
+        194.23699378967285,
+        182.79409408569336,
+        212.40901947021484,
+        179.53085899353027,
+        288.89012336730957,
+        179.05712127685547,
+        201.73025131225586,
+        982.0950031280518,
+        416.5167808532715,
+        347.7940559387207,
+        378.36503982543945,
+        397.27020263671875,
+        177.32501029968262,
+        181.28418922424316,
+        180.05895614624023,
+        180.8912754058838,
+        182.7089786529541,
+        244.8570728302002,
+        186.30003929138184,
+        182.47389793395996,
+        201.9813060760498,
+        356.2319278717041,
+        185.72592735290527,
+        239.84909057617188,
+        180.27925491333008,
+        208.87494087219238,
+        238.1722927093506,
+        241.98412895202637,
+        240.89384078979492,
+        494.2440986633301,
+        356.75597190856934,
+        1007.4450969696045,
+        243.1201934814453
+      ],
+      "moving_average": [
+        306.576132774353,
+        300.8996248245239,
+        284.58411693573,
+        288.67061138153076,
+        289.9169445037842,
+        295.7845687866211,
+        321.4620351791382,
+        321.5935468673706,
+        303.4872531890869,
+        377.2616386413574,
+        300.67009925842285,
+        302.82089710235596,
+        319.85301971435547,
+        315.94791412353516,
+        312.1119499206543,
+        323.8640308380127,
+        333.1026554107666,
+        334.5940589904785,
+        336.59276962280273,
+        264.9977684020996,
+        266.9826030731201,
+        264.8890018463135,
+        249.8011827468872,
+        250.40977001190186,
+        256.4826011657715,
+        238.58442306518555,
+        209.3381404876709,
+        211.65032386779785,
+        215.88830947875977,
+        215.0712251663208,
+        232.26861953735352,
+        232.3906421661377,
+        230.64582347869873,
+        231.40902519226074,
+        225.25770664215088,
+        226.78580284118652,
+        220.80459594726562,
+        220.1401948928833,
+        213.73376846313477,
+        217.26398468017578,
+        197.64249324798584,
+        199.61910247802734,
+        279.69422340393066,
+        301.6683101654053,
+        318.5054302215576,
+        336.9182348251343,
+        358.3658456802368,
+        354.8574447631836,
+        355.0327777862549,
+        344.14966106414795,
+        344.3330764770508,
+        342.4309492111206,
+        268.70715618133545,
+        245.68548202514648,
+        229.1534662246704,
+        211.51509284973145,
+        207.41126537322998,
+        208.25135707855225,
+        214.10784721374512,
+        214.1298770904541,
+        216.92824363708496,
+        222.4745750427246,
+        222.18728065490723,
+        227.64666080474854,
+        258.82368087768555,
+        274.3011474609375,
+        339.42246437072754
+      ],
+      "moving_success_rate": [
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
+      ]
+    },
+    "timeline": [
+      {
+        "timestamp": 1758854720.502657,
+        "latency_ms": 236.9370460510254,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854720502653,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854721.241106,
+        "latency_ms": 342.50402450561523,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854721241098,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854722.084595,
+        "latency_ms": 181.2441349029541,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854722084587,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854722.767379,
+        "latency_ms": 206.10404014587402,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854722767371,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854723.4749792,
+        "latency_ms": 181.74076080322266,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854723474972,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854724.158061,
+        "latency_ms": 185.90807914733887,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854724158053,
+          "result": "0x165bb4c"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854724.8453372,
+        "latency_ms": 179.7020435333252,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854724845330,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854725.526507,
+        "latency_ms": 362.2910976409912,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854725526499,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854726.3904471,
+        "latency_ms": 239.96496200561523,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854726390438,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854727.131914,
+        "latency_ms": 949.3651390075684,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854727131907,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854728.58279,
+        "latency_ms": 180.17196655273438,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854728582783,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854729.26418,
+        "latency_ms": 179.34894561767578,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854729264173,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854729.944743,
+        "latency_ms": 222.1090793609619,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854729944738,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854730.6681468,
+        "latency_ms": 218.5673713684082,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854730668144,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854731.388232,
+        "latency_ms": 240.4170036315918,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854731388225,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854732.1296902,
+        "latency_ms": 442.68274307250977,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854732129681,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854733.073885,
+        "latency_ms": 181.0171604156494,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854733073877,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854733.7558138,
+        "latency_ms": 181.2281608581543,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854733755808,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854734.438383,
+        "latency_ms": 977.7088165283203,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854734438376,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854735.917623,
+        "latency_ms": 183.44974517822266,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854735917615,
+          "result": "0x165bb4d"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854736.602624,
+        "latency_ms": 201.67994499206543,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854736602616,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854737.305789,
+        "latency_ms": 349.6701717376709,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854737305781,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854738.157011,
+        "latency_ms": 183.0580234527588,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854738157003,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854738.8416471,
+        "latency_ms": 180.2077293395996,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854738841638,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854739.5226061,
+        "latency_ms": 357.9378128051758,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854739522597,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854740.382064,
+        "latency_ms": 535.0689888000488,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854740382057,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854741.417873,
+        "latency_ms": 195.93119621276855,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854741417865,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854742.1152909,
+        "latency_ms": 201.21526718139648,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854742115283,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854742.8179011,
+        "latency_ms": 261.75880432128906,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854742817894,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854743.581175,
+        "latency_ms": 203.29809188842773,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854743581167,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854744.285965,
+        "latency_ms": 180.74393272399902,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854744285959,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854744.9681752,
+        "latency_ms": 198.7919807434082,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854744968169,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854745.669017,
+        "latency_ms": 189.14389610290527,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854745669010,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854746.3594759,
+        "latency_ms": 240.9360408782959,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854746359472,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854747.101784,
+        "latency_ms": 178.9560317993164,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854747101780,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854747.782145,
+        "latency_ms": 242.60616302490234,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854747782138,
+          "result": "0x165bb4e"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854748.5262249,
+        "latency_ms": 219.0530300140381,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854748526221,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854749.246496,
+        "latency_ms": 243.59512329101562,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854749246494,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854749.9908822,
+        "latency_ms": 253.5879611968994,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854749990874,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854750.745574,
+        "latency_ms": 375.2720355987549,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854750745573,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854751.6226938,
+        "latency_ms": 181.96415901184082,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854751622682,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854752.3056011,
+        "latency_ms": 181.34379386901855,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854752305596,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854752.988427,
+        "latency_ms": 196.7759132385254,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854752988420,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854753.686613,
+        "latency_ms": 179.42285537719727,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854753686611,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854754.367351,
+        "latency_ms": 194.23699378967285,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854754367349,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854755.062419,
+        "latency_ms": 182.79409408569336,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854755062416,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854755.746686,
+        "latency_ms": 212.40901947021484,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854755746680,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854756.460603,
+        "latency_ms": 179.53085899353027,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854756460596,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854757.140875,
+        "latency_ms": 288.89012336730957,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854757140868,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854757.931069,
+        "latency_ms": 179.05712127685547,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854757931067,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854758.611661,
+        "latency_ms": 201.73025131225586,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854758611655,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854759.314147,
+        "latency_ms": 982.0950031280518,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854759314141,
+          "result": "0x165bb4f"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854760.7977731,
+        "latency_ms": 416.5167808532715,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854760797766,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854761.715664,
+        "latency_ms": 347.7940559387207,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854761715657,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854762.565037,
+        "latency_ms": 378.36503982543945,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854762565029,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854763.444543,
+        "latency_ms": 397.27020263671875,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854763444536,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854764.343019,
+        "latency_ms": 177.32501029968262,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854764343018,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854765.0217059,
+        "latency_ms": 181.28418922424316,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854765021698,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854765.70424,
+        "latency_ms": 180.05895614624023,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854765704234,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854766.3854668,
+        "latency_ms": 180.8912754058838,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854766385460,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854767.0679739,
+        "latency_ms": 182.7089786529541,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854767067966,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854767.7520761,
+        "latency_ms": 244.8570728302002,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854767752070,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854768.497489,
+        "latency_ms": 186.30003929138184,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854768497482,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854769.185375,
+        "latency_ms": 182.47389793395996,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854769185367,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854769.8692238,
+        "latency_ms": 201.9813060760498,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854769869221,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854770.571989,
+        "latency_ms": 356.2319278717041,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854770571983,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854771.429785,
+        "latency_ms": 185.72592735290527,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854771429777,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854772.116962,
+        "latency_ms": 239.84909057617188,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854772116956,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854772.8583438,
+        "latency_ms": 180.27925491333008,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854772858337,
+          "result": "0x165bb50"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854773.539489,
+        "latency_ms": 208.87494087219238,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854773539480,
+          "result": "0x165bb51"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854774.2497878,
+        "latency_ms": 238.1722927093506,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854774249780,
+          "result": "0x165bb51"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854774.988389,
+        "latency_ms": 241.98412895202637,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854774988387,
+          "result": "0x165bb51"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854775.7319381,
+        "latency_ms": 240.89384078979492,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854775731930,
+          "result": "0x165bb51"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854776.474302,
+        "latency_ms": 494.2440986633301,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854776474297,
+          "result": "0x165bb51"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854777.4700532,
+        "latency_ms": 356.75597190856934,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854777470046,
+          "result": "0x165bb51"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854778.32771,
+        "latency_ms": 1007.4450969696045,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854778327702,
+          "result": "0x165bb51"
+        },
+        "status_code": 200
+      },
+      {
+        "timestamp": 1758854779.8365068,
+        "latency_ms": 243.1201934814453,
+        "success": true,
+        "trace_id": "NO_TRACE_ID",
+        "response": {
+          "jsonrpc": "2.0",
+          "id": 1758854779836503,
+          "result": "0x165bb51"
+        },
+        "status_code": 200
+      }
+    ]
+  },
+  "concurrent_impact": {
+    "baseline": {
+      "phase": "baseline",
+      "total_requests": 20,
+      "successful_requests": 20,
+      "success_rate": 100.0,
+      "avg_latency": 308.59525203704834,
+      "max_latency": 988.469123840332
+    },
+    "concurrent_load": {
+      "phase": "concurrent_load",
+      "total_requests": 50,
+      "successful_requests": 50,
+      "success_rate": 100.0,
+      "avg_latency": 716.1126756668091,
+      "max_latency": 1159.9366664886475
+    },
+    "recovery": {
+      "phase": "recovery",
+      "total_requests": 20,
+      "successful_requests": 20,
+      "success_rate": 100.0,
+      "avg_latency": 355.9548258781433,
+      "max_latency": 966.7270183563232
+    }
+  }
+}
