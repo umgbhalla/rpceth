@@ -66,11 +66,18 @@ pub struct MethodConfig {
     pub overrides: Vec<MethodOverrideConfig>,
 }
 
+#[derive(Debug, Clone, Deserialize, Default)]
+#[serde(default)]
+pub struct ChainConfig {
+    pub providers: Vec<ProviderId>,
+    pub aliases: Vec<String>,
+    pub tolerance: Option<ToleranceLevel>,
+}
+
 #[derive(Debug, Clone, Deserialize)]
 pub struct AuthConfig {
     pub api_key: String,
 }
-
 
 #[derive(Debug, Clone, Deserialize, Default)]
 #[serde(default)]
@@ -96,6 +103,10 @@ pub struct ProxyConfig {
     pub circuit_breaker: CircuitBreakerConfig,
     pub auth: AuthConfig,
     pub providers: Vec<ProviderConfig>,
+    #[serde(default)]
+    pub chains: HashMap<String, ChainConfig>,
+    #[serde(default)]
+    pub default_chain: Option<String>,
 }
 
 fn default_timeout_ms() -> u64 {
@@ -157,6 +168,8 @@ impl ProxyConfig {
             circuit_breaker: CircuitBreakerConfig::default(),
             auth,
             providers,
+            chains: HashMap::new(),
+            default_chain: None,
         };
         validate(&config)?;
         Ok(config)
@@ -211,6 +224,8 @@ fn validate(config: &ProxyConfig) -> Result<(), ConfigError> {
     }
 
     validate_methods(&config.methods)?;
+
+    validate_chains(config)?;
 
     Ok(())
 }
@@ -375,4 +390,108 @@ fn validate_multiplier(label: &str, value: Option<f64>) -> Result<(), ConfigErro
         }
     }
     Ok(())
+}
+
+fn validate_chains(config: &ProxyConfig) -> Result<(), ConfigError> {
+    if config.chains.is_empty() {
+        if let Some(default_chain) = &config.default_chain {
+            if !default_chain.trim().is_empty() {
+                return Err(ConfigError::Validation(
+                    "default_chain must not be specified when chains are empty".into(),
+                ));
+            }
+        }
+        return Ok(());
+    }
+
+    let provider_ids: HashSet<ProviderId> = config
+        .providers
+        .iter()
+        .map(|provider| provider.id.clone())
+        .collect();
+
+    let default_chain = config.default_chain.as_ref().ok_or_else(|| {
+        ConfigError::Validation("default_chain must be specified when chains are configured".into())
+    })?;
+
+    if default_chain.trim().is_empty() {
+        return Err(ConfigError::Validation(
+            "default_chain must not be empty".into(),
+        ));
+    }
+
+    if !config.chains.contains_key(default_chain) {
+        return Err(ConfigError::Validation(format!(
+            "default_chain `{}` does not exist in chains map",
+            default_chain
+        )));
+    }
+
+    let mut used_aliases: HashSet<String> = HashSet::new();
+
+    for (chain_key, chain) in &config.chains {
+        let canonical = chain_key.trim();
+        if canonical.is_empty() {
+            return Err(ConfigError::Validation(
+                "chain keys must not be empty or whitespace".into(),
+            ));
+        }
+
+        if chain.providers.is_empty() {
+            return Err(ConfigError::Validation(format!(
+                "chain `{}` must reference at least one provider",
+                chain_key
+            )));
+        }
+
+        for provider_id in &chain.providers {
+            if !provider_ids.contains(provider_id) {
+                return Err(ConfigError::Validation(format!(
+                    "chain `{}` references unknown provider `{}`",
+                    chain_key, provider_id.0
+                )));
+            }
+        }
+
+        // Ensure canonical identifier is unique across aliases
+        let canonical_norm = normalize_chain_alias(canonical);
+        if !used_aliases.insert(canonical_norm) {
+            return Err(ConfigError::Validation(format!(
+                "chain identifier `{}` conflicts with another chain alias",
+                chain_key
+            )));
+        }
+
+        let mut seen_chain_aliases: HashSet<String> = HashSet::new();
+        for alias in &chain.aliases {
+            let trimmed = alias.trim();
+            if trimmed.is_empty() {
+                return Err(ConfigError::Validation(format!(
+                    "chain `{}` has an empty alias entry",
+                    chain_key
+                )));
+            }
+
+            let normalized = normalize_chain_alias(trimmed);
+            if !seen_chain_aliases.insert(normalized.clone()) {
+                return Err(ConfigError::Validation(format!(
+                    "chain `{}` contains duplicate alias `{}`",
+                    chain_key, trimmed
+                )));
+            }
+
+            if !used_aliases.insert(normalized.clone()) {
+                return Err(ConfigError::Validation(format!(
+                    "alias `{}` is already in use by another chain",
+                    trimmed
+                )));
+            }
+        }
+    }
+
+    Ok(())
+}
+
+fn normalize_chain_alias(value: &str) -> String {
+    value.trim().to_ascii_lowercase()
 }

@@ -9,7 +9,7 @@ pub mod admin;
 use axum::body::Body;
 use axum::{
     Json, Router,
-    extract::{Extension, State},
+    extract::{Extension, Path, State},
     http::{HeaderMap, Request, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
@@ -35,16 +35,52 @@ struct RequestContext {
 #[derive(Clone)]
 pub struct ProxyState {
     pub config: proxy_core::ProxyConfig,
-    pub load_balancer: proxy_core::LoadBalancer,
-    pub health_service: Option<Arc<proxy_core::HealthService>>,
-    pub circuit_breaker: Arc<proxy_core::CircuitBreaker>,
-    pub method_registry: proxy_core::MethodRegistry,
     pub client: reqwest::Client,
     pub providers_by_id: HashMap<proxy_core::ProviderId, proxy_core::ProviderHandle>,
+    chains: HashMap<ChainKey, ChainRuntime>,
+    alias_map: HashMap<String, ChainKey>,
+    default_chain: Option<ChainKey>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+struct ChainKey(String);
+
+#[derive(Clone)]
+struct ChainRuntime {
+    id: ChainKey,
+    aliases: HashSet<String>,
+    tolerance: proxy_core::ToleranceLevel,
+    load_balancer: proxy_core::LoadBalancer,
+    health_service: Option<Arc<proxy_core::HealthService>>,
+    circuit_breaker: Arc<proxy_core::CircuitBreaker>,
+    method_registry: Arc<proxy_core::MethodRegistry>,
+    providers: HashSet<proxy_core::ProviderId>,
+}
+
+impl ChainRuntime {
+    fn contains_provider(&self, provider: &proxy_core::ProviderId) -> bool {
+        self.providers.contains(provider)
+    }
+
+    fn aliases(&self) -> impl Iterator<Item = &str> {
+        self.aliases.iter().map(|alias| alias.as_str())
+    }
+
+    fn tolerance(&self) -> proxy_core::ToleranceLevel {
+        self.tolerance
+    }
+
+    fn providers(&self) -> impl Iterator<Item = &proxy_core::ProviderId> {
+        self.providers.iter()
+    }
+
+    fn health_enabled(&self) -> bool {
+        self.health_service.is_some()
+    }
 }
 
 impl ProxyState {
-    pub fn new(config: proxy_core::ProxyConfig) -> Self {
+    pub fn new(mut config: proxy_core::ProxyConfig) -> Self {
         let client = reqwest::Client::builder()
             .pool_max_idle_per_host(8)
             .build()
@@ -63,7 +99,123 @@ impl ProxyState {
                 .map(|handle| (handle.id.clone(), handle.clone()))
                 .collect();
 
-        let health_service: Option<Arc<proxy_core::HealthService>> = {
+        let mut chains: HashMap<ChainKey, ChainRuntime> = HashMap::new();
+        let mut alias_map: HashMap<String, ChainKey> = HashMap::new();
+
+        let base_method_registry = Arc::new(
+            proxy_core::MethodRegistry::new(&config).expect("failed to build method registry"),
+        );
+
+        if config.chains.is_empty() {
+            // Fallback to legacy single-chain behaviour
+            let key = ChainKey("default".to_string());
+            let runtime = build_chain_runtime(
+                &key,
+                &[],
+                config.strategy,
+                proxy_core::ToleranceLevel::Balanced,
+                &provider_handles,
+                &config,
+                Arc::clone(&base_method_registry),
+            );
+            chains.insert(key.clone(), runtime);
+            config.default_chain = Some(key.0.clone());
+        } else {
+            for (chain_id, chain_config) in &config.chains {
+                let provider_subset: Vec<proxy_core::ProviderHandle> = chain_config
+                    .providers
+                    .iter()
+                    .filter_map(|id| providers_by_id.get(id))
+                    .cloned()
+                    .collect();
+
+                let key = ChainKey(chain_id.clone());
+                let runtime = build_chain_runtime(
+                    &key,
+                    &chain_config.aliases,
+                    config.strategy,
+                    chain_config.tolerance.unwrap_or(config.default_tolerance),
+                    &provider_subset,
+                    &config,
+                    Arc::clone(&base_method_registry),
+                );
+
+                register_alias(&mut alias_map, &key, std::iter::once(chain_id));
+                register_alias(&mut alias_map, &key, chain_config.aliases.iter());
+
+                chains.insert(key, runtime);
+            }
+        }
+
+        let default_chain = config
+            .default_chain
+            .as_ref()
+            .and_then(|id| chains.keys().find(|key| key.0 == *id).cloned());
+
+        Self {
+            config,
+            client,
+            providers_by_id,
+            chains,
+            alias_map,
+            default_chain,
+        }
+    }
+
+    pub fn api_key(&self) -> &str {
+        self.config.auth.api_key.as_str()
+    }
+
+    pub fn chain_provider_handle(
+        &self,
+        provider_id: &proxy_core::ProviderId,
+    ) -> Option<&proxy_core::ProviderHandle> {
+        self.providers_by_id.get(provider_id)
+    }
+
+    fn resolve_chain(&self, chain_id: Option<&str>) -> Result<&ChainRuntime, ChainError> {
+        let key = match chain_id {
+            None | Some("") => self
+                .default_chain
+                .as_ref()
+                .ok_or(ChainError::Unsupported("default".to_string()))?,
+            Some(value) => {
+                let normalized = normalize_chain_id(value);
+                self.alias_map
+                    .get(&normalized)
+                    .ok_or_else(|| ChainError::Unsupported(value.to_string()))?
+            }
+        };
+
+        self.chains
+            .get(key)
+            .ok_or_else(|| ChainError::Unsupported(key.0.clone()))
+    }
+
+    pub fn chains(&self) -> impl Iterator<Item = (&str, &ChainRuntime)> {
+        self.chains
+            .iter()
+            .map(|(key, runtime)| (key.0.as_str(), runtime))
+    }
+
+    pub fn default_chain(&self) -> Option<&str> {
+        self.default_chain.as_ref().map(|key| key.0.as_str())
+    }
+}
+
+fn build_chain_runtime(
+    key: &ChainKey,
+    aliases: &[String],
+    strategy: proxy_core::BalancerStrategy,
+    tolerance: proxy_core::ToleranceLevel,
+    providers: &[proxy_core::ProviderHandle],
+    config: &proxy_core::ProxyConfig,
+    method_registry: Arc<proxy_core::MethodRegistry>,
+) -> ChainRuntime {
+    let health_service: Option<Arc<proxy_core::HealthService>> = {
+        if providers.is_empty() {
+            None
+        } else {
             #[cfg(test)]
             {
                 None
@@ -75,8 +227,8 @@ impl ProxyState {
                     Duration::from_secs(3),
                 ));
                 let service = Arc::new(proxy_core::HealthService::new(
-                    provider_handles.clone(),
-                    proxy_core::ToleranceLevel::Balanced,
+                    providers.to_vec(),
+                    tolerance,
                     Duration::from_secs(15),
                     probe,
                 ));
@@ -88,36 +240,52 @@ impl ProxyState {
 
                 Some(service)
             }
-        };
-
-        let circuit_breaker = Arc::new(proxy_core::CircuitBreaker::new(
-            &provider_handles,
-            &config.circuit_breaker,
-        ));
-
-        let load_balancer = proxy_core::LoadBalancer::new(
-            config.strategy,
-            provider_handles.clone(),
-            health_service.clone(),
-        );
-
-        let method_registry =
-            proxy_core::MethodRegistry::new(&config).expect("failed to build method registry");
-
-        Self {
-            config,
-            load_balancer,
-            health_service,
-            circuit_breaker,
-            method_registry,
-            client,
-            providers_by_id,
         }
-    }
+    };
 
-    pub fn api_key(&self) -> &str {
-        self.config.auth.api_key.as_str()
+    let circuit_breaker = Arc::new(proxy_core::CircuitBreaker::new(
+        providers,
+        &config.circuit_breaker,
+    ));
+
+    let load_balancer =
+        proxy_core::LoadBalancer::new(strategy, providers.to_vec(), health_service.clone());
+
+    ChainRuntime {
+        id: key.clone(),
+        aliases: aliases
+            .iter()
+            .map(|alias| normalize_chain_id(alias))
+            .collect(),
+        tolerance,
+        load_balancer,
+        health_service,
+        circuit_breaker,
+        method_registry,
+        providers: providers.iter().map(|handle| handle.id.clone()).collect(),
     }
+}
+
+fn register_alias<'a, I>(map: &mut HashMap<String, ChainKey>, key: &ChainKey, aliases: I)
+where
+    I: IntoIterator<Item = &'a String>,
+{
+    for alias in aliases {
+        map.insert(normalize_chain_id(alias), key.clone());
+    }
+}
+
+fn normalize_chain_id(value: &str) -> String {
+    percent_encoding::percent_decode_str(value)
+        .decode_utf8_lossy()
+        .trim()
+        .to_ascii_lowercase()
+}
+
+#[derive(Debug)]
+enum ChainError {
+    Invalid(String),
+    Unsupported(String),
 }
 
 #[derive(Debug)]
@@ -207,6 +375,7 @@ fn unauthorized_response() -> Response {
 async fn proxy_handler(
     State(state): State<ProxyState>,
     Extension(ctx): Extension<RequestContext>,
+    Path(chain_id): Path<Option<String>>,
     _headers: HeaderMap,
     Json(body): Json<serde_json::Value>,
 ) -> ProxyOutcome {
@@ -229,7 +398,14 @@ async fn proxy_handler(
         .get("method")
         .and_then(serde_json::Value::as_str)
         .unwrap_or("<unknown>");
-    let method_policy = state.method_registry.resolve(Some(method_name));
+    let chain_runtime = match state.resolve_chain(chain_id.as_deref()) {
+        Ok(runtime) => runtime,
+        Err(err) => {
+            return ProxyOutcome::Failure(build_chain_error_response(&body, trace_id, err));
+        }
+    };
+
+    let method_policy = chain_runtime.method_registry.resolve(Some(method_name));
     let max_attempts = method_policy.max_retries.max(1);
 
     let mut tried = HashSet::new();
@@ -245,14 +421,22 @@ async fn proxy_handler(
 
     for attempt in 0..max_attempts {
         let lb_selection_start = Instant::now();
-        let provider = match select_provider(&state, &ctx, &tried, &method_policy).await {
+        let provider = match select_provider(
+            chain_runtime,
+            &state.providers_by_id,
+            &ctx,
+            &tried,
+            &method_policy,
+        )
+        .await
+        {
             Some(provider) => provider,
             None => break,
         };
         let lb_selection_duration = lb_selection_start.elapsed();
         tried.insert(provider.id.clone());
 
-        state.circuit_breaker.on_request_start(&provider.id);
+        chain_runtime.circuit_breaker.on_request_start(&provider.id);
 
         let span = tracing::info_span!(
             "proxy.attempt",
@@ -286,7 +470,7 @@ async fn proxy_handler(
                 let provider_request_duration = provider_request_start.elapsed();
                 let total_request_duration = request_start.elapsed();
 
-                state.circuit_breaker.on_success(&provider.id);
+                chain_runtime.circuit_breaker.on_success(&provider.id);
 
                 // Record detailed timing in span
                 span.in_scope(|| {
@@ -298,17 +482,27 @@ async fn proxy_handler(
                     );
                 });
 
-                record_success_metrics(method_name, &provider.id, total_request_duration);
+                record_success_metrics(
+                    method_name,
+                    &provider.id,
+                    &chain_runtime.id,
+                    total_request_duration,
+                );
                 return ProxyOutcome::Success(build_success_response(success, trace_id));
             }
             Err(error_message) => {
                 let provider_request_duration = provider_request_start.elapsed();
                 let total_request_duration = request_start.elapsed();
 
-                record_failure_metrics(method_name, Some(provider.id.0.as_str()), &error_message);
+                record_failure_metrics(
+                    method_name,
+                    Some(provider.id.0.as_str()),
+                    &chain_runtime.id,
+                    &error_message,
+                );
                 last_error = Some(error_message.clone());
 
-                state.circuit_breaker.on_failure(&provider.id);
+                chain_runtime.circuit_breaker.on_failure(&provider.id);
 
                 span.in_scope(|| {
                     error!(
@@ -330,21 +524,26 @@ async fn proxy_handler(
         }
     }
 
-    record_failure_metrics(method_name, None, "all providers failed");
+    record_failure_metrics(method_name, None, &chain_runtime.id, "all providers failed");
 
     ProxyOutcome::Failure(build_error_response(&body, trace_id, last_error))
 }
 
 async fn select_provider(
-    state: &ProxyState,
+    chain: &ChainRuntime,
+    providers_by_id: &HashMap<proxy_core::ProviderId, proxy_core::ProviderHandle>,
     ctx: &RequestContext,
     tried: &HashSet<proxy_core::ProviderId>,
     policy: &proxy_core::MethodPolicy,
 ) -> Option<proxy_core::ProviderHandle> {
     if let Some(ref override_id) = ctx.provider_override {
         if !tried.contains(override_id) {
-            if let Some(handle) = state.providers_by_id.get(override_id) {
-                if state.circuit_breaker.is_available(override_id) {
+            if !chain.contains_provider(override_id) {
+                return None;
+            }
+
+            if let Some(handle) = providers_by_id.get(override_id) {
+                if chain.circuit_breaker.is_available(override_id) {
                     return Some(handle.clone());
                 }
             }
@@ -357,9 +556,9 @@ async fn select_provider(
     }
 
     loop {
-        let provider = state.load_balancer.select(&excluded, Some(policy)).await?;
+        let provider = chain.load_balancer.select(&excluded, Some(policy)).await?;
 
-        if state.circuit_breaker.is_available(&provider.id) {
+        if chain.circuit_breaker.is_available(&provider.id) {
             return Some(provider);
         }
 
@@ -470,36 +669,77 @@ fn build_error_response(
         .unwrap()
 }
 
-fn record_success_metrics(method: &str, provider: &proxy_core::ProviderId, elapsed: Duration) {
+fn build_chain_error_response(
+    original_request: &serde_json::Value,
+    trace_id: String,
+    error: ChainError,
+) -> Response {
+    let id = original_request
+        .get("id")
+        .cloned()
+        .unwrap_or(serde_json::Value::Null);
+
+    let (code, message) = match error {
+        ChainError::Invalid(value) => (-32602, format!("invalid chain_id: {}", value)),
+        ChainError::Unsupported(value) => (-32602, format!("unsupported chain: {}", value)),
+    };
+
+    let payload = serde_json::json!({
+        "jsonrpc": "2.0",
+        "id": id,
+        "error": {
+            "code": code,
+            "message": message,
+        }
+    });
+
+    Response::builder()
+        .status(StatusCode::BAD_REQUEST)
+        .header("content-type", "application/json")
+        .header("x-trace-id", trace_id)
+        .body(axum::body::Body::from(payload.to_string()))
+        .unwrap()
+}
+
+fn record_success_metrics(
+    method: &str,
+    provider: &proxy_core::ProviderId,
+    chain: &ChainKey,
+    elapsed: Duration,
+) {
     let method_label = method.to_owned();
     let provider_label = provider.0.clone();
     histogram!(
         "rpc_request_duration_seconds",
         elapsed.as_secs_f64(),
         "method" => method_label.clone(),
-        "provider" => provider_label.clone()
+        "provider" => provider_label.clone(),
+        "chain" => chain.0.clone()
     );
     increment_counter!(
         "rpc_requests_total",
         "method" => method_label,
         "provider" => provider_label,
+        "chain" => chain.0.clone(),
         "status" => "success"
     );
 }
 
-fn record_failure_metrics(method: &str, provider: Option<&str>, error: &str) {
+fn record_failure_metrics(method: &str, provider: Option<&str>, chain: &ChainKey, error: &str) {
     let method_label = method.to_owned();
     let provider_label = provider.unwrap_or("<none>").to_owned();
     increment_counter!(
         "rpc_requests_total",
         "method" => method_label.clone(),
         "provider" => provider_label.clone(),
+        "chain" => chain.0.clone(),
         "status" => "failure"
     );
     increment_counter!(
         "rpc_errors_total",
         "method" => method_label,
         "provider" => provider_label,
+        "chain" => chain.0.clone(),
         "code" => classify_error(error)
     );
 }

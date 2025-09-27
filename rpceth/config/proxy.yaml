@@ -25,6 +25,26 @@ providers:
     base_weight: 400
     max_connections: 16
     timeout_ms: 3000
+chains:
+  ethereum:
+    providers:
+      - alchemy
+      - nodereal_eth
+      - publicnode_eth
+      - mevblocker_eth
+    aliases:
+      - eth
+      - main
+      - 1
+    tolerance: Balanced
+  polygon:
+    providers:
+      - publicnode_eth
+    aliases:
+      - pol
+      - 137
+    tolerance: Relaxed
+default_chain: ethereum
 methods:
   default:
     timeout_ms: 5000

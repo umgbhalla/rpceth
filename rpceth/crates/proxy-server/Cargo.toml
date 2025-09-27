@@ -23,6 +23,8 @@ uuid = { workspace = true }
 url = { workspace = true }
 dashmap = { workspace = true }
 chrono = { workspace = true }
+percent-encoding = "2.3.2"
+thiserror.workspace = true
 
 [dev-dependencies]
 httpmock = { workspace = true }

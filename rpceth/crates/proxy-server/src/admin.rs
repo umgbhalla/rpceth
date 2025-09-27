@@ -45,35 +45,54 @@ async fn readiness_handler(State(state): State<ProxyState>) -> impl IntoResponse
     let mut issues = Vec::new();
 
     // Check each provider's circuit breaker status
-    for provider in &state.config.providers {
-        let provider_id = &provider.id;
-        let is_available = state.circuit_breaker.is_available(provider_id);
+    for (chain_id, runtime) in state.chains() {
+        let mut chain_providers = Vec::new();
+        let mut available_in_chain = 0usize;
+        let mut total_in_chain = 0usize;
+
+        for provider_id in runtime.providers() {
+            total_in_chain += 1;
+            let provider = match state.chain_provider_handle(provider_id) {
+                Some(handle) => handle,
+                None => continue,
+            };
+
+            let is_available = runtime.circuit_breaker.is_available(provider_id);
+            if is_available {
+                available_in_chain += 1;
+            }
+
+            chain_providers.push(json!({
+                "id": provider_id.0,
+                "url": provider.url,
+                "timeout_ms": provider.timeout.as_millis(),
+                "weight": provider.base_weight,
+                "available": is_available,
+            }));
+
+            if !is_available {
+                ready = false;
+                issues.push(format!(
+                    "Provider {} (chain {}) is not available",
+                    provider_id.0, chain_id
+                ));
+            }
+        }
 
         provider_statuses.insert(
-            provider_id.0.clone(),
+            chain_id.to_string(),
             json!({
-                "available": is_available,
-                "url": provider.url,
-                "timeout_ms": provider.timeout().as_millis(),
-                "weight": provider.base_weight
+                "chain": chain_id,
+                "available_providers": available_in_chain,
+                "total_providers": total_in_chain,
+                "providers": chain_providers,
             }),
         );
 
-        if !is_available {
+        if available_in_chain == 0 {
             ready = false;
-            issues.push(format!("Provider {} is not available", provider_id.0));
+            issues.push(format!("No providers are available for chain {}", chain_id));
         }
-    }
-
-    // Check if we have at least one available provider
-    let available_providers = provider_statuses
-        .values()
-        .filter(|status| status["available"].as_bool().unwrap_or(false))
-        .count();
-
-    if available_providers == 0 {
-        ready = false;
-        issues.push("No providers are available".to_string());
     }
 
     let status_code = if ready {
@@ -85,10 +104,9 @@ async fn readiness_handler(State(state): State<ProxyState>) -> impl IntoResponse
     let response = json!({
         "status": if ready { "ready" } else { "not_ready" },
         "timestamp": chrono::Utc::now().to_rfc3339(),
-        "available_providers": available_providers,
-        "total_providers": provider_statuses.len(),
-        "providers": provider_statuses,
-        "issues": issues
+        "chains": provider_statuses,
+        "issues": issues,
+        "default_chain": state.default_chain(),
     });
 
     (status_code, Json(response))
@@ -99,42 +117,45 @@ async fn readiness_handler(State(state): State<ProxyState>) -> impl IntoResponse
 async fn providers_handler(State(state): State<ProxyState>) -> impl IntoResponse {
     info!("provider status requested");
 
-    let mut providers_info = Vec::new();
+    let mut chains_info = Vec::new();
 
-    for provider in &state.config.providers {
-        let provider_id = &provider.id;
-        let is_available = state.circuit_breaker.is_available(provider_id);
+    for (chain_id, runtime) in state.chains() {
+        let mut providers_info = Vec::new();
 
-        // Get health information if health service is available
-        let health_info = if let Some(ref _health_service) = state.health_service {
-            // Try to get health metrics (this would need to be implemented in HealthService)
-            json!({
-                "health_check_enabled": true,
-                "last_check": "N/A", // Would need to be implemented
-                "success_rate": "N/A", // Would need to be implemented
-                "avg_latency_ms": "N/A" // Would need to be implemented
-            })
-        } else {
-            json!({
-                "health_check_enabled": false
-            })
-        };
+        for provider_id in runtime.providers() {
+            if let Some(provider) = state.chain_provider_handle(provider_id) {
+                let is_available = runtime.circuit_breaker.is_available(provider_id);
 
-        providers_info.push(json!({
-            "id": provider_id.0,
-            "url": provider.url,
-            "weight": provider.base_weight,
-            "timeout_ms": provider.timeout().as_millis(),
-            "available": is_available,
-            "health": health_info
+                let health_info = json!({
+                    "health_check_enabled": runtime.health_enabled(),
+                });
+
+                providers_info.push(json!({
+                    "id": provider_id.0,
+                    "url": provider.url,
+                    "weight": provider.base_weight,
+                    "timeout_ms": provider.timeout.as_millis(),
+                    "available": is_available,
+                    "health": health_info
+                }));
+            }
+        }
+
+        chains_info.push(json!({
+            "chain": chain_id,
+            "aliases": runtime.aliases().collect::<Vec<_>>(),
+            "tolerance": format!("{:?}", runtime.tolerance()),
+            "provider_count": providers_info.len(),
+            "providers": providers_info,
         }));
     }
 
     let response = json!({
         "timestamp": chrono::Utc::now().to_rfc3339(),
-        "total_providers": providers_info.len(),
+        "total_chains": chains_info.len(),
         "strategy": format!("{:?}", state.config.strategy),
-        "providers": providers_info
+        "chains": chains_info,
+        "default_chain": state.default_chain(),
     });
 
     (StatusCode::OK, Json(response))
@@ -162,7 +183,7 @@ async fn config_handler(State(state): State<ProxyState>) -> impl IntoResponse {
             "half_open_probe": state.config.circuit_breaker.half_open_probe
         },
         "health_monitoring": {
-            "enabled": state.health_service.is_some()
+            "enabled": state.chains().any(|(_, runtime)| runtime.health_enabled())
         }
     });
 
