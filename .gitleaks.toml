@@ -1,0 +1,12 @@
+title = "RPCETH secret detection"
+
+[extend]
+useDefault = true
+
+# Provider keys can be embedded in URL paths and missed by generic rules.
+[[rules]]
+id = "nodereal-rpc-url-key"
+description = "NodeReal RPC credential embedded in a provider URL"
+regex = '''https?://[A-Za-z0-9.-]*nodereal\.io/v1/([A-Za-z0-9_-]{24,})'''
+secretGroup = 1
+keywords = ["nodereal.io"]
