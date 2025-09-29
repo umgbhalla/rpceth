@@ -305,8 +305,8 @@ impl IntoResponse for ProxyOutcome {
 pub fn build_router(config: proxy_core::ProxyConfig) -> Router {
     let state = ProxyState::new(config);
     Router::new()
-        .route("/:chain_id", post(proxy_handler))
-        .route("/", post(proxy_handler))
+        .route("/:chain_id", post(proxy_handler_with_chain))
+        .route("/", post(proxy_handler_default))
         .layer(middleware::from_fn_with_state(
             state.clone(),
             authenticate_request,
@@ -363,8 +363,27 @@ fn unauthorized_response() -> Response {
         .unwrap()
 }
 
+async fn proxy_handler_default(
+    State(state): State<ProxyState>,
+    Extension(ctx): Extension<RequestContext>,
+    _headers: HeaderMap,
+    Json(body): Json<serde_json::Value>,
+) -> ProxyOutcome {
+    proxy_handler_impl(state, ctx, None, body).await
+}
+
+async fn proxy_handler_with_chain(
+    State(state): State<ProxyState>,
+    Extension(ctx): Extension<RequestContext>,
+    Path(chain_id): Path<String>,
+    _headers: HeaderMap,
+    Json(body): Json<serde_json::Value>,
+) -> ProxyOutcome {
+    proxy_handler_impl(state, ctx, Some(chain_id), body).await
+}
+
 #[instrument(
-    skip(body, state, _headers),
+    skip(body, state, ctx),
     fields(
         method = body.get("method").and_then(|v| v.as_str()).unwrap_or("<unknown>"),
         request_id = body.get("id").and_then(|v| v.as_i64()).unwrap_or(0),
@@ -372,12 +391,11 @@ fn unauthorized_response() -> Response {
         otel_trace_id = tracing::field::Empty
     )
 )]
-async fn proxy_handler(
-    State(state): State<ProxyState>,
-    Extension(ctx): Extension<RequestContext>,
-    Path(chain_id): Path<Option<String>>,
-    _headers: HeaderMap,
-    Json(body): Json<serde_json::Value>,
+async fn proxy_handler_impl(
+    state: ProxyState,
+    ctx: RequestContext,
+    chain_id: Option<String>,
+    body: serde_json::Value,
 ) -> ProxyOutcome {
     let request_start = Instant::now();
 

@@ -17,4 +17,6 @@ coverage/
 
 # Node / package managers (if introduced later)
 node_modules/
+# Test artifacts
 *.json
+*/__pycache__/*
