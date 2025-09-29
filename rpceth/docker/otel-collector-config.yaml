@@ -14,25 +14,69 @@ processors:
     check_interval: 1s
     limit_mib: 400
     spike_limit_mib: 100
+  resource:
+    attributes:
+      - key: service.name
+        value: rpc-proxy
+        action: upsert
+      - key: service.version
+        value: "1.0.0"
+        action: upsert
+
+connectors:
+  spanmetrics:
+    metrics_flush_interval: 15s
+    histogram:
+      explicit:
+        buckets:
+          [0.001, 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10]
+    dimensions:
+      - name: http.method
+        default: "unknown"
+      - name: http.status_code
+        default: "unknown"
+      - name: rpc.method
+        default: "unknown"
+      - name: rpc.service
+        default: "unknown"
+    exemplars:
+      enabled: true
 
 exporters:
   debug:
-    verbosity: normal
+    verbosity: detailed
+    sampling_initial: 5
+    sampling_thereafter: 200
   otlp/jaeger:
     endpoint: jaeger:4317
     tls:
       insecure: true
   prometheus:
     endpoint: 0.0.0.0:8889
-    namespace: proxy_server
+    namespace: rpc_proxy
+    const_labels:
+      service: "rpc-proxy"
+    metric_expiration: 180m
+    resource_to_telemetry_conversion:
+      enabled: true
+  prometheus/spanmetrics:
+    endpoint: 0.0.0.0:8887
+    namespace: rpc_proxy_spans
+    const_labels:
+      service: "rpc-proxy-spans"
+    metric_expiration: 180m
 
 service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [memory_limiter, batch]
-      exporters: [otlp/jaeger, debug]
+      processors: [memory_limiter, resource, batch]
+      exporters: [otlp/jaeger, spanmetrics]
     metrics:
       receivers: [otlp]
-      processors: [memory_limiter, batch]
+      processors: [memory_limiter, resource, batch]
       exporters: [prometheus]
+    metrics/spanmetrics:
+      receivers: [spanmetrics]
+      processors: [batch]
+      exporters: [prometheus/spanmetrics]

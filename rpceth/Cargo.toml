@@ -40,13 +40,16 @@ metrics-exporter-prometheus = "0.12"
 tracing-opentelemetry = "0.31"
 opentelemetry = { version = "0.30", default-features = false, features = [
   "trace",
+  "metrics",
 ] }
 opentelemetry-otlp = { version = "0.30", default-features = false, features = [
   "grpc-tonic",
   "trace",
+  "metrics",
 ] }
 opentelemetry_sdk = { version = "0.30", default-features = false, features = [
   "trace",
+  "metrics",
   "rt-tokio",
 ] }
 bytes = "1.7"

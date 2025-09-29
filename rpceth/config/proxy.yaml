@@ -25,6 +25,76 @@ providers:
     base_weight: 400
     max_connections: 16
     timeout_ms: 3000
+  - id: llama_eth
+    url: https://eth.llamarpc.com
+    base_weight: 450
+    max_connections: 12
+    timeout_ms: 2500
+  - id: blast_eth
+    url: https://eth-mainnet.public.blastapi.io
+    base_weight: 420
+    max_connections: 12
+    timeout_ms: 3000
+  - id: nodies_eth
+    url: https://ethereum-public.nodies.app
+    base_weight: 350
+    max_connections: 12
+    timeout_ms: 3000
+  - id: blockpi_eth
+    url: https://ethereum.public.blockpi.network/v1/rpc/public
+    base_weight: 380
+    max_connections: 12
+    timeout_ms: 3000
+  - id: stackup_eth
+    url: https://public.stackup.sh/api/v1/node/ethereum-mainnet
+    base_weight: 360
+    max_connections: 8
+    timeout_ms: 3200
+  - id: drpc_eth
+    url: https://eth.drpc.org
+    base_weight: 340
+    max_connections: 8
+    timeout_ms: 3200
+  - id: llama_pol
+    url: https://polygon-bor-rpc.publicnode.com
+    base_weight: 300
+    max_connections: 10
+    timeout_ms: 3000
+  - id: ankr_pol
+    url: https://rpc.ankr.com/polygon
+    base_weight: 280
+    max_connections: 10
+    timeout_ms: 3500
+  - id: stackup_pol
+    url: https://public.stackup.sh/api/v1/node/polygon-mainnet
+    base_weight: 260
+    max_connections: 8
+    timeout_ms: 3500
+  - id: drpc_pol
+    url: https://polygon.drpc.org
+    base_weight: 240
+    max_connections: 8
+    timeout_ms: 3500
+  - id: nodies_bsc
+    url: https://binance-smart-chain-public.nodies.app
+    base_weight: 320
+    max_connections: 10
+    timeout_ms: 3500
+  - id: ankr_bsc
+    url: https://endpoints.omniatech.io/v1/bsc/mainnet/public
+    base_weight: 300
+    max_connections: 10
+    timeout_ms: 3500
+  - id: drpc_bsc
+    url: https://bsc.drpc.org
+    base_weight: 280
+    max_connections: 8
+    timeout_ms: 3500
+  - id: stackup_bsc
+    url: https://public.stackup.sh/api/v1/node/bsc-mainnet
+    base_weight: 260
+    max_connections: 8
+    timeout_ms: 3600
 chains:
   ethereum:
     providers:
@@ -39,10 +109,23 @@ chains:
     tolerance: Balanced
   polygon:
     providers:
-      - publicnode_eth
+      - llama_pol
+      - ankr_pol
+      - stackup_pol
+      - drpc_pol
     aliases:
       - pol
       - 137
+    tolerance: Relaxed
+  binance:
+    providers:
+      - nodies_bsc
+      - ankr_bsc
+      - drpc_bsc
+      - stackup_bsc
+    aliases:
+      - bsc
+      - 56
     tolerance: Relaxed
 default_chain: ethereum
 methods:

@@ -15,7 +15,8 @@ use axum::{
     response::{IntoResponse, Response},
     routing::post,
 };
-use metrics::{histogram, increment_counter};
+use metrics::{gauge, histogram, increment_counter};
+use tokio::time::{Duration as TokioDuration, interval};
 use tower::retry::backoff::{
     Backoff as TowerBackoff, ExponentialBackoff, ExponentialBackoffMaker, MakeBackoff,
 };
@@ -46,7 +47,7 @@ pub struct ProxyState {
 struct ChainKey(String);
 
 #[derive(Clone)]
-struct ChainRuntime {
+pub(crate) struct ChainRuntime {
     id: ChainKey,
     aliases: HashSet<String>,
     tolerance: proxy_core::ToleranceLevel,
@@ -192,7 +193,7 @@ impl ProxyState {
             .ok_or_else(|| ChainError::Unsupported(key.0.clone()))
     }
 
-    pub fn chains(&self) -> impl Iterator<Item = (&str, &ChainRuntime)> {
+    pub(crate) fn chains(&self) -> impl Iterator<Item = (&str, &ChainRuntime)> {
         self.chains
             .iter()
             .map(|(key, runtime)| (key.0.as_str(), runtime))
@@ -284,7 +285,6 @@ fn normalize_chain_id(value: &str) -> String {
 
 #[derive(Debug)]
 enum ChainError {
-    Invalid(String),
     Unsupported(String),
 }
 
@@ -388,7 +388,8 @@ async fn proxy_handler_with_chain(
         method = body.get("method").and_then(|v| v.as_str()).unwrap_or("<unknown>"),
         request_id = body.get("id").and_then(|v| v.as_i64()).unwrap_or(0),
         jsonrpc_version = body.get("jsonrpc").and_then(|v| v.as_str()).unwrap_or("unknown"),
-        otel_trace_id = tracing::field::Empty
+        otel_trace_id = tracing::field::Empty,
+        otel.kind = "server"
     )
 )]
 async fn proxy_handler_impl(
@@ -431,10 +432,21 @@ async fn proxy_handler_impl(
     let mut backoff = method_policy.backoff.as_ref().map(make_backoff);
 
     let method_label = method_name.to_owned();
+    let chain_label = chain_runtime.id.0.clone();
+
+    // Record request start
     increment_counter!(
         "rpc_requests_total",
-        "method" => method_label,
+        "method" => method_label.clone(),
+        "chain" => chain_label.clone(),
         "status" => "started"
+    );
+
+    // Record request volume metrics
+    increment_counter!(
+        "rpc_request_volume_total",
+        "method" => method_label.clone(),
+        "chain" => chain_label.clone()
     );
 
     for attempt in 0..max_attempts {
@@ -453,6 +465,24 @@ async fn proxy_handler_impl(
         };
         let lb_selection_duration = lb_selection_start.elapsed();
         tried.insert(provider.id.clone());
+
+        // Record load balancer selection metrics
+        histogram!(
+            "rpc_lb_selection_duration_seconds",
+            lb_selection_duration.as_secs_f64(),
+            "method" => method_label.clone(),
+            "chain" => chain_label.clone(),
+            "provider" => provider.id.0.clone()
+        );
+
+        // Record provider selection
+        increment_counter!(
+            "rpc_provider_selections_total",
+            "method" => method_label.clone(),
+            "chain" => chain_label.clone(),
+            "provider" => provider.id.0.clone(),
+            "attempt" => attempt.to_string()
+        );
 
         chain_runtime.circuit_breaker.on_request_start(&provider.id);
 
@@ -500,12 +530,33 @@ async fn proxy_handler_impl(
                     );
                 });
 
+                info!(
+                    target: "proxy_server::forward",
+                    trace_id = %trace_id,
+                    chain = %chain_runtime.id.0,
+                    method = %method_name,
+                    provider = %provider.id.0,
+                    status = success.status.as_u16(),
+                    "proxy call success"
+                );
+
                 record_success_metrics(
                     method_name,
                     &provider.id,
                     &chain_runtime.id,
                     total_request_duration,
+                    provider_request_duration,
+                    lb_selection_duration,
                 );
+
+                // Record successful request completion
+                increment_counter!(
+                    "rpc_request_completions_total",
+                    "method" => method_label.clone(),
+                    "chain" => chain_label.clone(),
+                    "status" => "success"
+                );
+
                 return ProxyOutcome::Success(build_success_response(success, trace_id));
             }
             Err(error_message) => {
@@ -532,6 +583,16 @@ async fn proxy_handler_impl(
                     );
                 });
 
+                warn!(
+                    target: "proxy_server::forward",
+                    trace_id = %trace_id,
+                    chain = %chain_runtime.id.0,
+                    method = %method_name,
+                    provider = %provider.id.0,
+                    error = %error_message,
+                    "proxy call failure"
+                );
+
                 if attempt + 1 < max_attempts {
                     if let Some(delay) = backoff.as_mut().map(TowerBackoff::next_backoff) {
                         span.in_scope(|| warn!("retrying request after backoff"));
@@ -543,6 +604,14 @@ async fn proxy_handler_impl(
     }
 
     record_failure_metrics(method_name, None, &chain_runtime.id, "all providers failed");
+
+    // Record failed request completion
+    increment_counter!(
+        "rpc_request_completions_total",
+        "method" => method_label.clone(),
+        "chain" => chain_label.clone(),
+        "status" => "failure"
+    );
 
     ProxyOutcome::Failure(build_error_response(&body, trace_id, last_error))
 }
@@ -698,7 +767,6 @@ fn build_chain_error_response(
         .unwrap_or(serde_json::Value::Null);
 
     let (code, message) = match error {
-        ChainError::Invalid(value) => (-32602, format!("invalid chain_id: {}", value)),
         ChainError::Unsupported(value) => (-32602, format!("unsupported chain: {}", value)),
     };
 
@@ -723,22 +791,47 @@ fn record_success_metrics(
     method: &str,
     provider: &proxy_core::ProviderId,
     chain: &ChainKey,
-    elapsed: Duration,
+    total_elapsed: Duration,
+    provider_elapsed: Duration,
+    lb_elapsed: Duration,
 ) {
     let method_label = method.to_owned();
     let provider_label = provider.0.clone();
+    let chain_label = chain.0.clone();
+
+    // Total request duration
     histogram!(
         "rpc_request_duration_seconds",
-        elapsed.as_secs_f64(),
+        total_elapsed.as_secs_f64(),
         "method" => method_label.clone(),
         "provider" => provider_label.clone(),
-        "chain" => chain.0.clone()
+        "chain" => chain_label.clone()
     );
+
+    // Provider-specific request duration
+    histogram!(
+        "rpc_provider_request_duration_seconds",
+        provider_elapsed.as_secs_f64(),
+        "method" => method_label.clone(),
+        "provider" => provider_label.clone(),
+        "chain" => chain_label.clone()
+    );
+
+    // Load balancer overhead
+    histogram!(
+        "rpc_lb_overhead_seconds",
+        lb_elapsed.as_secs_f64(),
+        "method" => method_label.clone(),
+        "provider" => provider_label.clone(),
+        "chain" => chain_label.clone()
+    );
+
+    // Success counter
     increment_counter!(
         "rpc_requests_total",
         "method" => method_label,
         "provider" => provider_label,
-        "chain" => chain.0.clone(),
+        "chain" => chain_label,
         "status" => "success"
     );
 }
@@ -771,5 +864,169 @@ fn classify_error(message: &str) -> &'static str {
         "server"
     } else {
         "other"
+    }
+}
+
+/// Background task to collect and export health metrics
+pub async fn health_metrics_task(state: ProxyState) {
+    let mut interval = interval(TokioDuration::from_secs(15)); // Update every 15 seconds
+
+    loop {
+        interval.tick().await;
+
+        // Export provider health metrics
+        for (chain_id, runtime) in state.chains() {
+            let chain_label = chain_id.to_string();
+
+            // Export chain-level metrics
+            gauge!(
+                "rpc_chain_provider_count",
+                runtime.providers().count() as f64,
+                "chain" => chain_label.clone()
+            );
+
+            gauge!(
+                "rpc_chain_health_enabled",
+                if runtime.health_enabled() { 1.0 } else { 0.0 },
+                "chain" => chain_label.clone()
+            );
+
+            gauge!(
+                "rpc_chain_tolerance_level",
+                match runtime.tolerance() {
+                    proxy_core::ToleranceLevel::Strict => 1.0,
+                    proxy_core::ToleranceLevel::Balanced => 2.0,
+                    proxy_core::ToleranceLevel::Relaxed => 3.0,
+                },
+                "chain" => chain_label.clone()
+            );
+
+            // Export provider-level metrics
+            for provider_id in runtime.providers() {
+                if let Some(provider) = state.chain_provider_handle(provider_id) {
+                    let provider_label = provider_id.0.clone();
+
+                    // Basic provider info
+                    gauge!(
+                        "rpc_provider_base_weight",
+                        provider.base_weight as f64,
+                        "provider" => provider_label.clone(),
+                        "chain" => chain_label.clone()
+                    );
+
+                    gauge!(
+                        "rpc_provider_timeout_seconds",
+                        provider.timeout.as_secs_f64(),
+                        "provider" => provider_label.clone(),
+                        "chain" => chain_label.clone()
+                    );
+
+                    gauge!(
+                        "rpc_provider_available",
+                        if runtime.circuit_breaker.is_available(provider_id) { 1.0 } else { 0.0 },
+                        "provider" => provider_label.clone(),
+                        "chain" => chain_label.clone()
+                    );
+
+                    // Health metrics if available
+                    if let Some(health_service) = &runtime.health_service {
+                        let snapshots = health_service.snapshots();
+                        if let Some(snapshot) =
+                            snapshots.iter().find(|s| s.provider == *provider_id)
+                        {
+                            gauge!(
+                                "rpc_provider_health_score",
+                                snapshot.score,
+                                "provider" => provider_label.clone(),
+                                "chain" => chain_label.clone()
+                            );
+
+                            gauge!(
+                                "rpc_provider_sync_score",
+                                snapshot.sync_score,
+                                "provider" => provider_label.clone(),
+                                "chain" => chain_label.clone()
+                            );
+
+                            gauge!(
+                                "rpc_provider_latency_score",
+                                snapshot.latency_score,
+                                "provider" => provider_label.clone(),
+                                "chain" => chain_label.clone()
+                            );
+
+                            gauge!(
+                                "rpc_provider_success_score",
+                                snapshot.success_score,
+                                "provider" => provider_label.clone(),
+                                "chain" => chain_label.clone()
+                            );
+
+                            gauge!(
+                                "rpc_provider_method_support_score",
+                                snapshot.method_support_score,
+                                "provider" => provider_label.clone(),
+                                "chain" => chain_label.clone()
+                            );
+
+                            gauge!(
+                                "rpc_provider_consecutive_failures",
+                                snapshot.consecutive_failures as f64,
+                                "provider" => provider_label.clone(),
+                                "chain" => chain_label.clone()
+                            );
+
+                            if let Some(block) = snapshot.latest_block {
+                                gauge!(
+                                    "rpc_provider_latest_block",
+                                    block as f64,
+                                    "provider" => provider_label.clone(),
+                                    "chain" => chain_label.clone()
+                                );
+                            }
+
+                            if let Some(chain_id_val) = snapshot.chain_id {
+                                gauge!(
+                                    "rpc_provider_chain_id",
+                                    chain_id_val as f64,
+                                    "provider" => provider_label.clone(),
+                                    "chain" => chain_label.clone()
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Export global configuration metrics
+        gauge!(
+            "rpc_config_total_providers",
+            state.config.providers.len() as f64
+        );
+
+        gauge!("rpc_config_total_chains", state.chains().count() as f64);
+
+        gauge!(
+            "rpc_config_strategy",
+            match state.config.strategy {
+                proxy_core::BalancerStrategy::RoundRobin => 1.0,
+                proxy_core::BalancerStrategy::WeightedRandom => 2.0,
+            }
+        );
+
+        gauge!(
+            "rpc_config_circuit_breaker_failure_threshold",
+            state.config.circuit_breaker.failure_threshold.unwrap_or(5) as f64
+        );
+
+        gauge!(
+            "rpc_config_circuit_breaker_reset_timeout_ms",
+            state
+                .config
+                .circuit_breaker
+                .reset_timeout_ms
+                .unwrap_or(30000) as f64
+        );
     }
 }

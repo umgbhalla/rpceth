@@ -2,7 +2,7 @@ use axum::{Router, routing::get};
 use metrics_exporter_prometheus::{PrometheusBuilder, PrometheusHandle};
 use opentelemetry::{KeyValue, global, trace::TracerProvider as _};
 use opentelemetry_otlp::WithExportConfig;
-use opentelemetry_sdk::{Resource, trace::SdkTracerProvider};
+use opentelemetry_sdk::{Resource, metrics::SdkMeterProvider, trace::SdkTracerProvider};
 use proxy_core::ProxyConfigLoader;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
@@ -10,10 +10,15 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 async fn main() {
     let prometheus = install_metrics_exporter();
     let _tracer_provider = install_tracing();
+    let _meter_provider = install_otel_metrics();
 
     let config = ProxyConfigLoader::from_path("config/proxy.yaml").expect("load proxy config");
 
-    let app = proxy_server::build_router(config).merge(observability_routes(prometheus));
+    let app = proxy_server::build_router(config.clone()).merge(observability_routes(prometheus));
+
+    // Start health metrics collection task
+    let state_for_metrics = proxy_server::ProxyState::new(config);
+    tokio::spawn(proxy_server::health_metrics_task(state_for_metrics));
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
         .await
@@ -24,7 +29,7 @@ async fn main() {
         .await
         .expect("server failed");
 
-    // tracer provider dropped here to flush remaining spans
+    // tracer and meter providers dropped here to flush remaining data
 }
 
 fn observability_routes(prometheus: PrometheusHandle) -> Router {
@@ -33,11 +38,9 @@ fn observability_routes(prometheus: PrometheusHandle) -> Router {
         .with_state(prometheus)
 }
 
-#[tracing::instrument(skip(prometheus))]
 async fn metrics_handler(
     axum::extract::State(prometheus): axum::extract::State<PrometheusHandle>,
 ) -> String {
-    tracing::info!("serving prometheus metrics");
     prometheus.render()
 }
 
@@ -83,6 +86,40 @@ fn install_tracing() -> SdkTracerProvider {
         .init();
 
     let _ = global::set_tracer_provider(provider.clone());
+    provider
+}
+
+fn install_otel_metrics() -> SdkMeterProvider {
+    let exporter = opentelemetry_otlp::MetricExporter::builder()
+        .with_tonic()
+        .with_endpoint("http://localhost:4317")
+        .build()
+        .expect("Failed to create OTLP metrics exporter");
+
+    let resource = Resource::builder_empty()
+        .with_attributes([
+            KeyValue::new("service.name", "proxy-server"),
+            KeyValue::new("service.version", env!("CARGO_PKG_VERSION")),
+            KeyValue::new(
+                "deployment.environment",
+                std::env::var("ENVIRONMENT").unwrap_or_else(|_| "development".to_string()),
+            ),
+            KeyValue::new("telemetry.sdk.name", "opentelemetry"),
+            KeyValue::new("telemetry.sdk.language", "rust"),
+            KeyValue::new("telemetry.sdk.version", "0.30.0"),
+        ])
+        .build();
+
+    let provider = SdkMeterProvider::builder()
+        .with_reader(
+            opentelemetry_sdk::metrics::PeriodicReader::builder(exporter)
+                .with_interval(std::time::Duration::from_secs(5))
+                .build(),
+        )
+        .with_resource(resource)
+        .build();
+
+    let _ = global::set_meter_provider(provider.clone());
     provider
 }
 
