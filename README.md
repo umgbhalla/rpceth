@@ -10,7 +10,7 @@ A Rust JSON-RPC gateway with health-aware routing, provider failover, and visibi
 
 </div>
 
-![RPCETH architecture: applications send requests through chain and method policies to provider selection, which chooses one RPC node per attempt using health and circuit state. Metrics and traces observe the gateway.](docs/assets/architecture.png)
+![RPCETH: a failed node is not a dead end. A signal takes the healthy route past a failed connection.](docs/assets/hero-wide.png)
 
 ---
 
@@ -26,35 +26,38 @@ RPCETH sits between your application and its upstream RPC nodes. It selects a pr
 
 ## Request flow
 
-<details>
-<summary>View the editable request-flow diagram</summary>
-
 ```mermaid
 flowchart LR
-    app[Application] --> api[Axum HTTP gateway]
-    api --> chain[Resolve chain]
-    chain --> policy[Apply method policy]
-    policy --> select[Select eligible provider]
-    select --> a[RPC node A]
-    select --> b[RPC node B]
-    select --> c[RPC node C]
-    health[Health probes] -. scores .-> select
-    circuit[Circuit breaker] -. availability .-> select
-    api -. telemetry .-> observe[Metrics and traces]
+    app([Your application]) request@--> policy["RPCETH<br/>Chain + method policy"]
+    policy route@--> pool{"Choose an<br/>eligible provider"}
+    pool selected@-->|this attempt| healthy["Healthy node"]
+    healthy result@--> response([JSON-RPC response])
+    pool -. skip .-> failed["Unavailable node<br/>Circuit open"]
+    pool -. alternative .-> standby["Another eligible node"]
+    health["Health scores + weights"] -.-> pool
 
-    classDef entry fill:#102a43,stroke:#486581,color:#ffffff;
-    classDef routing fill:#e6f6ff,stroke:#0284c7,color:#102a43;
-    classDef node fill:#ecfdf5,stroke:#059669,color:#064e3b;
-    classDef support fill:#f5f3ff,stroke:#8b5cf6,color:#4c1d95;
-    class app,api entry;
-    class chain,policy,select routing;
-    class a,b,c node;
-    class health,circuit,observe support;
+    request@{ animation: slow }
+    route@{ animation: slow }
+    selected@{ animation: slow }
+    result@{ animation: slow }
+
+    classDef entry fill:#f6f8fa,stroke:#57606a,color:#1f2328;
+    classDef core fill:#eaf1ff,stroke:#2457d6,stroke-width:2px,color:#172554;
+    classDef healthy fill:#e9f7ef,stroke:#238636,color:#14532d;
+    classDef failed fill:#fff0ee,stroke:#cf3f30,color:#8b241b;
+    classDef muted fill:#f6f8fa,stroke:#8c959f,stroke-dasharray:4 4,color:#57606a;
+    classDef active stroke:#2457d6,stroke-width:2px;
+    class app,response entry;
+    class policy,pool core;
+    class healthy healthy;
+    class failed failed;
+    class standby,health muted;
+    class request,route,selected,result active;
 ```
 
-</details>
+**One provider per attempt.** The moving path illustrates one selected route. Other nodes are alternatives, not broadcast targets. A failed attempt can try a different provider within the configured attempt budget; an open circuit makes a provider unavailable.
 
-The arrows to nodes show possible destinations; a normal request selects one provider per attempt. See the [architecture notes](docs/architecture.md) for retry behavior and implementation boundaries.
+[See the failover sequence and implementation details](docs/architecture.md#a-request-through-the-gateway).
 
 ## Quick start
 
@@ -167,7 +170,7 @@ cargo metadata --no-deps --format-version 1
 cargo test -j 2 -p proxy-core --tests
 ```
 
-Core tests cover configuration, method routing, health scoring, and provider selection. Python scripts in [`smoke_tests/`](smoke_tests/) exercise a running proxy and can contact upstream services; review their configuration before running them.
+Core tests cover configuration, method routing, health scoring, and provider selection. They run locally without contacting upstream services.
 
 ```text
 crates/
@@ -176,7 +179,6 @@ crates/
 config/            Provider and chain configuration examples
 docker/            Local observability stack and dashboards
 docs/              Architecture and operational details
-smoke_tests/       Python checks against a running proxy
 ```
 
 ## Documentation
@@ -184,7 +186,4 @@ smoke_tests/       Python checks against a running proxy
 - [Architecture and current boundaries](docs/architecture.md)
 - [Credential handling and security checks](SECURITY.md)
 - [Core library reference](CORE_LIBRARY_DOCS.md)
-- [Recorded RPC method checks](RPC_METHODS_TESTED.md)
-- [Recorded chain ID checks](smoke_tests/README_CHAINID_TESTS.md)
-
-The recorded checks describe earlier work; they are not a current CI or live-service status report. This repository does not currently include a checked-in CI workflow.
+This repository does not currently include a checked-in CI workflow.
